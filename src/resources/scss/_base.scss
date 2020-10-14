@@ -1,0 +1,17 @@
+body{
+    overflow-x: hidden;
+}
+body::-webkit-scrollbar{
+    display: none;
+    scrollbar-width: 0;
+}
+a:focus{
+    outline: none;
+}
+.bg-primary{
+    background-color: $base-color !important;
+}
+.line{
+    height: 2px;
+    background: #dbdbdb;
+}

@@ -1,0 +1,51 @@
+.brand-img{
+    width: 2.5rem;
+    margin-left: 1.5rem;
+}
+.navbar-brand{
+    position: absolute;
+    font-size: 1.5rem;
+}
+.nav-link{
+    margin-left: 1rem;
+}
+.fa-white{
+    color: white;
+    margin-left: 4rem;
+}
+.color-grey{
+    color: #636e72;
+}
+.white-text{
+    margin-left: 1rem;
+    display: inline-block;
+    color: white;
+}
+.footer{
+    margin-top: 1.5rem;
+    a{
+        text-decoration: none;
+        color: #636e72;
+    }
+    p{
+        display: inline-block;
+    }
+    .footer-info{
+        margin-left: 2rem;
+    }
+    .detail-info{
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+        color: #636e72;
+        display: block;
+        p{
+            margin-left: 0.5rem;
+        }
+        a{
+            .contact-icon
+            {
+                margin-left: 1rem;
+            }
+        }
+    }
+}
