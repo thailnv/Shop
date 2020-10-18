@@ -1,3 +1,4 @@
+@import 'variables';
 .carousel-item{
     width: 100vw !important;
     height: 35vw !important;
@@ -54,13 +55,13 @@
 .category-card a{
     z-index: 2;
     color: #969494;
-    position: absolute;
+    position: absolute !important;
     left: 0; 
     right: 0; 
     margin: 0;
     margin-left: auto; 
     margin-right: auto;
-    top: 15rem;
+    top: 14rem !important;
     width: 9rem;
     height: 2.4rem;
     line-height: 2.3rem;
@@ -70,6 +71,11 @@
     text-align: center;
     text-decoration: none;
     outline: none;
+}
+.category-card a:hover{
+    background: $button-color;
+    color: white;
+    font-weight: 600;
 }
 
 //best seller
@@ -92,6 +98,9 @@
     height: 23rem;
     position: relative;
     outline: none;
+}
+.product-card p{
+    text-align: center;
 }
 .product-img{
     height: 14rem;

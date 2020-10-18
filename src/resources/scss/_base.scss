@@ -1,5 +1,5 @@
 body{
-    overflow-x: hidden;
+    overflow-x: hidden !important;
 }
 body::-webkit-scrollbar{
     display: none;
@@ -14,4 +14,9 @@ a:focus{
 .line{
     height: 2px;
     background: #dbdbdb;
+}
+h1{
+    font-family: 'Audiowide', cursive;
+    font-size: 2rem;
+    text-align: center;
 }
