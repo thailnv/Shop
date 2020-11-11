@@ -61,7 +61,8 @@ h1 {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
   border-radius: 8px;
-  position: absolute; }
+  position: absolute;
+  background: #ebeff1; }
 
 .category-img > img {
   width: 80%;
