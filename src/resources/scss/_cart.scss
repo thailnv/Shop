@@ -1,0 +1,43 @@
+.cart-popup{
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 16; /* Sit on top */
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: rgba(0,0,0,0.6);
+}
+.cart-form{
+    width: 30%;
+    height: 100%;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    background-color: whitesmoke;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+.shopping-title{
+    font-family: $default-font;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+}
+@keyframes cartshow{
+    from {right:-40vw; opacity:0}
+    to {right:0; opacity:1}
+}
+@keyframes carthide{
+    from {right:0vh; opacity:1}
+    to {right:-4-vw; opacity:0}
+}
+.cart-show{
+    animation-name: cartshow;
+    animation-duration: 1.5s;
+}
+.cart-hide{
+    animation-name: carthide;
+    animation-duration: 1.5s;
+}

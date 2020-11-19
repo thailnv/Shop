@@ -6,6 +6,23 @@
     position: absolute;
     font-size: 1.5rem;
 }
+.account-info{
+    display: none;
+}
+#login-btn{
+    border: none;
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 0.25rem;
+    margin-left: 1rem;
+    width: 5rem;
+    height: 2rem;
+    outline: none;
+    border-radius: 0.4rem;
+    background: rgb(138, 228, 213);
+}
 .nav-link{
     margin-left: 1rem;
 }

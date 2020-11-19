@@ -2,13 +2,11 @@ class ProductsController{
     
     // [GET] /products
     index(req , res){
-        console.log('render index');
-        res.render('home');
+        res.render('products');
     }
     
     //[GET] /products/...
     chair(req, res){
-        console.log('render chair');
         res.render('chair');
     }
 }

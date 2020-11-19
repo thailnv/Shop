@@ -11,8 +11,8 @@ const route =  require('./routes/index')
 const db = require('./config/db');
 db.connect();
 
+//image folder
 app.use(express.static(path.join(__dirname, '/public')));
-
 //template engine
 app.engine('hbs', handlebars({
     extname: '.hbs'
@@ -20,10 +20,10 @@ app.engine('hbs', handlebars({
 
 app.set('view engine', 'hbs');
 
-app.set('views', path.join(__dirname, 'resources/views'));
+app.set('views', path.join(__dirname, 'resources' ,'views'));
 
 // routing
 route(app);
 
 //port listening
-app.listen(port, () => console.log(`Example app listen at port ${port}`) );
+app.listen(port, () => console.log(`App listen at port ${port}`) );

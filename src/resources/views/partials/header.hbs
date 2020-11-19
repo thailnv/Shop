@@ -1,17 +1,17 @@
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light nav-fill row banner">
   <div class="col-sm-2">
-    <img src="/img/brand.png" class="brand-img"/>
+    <img src="/img/brand.png" class="brand-img" />
     <a class="navbar-brand" href="/">alorant</a>
   </div>
-  <div class="col-sm-7">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <div class="col-sm-8">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#">FEATURES</a>
+          <a class="nav-link" href="/products">PRODUCTS</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">COLLECTION</a>
@@ -27,18 +27,14 @@
   </div>
   <div>
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <li class="nav-item" id="cart-btn">
         <a class="nav-link" href="#">
           <i class="fas fa-shopping-cart"></i>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="fas fa-envelope"></i>
-        </a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <li class="nav-item dropdown account-info">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
           Account
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -47,6 +43,88 @@
           <a class="dropdown-item" href="#">Logout</a>
         </div>
       </li>
+      <li class="nav-item">
+        <button id="login-btn">
+          Login
+        </button>
+      </li>
     </ul>
   </div>
 </nav>
+<div class="login-popup">
+  <div class="login-form">
+    <div class="filter">
+      <div class="icon">
+        <div class="image">
+          <img src="/img/logolog.png">
+        </div>
+        <h1>
+          Welcome<br> to Valorant
+        </h1>
+        <h2>
+          Find the best furniture for <br> your home!
+        </h2>
+      </div>
+      <div class="login-input">
+        <button id="close-login-btn">X</button>
+        <div class="header">
+          Sign up <span style="color: rgb(32, 138, 165);">/ Login</span>
+        </div>
+        <div class="login-sign-up">
+          <div class="sign-up">
+            <div>
+              We will need...
+            </div>
+            <form action="post">
+              <div class="input-container">
+                <input type="text" name="uName" id="uName" placeholder="Your name">
+                <i class="far fa-smile-wink"></i>
+              </div>
+              <div class="input-container">
+                <input type="text" name="uAddress" id="uAddress" placeholder="Address">
+                <i class="far fa-paper-plane"></i>
+              </div>
+              <div class="input-container">
+                <input type="text" name="uUsername" id="uUsername" placeholder="Username">
+                <i class="far fa-user"></i>
+              </div>
+              <div class="input-container">
+                <input type="password" name="uPassword" id="uPassword" placeholder="One more line">
+                <i class="far fa-keyboard"></i>
+              </div>
+              <input type="button" value="Sign up">
+            </form>
+          </div>
+          <div class="ver-line">
+            <div></div>
+            <h2>
+              Or
+            </h2>
+            <div></div>
+          </div>
+          <div class="login">
+            <div>
+              Also you can...
+            </div>
+            <form action="post">
+              <div class="input-container">
+                <input type="text" name="Username" id="Username" placeholder="Username">
+                <i class="far fa-user"></i>
+              </div>
+              <div class="input-container">
+                <input type="password" name="Password" id="Password" placeholder="Password">
+                <i class="far fa-keyboard"></i>
+              </div>
+              <input type="button" value="Login">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cart-popup">
+  <div class="cart-form cart-show">
+    <div class="shopping-title cart-show">Shopping cart</div>
+  </div>
+</div>

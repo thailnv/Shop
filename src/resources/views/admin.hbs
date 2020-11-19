@@ -1,0 +1,295 @@
+<div class="admin-page">
+    <div class="income-status">
+        <div class="income-container">
+            <div class="income-detail">
+                <div class="income-detail-value">
+                    370
+                </div>
+                <div class="income-detail-name">
+                    NEW CUSTOMERS
+                </div>
+            </div>
+            <div class="income-icon">
+                <i class="fas fa-users"></i>
+            </div>
+        </div>
+        <div class="income-container">
+            <div class="income-icon">
+                <i class="fas fa-couch"></i>
+            </div>
+            <div class="income-detail">
+                <div class="income-detail-value">
+                    {{nItem}}
+                </div>
+                <div class="income-detail-name">
+                    SHOP ITEMS
+                </div>
+            </div>
+        </div>
+        <div class="income-container">
+            <div class="income-detail">
+                <div class="income-detail-value">
+                    840
+                </div>
+                <div class="income-detail-name">
+                    TODAY'S SALE
+                </div>
+            </div>
+            <div class="income-icon">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+        </div>
+        <div class="income-container">
+            <div class="income-icon">
+                <i class="fas fa-wallet"></i>
+            </div>
+            <div class="income-detail">
+                <div class="income-detail-value">
+                    $3680
+                </div>
+                <div class="income-detail-name">
+                    EARNING
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-section">
+        <div class="add-product-container">
+            <div class="status-title">
+                New Product
+            </div>
+            <form class="add-product-form">
+                <label for="pname">Product name:</label><br>
+                <input type="text" id="pname" name="pname"><br>
+                <div style="display: flex; margin-top: 0.5rem;">
+                    <label for="type">Type:</label>
+                    <div style="display: inline-block; margin-left: 2rem">
+                        <div style="display: flex; width: 8rem; justify-content: space-between">
+                            <div>
+                                <div>
+                                    <input type="radio" name="type" id="tchair" value="1">
+                                    <label for="tchair">Chair</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="type" id="ttable" value="2">
+                                    <label for="ttable">Table</label><br>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <input type="radio" name="type" id="tbed" value="4">
+                                    <label for="tbed">Bed</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="type" id="tdecor" value="3">
+                                    <label for="tdecor">Decor</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <label for="supplier">Supplier:</label><br>
+                <select name="supplier" id="supplier">
+                    {{#each suppliers}}
+                        <option value="{{this.id}}">{{this.name}}</option>
+                    {{/each}}
+                </select><br>
+                <label for="price">Price:</label><br>
+                <input type="number" min="0" id="price" name="price"><br>
+                <label for="number">Number:</label><br>
+                <input type="number" min="0" id="number" name="number"><br>
+                <label for="image">Image:</label>
+                <input type="file" name="image" id="image"><br>
+                <div style="margin-top: 0.6rem; display: flex; justify-content:space-between;">
+                    <input type="submit" id="submit-btn" value="Add Product">
+                    <input type="button" id="reset-btn" value="Clear">
+                </div>
+            </form>
+        </div>
+        <div class="product-status">
+            <div class="status-title">
+                Product status
+            </div>
+            <table>
+                <tr>
+                    <th class="id-field">
+                        <div class="table-header">
+                            <div>
+                                ID
+                            </div>
+                            <div>
+                                <button class="sort-btn">
+                                    <i class="fas fa-sort-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </th>
+                    <th class="name-field">
+                        <div class="table-header">
+                            <div>
+                                Name
+                            </div>
+                            <div>
+                                <button class="sort-btn">
+                                    <i class="fas fa-sort-up"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </th>
+                    <th class="type-field">
+                        <div class="table-header">
+                            <div>
+                                Type
+                            </div>
+                            <div>
+                                <button class="sort-btn">
+                                    <span style="color: rgb(175, 175, 175);">
+                                        <i class="fas fa-sort"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </th>
+                    <th class="price-field">
+                        <div class="table-header">
+                            <div>
+                                Price
+                            </div>
+                            <div>
+                                <button class="sort-btn">
+                                    <span style="color: rgb(175, 175, 175);">
+                                        <i class="fas fa-sort"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </th>
+                    <th class="status-field">
+                        <div class="table-header">
+                            <div>
+                                Status
+                            </div>
+                            <div>
+                                <button class="sort-btn">
+                                    <span style="color: rgb(175, 175, 175);">
+                                        <i class="fas fa-sort"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </th>
+                    <th class="action-field">
+                        <div class="table-header">
+                            <div>
+                                Action
+                            </div>
+                            <div>
+                                <button class="sort-btn">
+                                    <span style="color: rgb(175, 175, 175);">
+                                        <i class="fas fa-sort"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </table>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th class="id-field">
+                        </th>
+                        <th class="name-field">
+                        </th>
+                        <th class="type-field">
+                        </th>
+                        <th class="price-field">
+                        </th>
+                        <th class="status-field">
+                        </th>
+                        <th class="action-field">
+                        </th>
+                    </tr>
+                    {{#each products}}
+                    <tr class="product-data" link="{{this.image}}" number="{{this.number}}">
+                        <td class="pinfoid">{{this.id}}</td>
+                        <td class="pinfoname">{{this.name}}</td>
+                        <td class="pinfotype">{{this.type}}</td>
+                        <td class="pinfoprice">{{this.price}}</td>
+                        <td>
+                            <div class="instock">
+                                In stock
+                            </div>
+                        </td>
+                        <td>
+                            <div class="action">
+                                <button class="action-btn btn-edit">
+                                    <i class="far fa-edit"></i>
+                                </button>
+                                <button class="action-btn btn-delete">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="edit-product-popup">
+    <div class="edit-product-form">
+        <div class="edit-form-image">
+            <span class="helper"></span>
+            <img src="/img/chair3.png">
+        </div>
+        <div class="edit-form-input">
+            <div class="edit-product-container">
+                <button id="close-edit-btn">X</button>
+                <form>
+                    <label for="pename">Product name:</label><br>
+                    <input type="text" id="pename" name="pename"><br>
+                    <div style="display: flex; margin-top: 0.5rem;">
+                        <label for="petype">Type:</label>
+                        <div style="display: inline-block; margin-left: 2rem">
+                            <div style="display: flex; width: 8rem; justify-content: space-between">
+                                <div>
+                                    <div>
+                                        <input type="radio" name="petype" id="petypechair" value="1">
+                                        <label for="tchair">Chair</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="petype" id="petypetable" value="2">
+                                        <label for="ttable">Table</label><br>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <input type="radio" name="petype" id="petypebed" value="4">
+                                        <label for="tbed">Bed</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="petype" id="petypedecor" value="3">
+                                        <label for="tdecor">Decor</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <label for="pesupplier">Supplier:</label><br>
+                    <select name="pesupplier" id="pesupplier">
+                    {{#each suppliers}}
+                        <option value="{{this.id}}">{{this.name}}</option>
+                    {{/each}}
+                    </select><br>
+                    <label for="peprice">Price:</label><br>
+                    <input type="number" min="0" id="peprice" name="peprice"><br>
+                    <label for="penumber">Number:</label><br>
+                    <input type="number" min="0" id="penumber" name="penumber" value="5"><br>
+                    <input type="submit" id="submit-edit-btn" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

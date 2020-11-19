@@ -1,19 +1,60 @@
 body {
-  overflow-x: hidden !important; }
+  overflow-x: hidden !important;
+  background: #f7f7f7; }
+
+.bg-light {
+  background: #f1f1f1 !important; }
 
 body::-webkit-scrollbar {
   display: none;
   scrollbar-width: 0; }
 
+a {
+  text-decoration: none !important;
+  color: #333333; }
+
 a:focus {
-  outline: none; }
+  outline: none;
+  text-decoration: none; }
 
 .bg-primary {
   background-color: #0abde3 !important; }
 
 .line {
+  margin-top: 1rem;
   height: 2px;
   background: #dbdbdb; }
+
+.flex {
+  display: flex;
+  width: 100vw;
+  flex-wrap: wrap; }
+
+.small-size {
+  font-size: 1rem; }
+
+.normal-size {
+  font-size: 1.2rem !important; }
+
+.big-size {
+  font-size: 2rem !important; }
+
+.right {
+  margin-right: 2rem;
+  position: absolute;
+  right: 0.5rem;
+  bottom: -1rem; }
+
+.center {
+  width: 100vw;
+  display: block;
+  text-align: center; }
+
+.title-font {
+  font-family: 'Audiowide', cursive;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 0.5rem; }
 
 h1 {
   font-family: 'Audiowide', cursive;
@@ -112,7 +153,6 @@ h1 {
 
 .product-card {
   width: 25%;
-  height: 23rem;
   position: relative;
   outline: none; }
 
@@ -150,7 +190,7 @@ a.product-name {
 a.btn-addcart {
   text-decoration: none;
   color: #929292;
-  border: #333333 1px solid;
+  border: solid   1px    #babdbe;
   width: 7rem;
   height: 2rem;
   display: inline-block;
@@ -158,12 +198,16 @@ a.btn-addcart {
   text-align: center;
   border-radius: 1rem;
   display: block;
-  opacity: 0.5;
+  opacity: 1;
   margin-left: auto;
   margin-right: auto; }
 
 .btn-addcart:hover {
-  opacity: 0.8; }
+  background: #8be0f3;
+  color: white;
+  font-weight: 600;
+  opacity: 1;
+  outline: none; }
 
 #pBtn, #p1Btn {
   left: 0;
@@ -177,12 +221,12 @@ a.btn-addcart {
   opacity: 0.5; }
 
 .best-seller {
-  margin-top: 1.5rem; }
+  margin-top: 0rem; }
 
 .best-seller div {
   text-align: center; }
 
-.best-seller .title, .new-arrivals .title {
+.title {
   margin-top: 3rem;
   text-align: center;
   font-size: 2rem;
@@ -242,6 +286,23 @@ a.btn-addcart {
 .navbar-brand {
   position: absolute;
   font-size: 1.5rem; }
+
+.account-info {
+  display: none; }
+
+#login-btn {
+  border: none;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 0.25rem;
+  margin-left: 1rem;
+  width: 5rem;
+  height: 2rem;
+  outline: none;
+  border-radius: 0.4rem;
+  background: #8ae4d5; }
 
 .nav-link {
   margin-left: 1rem; }
@@ -325,3 +386,531 @@ a.btn-addcart {
     top: 35%;
     font-size: 1rem;
     border-radius: 4rem; }
+
+.product-display {
+  position: relative; }
+
+.login-popup {
+  position: fixed;
+  /* Stay in place */
+  left: 0;
+  top: 0;
+  display: none;
+  z-index: 1;
+  /* Sit on top */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.6);
+  /* Black w/ opacity */ }
+
+.login-form {
+  width: 78vw;
+  height: 85vh;
+  position: relative;
+  border-radius: 0.5rem;
+  /* Black w/ opacity */
+  background-image: url("/img/login.jpg");
+  background-size: contain;
+  margin: auto;
+  margin-top: calc((100vh - 85vh)/2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
+
+.show {
+  animation-name: animatetop;
+  animation-duration: 0.8s; }
+
+.hide {
+  animation-name: animatehide;
+  animation-duration: 0.8s; }
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -95vh;
+    opacity: 0; }
+  to {
+    top: 0;
+    opacity: 1; } }
+
+@keyframes animatetop {
+  from {
+    top: -95vh;
+    opacity: 0; }
+  to {
+    top: 0;
+    opacity: 1; } }
+
+@keyframes animatehide {
+  from {
+    top: 0px;
+    opacity: 0; }
+  to {
+    top: -95vh;
+    opacity: 1; } }
+
+.filter {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(48, 48, 53, 0.6);
+  border-radius: 0.5rem;
+  display: flex; }
+
+.icon {
+  width: 33%; }
+  .icon .image {
+    width: 6rem;
+    height: 6rem;
+    margin-top: 3rem;
+    padding-top: 0.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background: white;
+    clip-path: polygon(92.32051% 40%, 93.79385% 43.1596%, 94.69616% 46.52704%, 95% 50%, 94.69616% 53.47296%, 93.79385% 56.8404%, 92.32051% 60%, 79.82051% 81.65064%, 77.82089% 84.50639%, 75.35575% 86.97152%, 72.5% 88.97114%, 69.3404% 90.44449%, 65.97296% 91.34679%, 62.5% 91.65064%, 37.5% 91.65064%, 34.02704% 91.34679%, 30.6596% 90.44449%, 27.5% 88.97114%, 24.64425% 86.97152%, 22.17911% 84.50639%, 20.17949% 81.65064%, 7.67949% 60%, 6.20615% 56.8404%, 5.30384% 53.47296%, 5% 50%, 5.30384% 46.52704%, 6.20615% 43.1596%, 7.67949% 40%, 20.17949% 18.34936%, 22.17911% 15.49361%, 24.64425% 13.02848%, 27.5% 11.02886%, 30.6596% 9.55551%, 34.02704% 8.65321%, 37.5% 8.34936%, 62.5% 8.34936%, 65.97296% 8.65321%, 69.3404% 9.55551%, 72.5% 11.02886%, 75.35575% 13.02848%, 77.82089% 15.49361%, 79.82051% 18.34936%); }
+    .icon .image img {
+      width: 5rem;
+      height: 5rem;
+      display: block;
+      margin-right: auto;
+      margin-left: auto; }
+  .icon h1 {
+    margin-top: 1rem;
+    color: white;
+    font-size: 1rem; }
+  .icon h2 {
+    margin-top: 2rem;
+    color: white;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+    text-align: center; }
+
+.login-input {
+  position: relative;
+  width: 67%;
+  height: 100%;
+  z-index: 2;
+  border-radius: 0.5rem;
+  margin-left: auto;
+  background-color: white; }
+  .login-input button {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-family: "Audiowide", cursive;
+    border: none;
+    outline: none;
+    background: whitesmoke;
+    border-radius: 10rem;
+    color: #aaaaaa; }
+  .login-input button:hover {
+    background-color: #f3c0a2;
+    color: white; }
+  .login-input .header {
+    font-family: "Audiowide", cursive;
+    margin-top: 2rem;
+    margin-left: 2rem; }
+  .login-input .login-sign-up {
+    display: flex;
+    height: 80%;
+    width: 100%;
+    margin-top: 3rem; }
+    .login-input .login-sign-up .login {
+      margin-left: 1rem;
+      margin-right: 1rem;
+      width: 47%; }
+      .login-input .login-sign-up .login div {
+        font-family: "Audiowide", cursive;
+        color: #6a6e6e; }
+      .login-input .login-sign-up .login form {
+        margin-top: 3rem; }
+        .login-input .login-sign-up .login form .input-container {
+          position: relative; }
+          .login-input .login-sign-up .login form .input-container i {
+            position: absolute;
+            padding-top: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 400;
+            top: 2.5rem;
+            left: 82%;
+            color: #a4afd6; }
+        .login-input .login-sign-up .login form input[type="text"], .login-input .login-sign-up .login form input[type="password"] {
+          margin-top: 3rem;
+          width: 90%;
+          font-family: sans-serif;
+          border: none;
+          outline: none;
+          border-bottom: 1px solid #a4afd6;
+          color: #a4afd6; }
+        .login-input .login-sign-up .login form input[type="text"]:focus, .login-input .login-sign-up .login form input[type="password"]:focus {
+          color: #a4afd6;
+          border-bottom: 2px solid #a4afd6; }
+        .login-input .login-sign-up .login form input[type="button"] {
+          outline: none;
+          margin-left: auto;
+          margin-top: 3rem;
+          width: 6rem;
+          height: 2rem;
+          display: block;
+          margin-right: auto;
+          border: none;
+          border-radius: 0.5rem;
+          background: #86c1e9;
+          font-weight: 500;
+          color: white; }
+    .login-input .login-sign-up .sign-up {
+      width: 47%;
+      margin-left: 2rem; }
+      .login-input .login-sign-up .sign-up div {
+        font-family: "Audiowide", cursive;
+        color: #6e6a6e; }
+      .login-input .login-sign-up .sign-up form {
+        margin-top: 1.5rem; }
+        .login-input .login-sign-up .sign-up form .input-container {
+          position: relative; }
+          .login-input .login-sign-up .sign-up form .input-container i {
+            position: absolute;
+            padding-top: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 400;
+            top: 1.5rem;
+            left: 82%;
+            color: #a4afd6; }
+        .login-input .login-sign-up .sign-up form input[type="text"], .login-input .login-sign-up .sign-up form input[type="password"] {
+          margin-top: 2rem;
+          width: 90%;
+          font-family: sans-serif;
+          border: none;
+          outline: none;
+          border-bottom: 1px solid #a4afd6;
+          color: #a4afd6; }
+        .login-input .login-sign-up .sign-up form input[type="text"]:focus, .login-input .login-sign-up .sign-up form input[type="password"]:focus {
+          color: #a4afd6;
+          font-size: 500;
+          border-bottom: 2px solid #a4afd6; }
+        .login-input .login-sign-up .sign-up form input[type="button"] {
+          margin-left: auto;
+          outline: none;
+          margin-top: 2.5rem;
+          width: 6rem;
+          height: 2rem;
+          display: block;
+          margin-right: auto;
+          border: none;
+          border-radius: 0.5rem;
+          background: #86e9e1;
+          font-weight: 500;
+          color: white; }
+    .login-input .login-sign-up .ver-line {
+      width: 6%;
+      height: 100%; }
+      .login-input .login-sign-up .ver-line div {
+        width: 1px;
+        border-radius: 1rem;
+        background: #2097b4;
+        border: none;
+        height: 40%;
+        margin-left: auto;
+        margin-right: auto; }
+      .login-input .login-sign-up .ver-line h2 {
+        display: block;
+        margin-top: 0.5rem;
+        margin-left: 0.5rem;
+        font-size: 1rem;
+        font-weight: 400;
+        color: #717677;
+        font-family: "Audiowide", cursive; }
+
+.income-status {
+  display: flex;
+  width: 98vw;
+  margin-left: auto;
+  margin-right: auto;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+
+.income-container {
+  width: 24%;
+  height: 5rem;
+  background: white;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-evenly; }
+
+.income-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
+.income-detail-value {
+  font-family: "Audiowide", cursive; }
+
+.income-detail-name {
+  font-size: 0.8rem;
+  font-weight: 600; }
+
+.income-icon {
+  font-size: 2.5rem;
+  margin-top: 0.3rem;
+  color: #5f5b5b; }
+
+.product-section {
+  display: flex; }
+
+.add-product-container {
+  width: 23.5vw;
+  height: 29.7rem;
+  margin-left: 1vw;
+  border-radius: 0.5rem;
+  background: white; }
+  .add-product-container form {
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem; }
+    .add-product-container form #pname, .add-product-container form #price, .add-product-container form #number, .add-product-container form #supplier {
+      width: 100%;
+      height: 1.8rem;
+      outline: none;
+      border: solid 1px #616161;
+      border-radius: 0.125rem;
+      color: #616161; }
+    .add-product-container form #submit-btn {
+      border-radius: 0.25rem;
+      width: 48%;
+      text-align: center;
+      background: #74d8ba;
+      border: none;
+      outline: none;
+      color: white;
+      height: 2rem; }
+    .add-product-container form #reset-btn {
+      border-radius: 0.25rem;
+      width: 48%;
+      text-align: center;
+      background: #d8a474;
+      border: none;
+      outline: none;
+      color: white;
+      height: 2rem; }
+
+.table-container::-webkit-scrollbar {
+  display: none; }
+
+.table-container {
+  height: 25rem;
+  overflow-y: scroll; }
+
+.product-status {
+  width: 73.1vw;
+  margin-left: auto;
+  margin-right: 1vw;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  background: white;
+  color: #333333; }
+  .product-status table {
+    margin-top: 1rem;
+    width: 100%; }
+    .product-status table tr {
+      width: 100%; }
+      .product-status table tr .table-header {
+        display: flex; }
+        .product-status table tr .table-header .sort-btn {
+          width: auto;
+          height: auto;
+          background: none;
+          border: none;
+          outline: none; }
+      .product-status table tr td:first-child, .product-status table tr th:first-child {
+        padding-left: 0.5rem; }
+      .product-status table tr td {
+        border-top: solid 2px #f7f7f7;
+        color: #616161;
+        height: 3rem; }
+        .product-status table tr td .instock {
+          width: 5rem;
+          height: 1.8rem;
+          border-radius: 1rem;
+          border: none;
+          background: #74d8ba;
+          color: white;
+          text-align: center; }
+        .product-status table tr td .action {
+          display: flex; }
+          .product-status table tr td .action .action-btn {
+            width: auto;
+            height: auto;
+            background: none;
+            border: none;
+            outline: none; }
+          .product-status table tr td .action .btn-delete {
+            color: #e44f4f; }
+          .product-status table tr td .action .btn-edit {
+            color: #53d8b7; }
+      .product-status table tr .id-field {
+        width: 10%; }
+      .product-status table tr .name-field {
+        width: 25%; }
+      .product-status table tr .action-field {
+        width: 15%; }
+      .product-status table tr .type-field {
+        width: 15%; }
+      .product-status table tr .status-field {
+        width: 20%; }
+      .product-status table tr .price-field {
+        width: 15%; }
+
+.status-title {
+  font-size: 1rem;
+  font-family: "Audiowide", cursive;
+  padding-top: 0.5rem;
+  padding-left: 0.5rem; }
+
+.edit-product-popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: none;
+  z-index: 1;
+  /* Sit on top */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); }
+
+.edit-product-form {
+  width: 70vw;
+  height: 85vh;
+  position: relative;
+  margin: auto;
+  background-color: #cacaca;
+  border-radius: 0.5rem;
+  margin-top: calc((100vh - 85vh)/2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex; }
+  .edit-product-form .edit-form-image {
+    width: 60%;
+    height: 100%;
+    display: block;
+    white-space: nowrap; }
+    .edit-product-form .edit-form-image img {
+      width: 80%;
+      height: auto;
+      margin-top: auto;
+      margin-bottom: auto;
+      margin: auto;
+      display: block;
+      margin-top: calc(0.5*(85vh - 80%)); }
+  .edit-product-form .edit-form-input {
+    width: 40%;
+    display: block;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    background-color: white; }
+
+.edit-product-container {
+  width: 85%;
+  height: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0.5rem;
+  background: white; }
+  .edit-product-container button {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-family: "Audiowide", cursive;
+    border: none;
+    outline: none;
+    background: whitesmoke;
+    border-radius: 10rem;
+    color: #aaaaaa; }
+  .edit-product-container button:hover {
+    background-color: #e79c9c;
+    color: white; }
+  .edit-product-container form {
+    margin-top: 2rem; }
+    .edit-product-container form input[type="radio"] {
+      pointer-events: none; }
+    .edit-product-container form label {
+      margin-top: 0.5rem; }
+    .edit-product-container form #pename, .edit-product-container form #peprice, .edit-product-container form #penumber, .edit-product-container form #pesupplier {
+      width: 100%;
+      height: 1.8rem;
+      outline: none;
+      border: solid 1px #616161;
+      border-radius: 0.125rem;
+      color: #616161; }
+    .edit-product-container form #submit-edit-btn {
+      border-radius: 0.25rem;
+      width: 45%;
+      display: block;
+      text-align: center;
+      margin-top: 2rem;
+      background: #74d8ba;
+      border: none;
+      outline: none;
+      color: white;
+      height: 2.25rem; }
+
+.cart-popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 16;
+  /* Sit on top */
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.6); }
+
+.cart-form {
+  width: 30%;
+  height: 100%;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  background-color: whitesmoke;
+  position: fixed;
+  right: 0;
+  top: 0; }
+
+.shopping-title {
+  font-family: "Audiowide", cursive;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem; }
+
+@keyframes cartshow {
+  from {
+    right: -40vw;
+    opacity: 0; }
+  to {
+    right: 0;
+    opacity: 1; } }
+
+@keyframes carthide {
+  from {
+    right: 0vh;
+    opacity: 1; }
+  to {
+    right: -4-vw;
+    opacity: 0; } }
+
+.cart-show {
+  animation-name: cartshow;
+  animation-duration: 1.5s; }
+
+.cart-hide {
+  animation-name: carthide;
+  animation-duration: 1.5s; }

@@ -96,7 +96,7 @@
 }
 .product-card{
     width: 25%;
-    height: 23rem;
+    //height: 23rem;
     position: relative;
     outline: none;
 }
@@ -134,7 +134,7 @@ a.product-name{
 a.btn-addcart{
     text-decoration: none;
     color: #929292;
-    border: #333333 1px solid;
+    border: solid   1px    #babdbe;
     width: 7rem;
     height: 2rem;
     display: inline-block;
@@ -142,12 +142,16 @@ a.btn-addcart{
     text-align: center;
     border-radius: 1rem;
     display: block;
-    opacity: 0.5;
+    opacity: 1;
     margin-left: auto;
     margin-right: auto;
 }
 .btn-addcart:hover{
-    opacity: 0.8;
+    background: $button-color;
+    color: white;
+    font-weight: 600;
+    opacity: 1;
+    outline: none;
 }
 #pBtn , #p1Btn{
     left: 0;
@@ -161,12 +165,12 @@ a.btn-addcart{
     opacity: 0.5;
 }
 .best-seller{
-    margin-top: 1.5rem;
+    margin-top: 0rem;
 }
 .best-seller div{
     text-align: center;
 }
-.best-seller .title, .new-arrivals .title{
+.title{
     margin-top: 3rem;
     text-align: center;
     font-size: 2rem;
