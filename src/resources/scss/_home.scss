@@ -131,8 +131,10 @@ a.product-name{
     margin-top: 2.5rem;
     margin-bottom: 1rem;
 }
-a.btn-addcart{
+.btn-addcart{
     text-decoration: none;
+    background: none;
+    outline: none;
     color: #929292;
     border: solid   1px    #babdbe;
     width: 7rem;

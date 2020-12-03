@@ -34,10 +34,34 @@
     margin-top: 0.3rem;
     color: #5f5b5b;
 }
+.setting-container{
+    position: relative;
+}
 .product-section{
     display: flex;
+
 }
-.add-product-container{
+.supplier-section{
+    display: flex;
+}
+.staff-section{
+    display: flex;
+    z-index: 2;
+}
+.sale-section{
+    display: flex;
+    z-index: 2;
+}
+.warranty-section{
+    display: flex;
+    z-index: 2;
+}
+.setting-section{
+//    position: absolute;
+    width: 100%;
+    top: 0;
+}
+.add-product-container, .add-supplier-container, .add-staff-container{
     width: 23.5vw;
     height: 29.7rem;
     margin-left: 1vw;
@@ -47,7 +71,7 @@
         margin-top: 1rem;
         margin-left: 0.5rem;
         margin-right: 0.5rem;
-        #pname, #price, #number, #supplier{
+        #pname, #price, #number, #supplier, #sname, #spnumber, #saddress, #stname, #staddress, .form-input{
             width: 100%;
             height: 1.8rem;
             outline: none;
@@ -55,7 +79,7 @@
             border-radius: 0.125rem;
             color: #616161;
         }
-        #submit-btn{
+        .submit-btn{
             border-radius: 0.25rem;
             width: 48%;
             text-align: center;
@@ -162,6 +186,354 @@
         }
     }
 }
+.supplier-status{
+    width: 73.1vw;
+    margin-left: auto;
+    margin-right: 1vw;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    background: rgb(255, 255, 255);
+    color: #333333;
+    table{
+        margin-top: 1rem;
+        width: 100%;
+        tr{
+            width: 100%;
+            .table-header{
+                display: flex;
+                
+                .sort-btn{
+                    width: auto;
+                    height: auto;
+                    background: none;
+                    border: none;
+                    outline: none;
+                }
+            }
+            td:first-child , th:first-child{
+                padding-left: 0.5rem;
+            }
+            td{
+                border-top: solid 2px rgb(247, 247, 247);
+                color: #616161;
+                height: 3rem;
+                .action{
+                    display: flex;
+                    .action-btn{
+                        width: auto;
+                        height: auto;
+                        background: none;
+                        border: none;
+                        outline: none;
+                    }
+                    .btn-delete{
+                        color: rgb(228, 79, 79);
+                    }
+                    .btn-edit{
+                        color: rgb(83, 216, 183);
+                    }
+                }
+            }
+            .id-field{
+                width: 10%;
+            }
+            .name-field{
+                width: 15%;
+            }
+            .address-field{
+                width: 45%;
+            }
+            .pnumber-field{
+                width: 20%;
+            }
+            .action-field{
+                width: 10%;
+            }
+        }
+    }
+}
+.staff-status{
+    width: 73.1vw;
+    margin-left: auto;
+    margin-right: 1vw;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    background: rgb(255, 255, 255);
+    color: #333333;
+    table{
+        margin-top: 1rem;
+        width: 100%;
+        tr{
+            width: 100%;
+            .table-header{
+                display: flex;
+                
+                .sort-btn{
+                    width: auto;
+                    height: auto;
+                    background: none;
+                    border: none;
+                    outline: none;
+                }
+            }
+            td:first-child , th:first-child{
+                padding-left: 0.5rem;
+            }
+            td{
+                border-top: solid 2px rgb(247, 247, 247);
+                color: #616161;
+                height: 3rem;
+                .action{
+                    display: flex;
+                    .action-btn{
+                        width: auto;
+                        height: auto;
+                        background: none;
+                        border: none;
+                        outline: none;
+                    }
+                    .btn-delete{
+                        color: rgb(228, 79, 79);
+                    }
+                    .btn-edit{
+                        color: rgb(83, 216, 183);
+                    }
+                }
+            }
+            .id-field{
+                width: 10%;
+            }
+            .name-field{
+                width: 25%;
+            }
+            .type-field{
+                width: 20%;
+            }
+            .pnumber-field{
+                width: 20%;
+            }
+            .status-field{
+                width: 15%;
+            }
+            .action-field{
+                width: 10%;
+            }
+        }
+    }
+}
+.sale-status{
+    width: 98vw;
+    margin-left: auto;
+    margin-right: 1vw;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    background: rgb(255, 255, 255);
+    color: #333333;
+    table{
+        margin-top: 1rem;
+        width: 100%;
+        tr{
+            width: 100%;
+            .table-header{
+                display: flex;
+                
+                .sort-btn{
+                    width: auto;
+                    height: auto;
+                    background: none;
+                    border: none;
+                    outline: none;
+                }
+            }
+            td:first-child , th:first-child{
+                padding-left: 0.5rem;
+            }
+            td{
+                border-top: solid 2px rgb(247, 247, 247);
+                color: #616161;
+                height: 3rem;
+                .action{
+                    display: flex;
+                    .action-btn{
+                        width: auto;
+                        height: auto;
+                        background: none;
+                        border: none;
+                        outline: none;
+                    }
+                    .btn-delete{
+                        color: rgb(228, 79, 79);
+                    }
+                    .btn-edit{
+                        color: rgb(83, 216, 183);
+                    }
+                }
+            }
+            .id-field{
+                width: 10%;
+            }
+            .cname-field{
+                width: 20%;
+            }
+            .date-field{
+                width: 15%;
+            }
+            .tprice-field{
+                width: 15%;
+            }
+            .status-field{
+                width: 15%;
+            }
+            .staffif-field{
+                width: 15%;
+            }
+            .action-field{
+                width: 10%;
+            }
+        }
+    }
+}
+.instalment-status{
+    width: 98vw;
+    margin-left: auto;
+    margin-right: 1vw;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    background: rgb(255, 255, 255);
+    color: #333333;
+    table{
+        margin-top: 1rem;
+        width: 100%;
+        tr{
+            width: 100%;
+            .table-header{
+                display: flex;
+                
+                .sort-btn{
+                    width: auto;
+                    height: auto;
+                    background: none;
+                    border: none;
+                    outline: none;
+                }
+            }
+            td:first-child , th:first-child{
+                padding-left: 0.5rem;
+            }
+            td{
+                border-top: solid 2px rgb(247, 247, 247);
+                color: #616161;
+                height: 3rem;
+                .action{
+                    display: flex;
+                    .action-btn{
+                        width: auto;
+                        height: auto;
+                        background: none;
+                        border: none;
+                        outline: none;
+                    }
+                    .btn-payment{
+                        color: rgb(19, 124, 107);
+                    }
+                    .btn-edit{
+                        color: rgb(83, 216, 183);
+                    }
+                }
+            }
+            .id-field{
+                width: 10%;
+            }
+            .cname-field{
+                width: 20%;
+            }
+            .date-field{
+                width: 15%;
+            }
+            .mpayment-field{
+                width: 15%;
+            }
+            .status-field{
+                width: 15%;
+            }
+            .cid-field{
+                width: 15%;
+            }
+            .action-field{
+                width: 10%;
+            }
+        }
+    }
+}
+.warranty-status{
+    width: 98vw;
+    margin-left: auto;
+    margin-right: 1vw;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    background: rgb(255, 255, 255);
+    color: #333333;
+    table{
+        margin-top: 1rem;
+        width: 100%;
+        tr{
+            width: 100%;
+            .table-header{
+                display: flex;
+                
+                .sort-btn{
+                    width: auto;
+                    height: auto;
+                    background: none;
+                    border: none;
+                    outline: none;
+                }
+            }
+            td:first-child , th:first-child{
+                padding-left: 0.5rem;
+            }
+            td{
+                border-top: solid 2px rgb(247, 247, 247);
+                color: #616161;
+                height: 3rem;
+                .action{
+                    display: flex;
+                    .action-btn{
+                        width: auto;
+                        height: auto;
+                        background: none;
+                        border: none;
+                        outline: none;
+                    }
+                    .btn-payment{
+                        color: rgb(19, 124, 107);
+                    }
+                    .btn-edit{
+                        color: rgb(83, 216, 183);
+                    }
+                }
+            }
+            .id-field{
+                width: 10%;
+            }
+            .cname-field{
+                width: 20%;
+            }
+            .product-field{
+                width: 15%;
+            }
+            .date-field{
+                width: 15%;
+            }
+            .note-field{
+                width: 30%;
+            }
+            .action-field{
+                width: 10%;
+            }
+        }
+    }
+}
 .status-title{
     font-size: 1rem;
     font-family: $default-font;
@@ -173,7 +545,7 @@
     left: 0;
     top: 0;
     display: none;
-    z-index: 1; /* Sit on top */
+    z-index: 16; /* Sit on top */
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.6);
@@ -263,5 +635,34 @@
             color: white;
             height: 2.25rem;
         }
+    }
+}
+.setting{
+    position: fixed; 
+    bottom: 1rem; 
+    right: 0.5rem; 
+    z-index: 15; 
+}
+.setting-select{
+    position: fixed;
+    display: none;
+    bottom: 6rem;
+    right: 0.5rem;
+    height: 19rem;
+    z-index: 16;
+    .setting-option{
+        display: block;
+        margin-left: auto;
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+        outline: none;
+        border: none;
+        background: #5f5b5b;
+        opacity: 0.4;
+        border-radius: 0.25rem;
+        color: white;
+    }
+    .setting-option:hover{
+        opacity: 0.8;
     }
 }

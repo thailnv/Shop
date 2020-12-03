@@ -5,9 +5,15 @@ body{
 .bg-light{
     background: $background-color !important;
 }
+button{
+    cursor: pointer;
+}
 body::-webkit-scrollbar{
     display: none;
     scrollbar-width: 0;
+}
+button:focus{
+    outline: none;
 }
 a{
     text-decoration: none !important;

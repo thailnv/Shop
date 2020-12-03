@@ -53,187 +53,848 @@
             </div>
         </div>
     </div>
-    <div class="product-section">
-        <div class="add-product-container">
-            <div class="status-title">
-                New Product
-            </div>
-            <form class="add-product-form">
-                <label for="pname">Product name:</label><br>
-                <input type="text" id="pname" name="pname"><br>
-                <div style="display: flex; margin-top: 0.5rem;">
-                    <label for="type">Type:</label>
-                    <div style="display: inline-block; margin-left: 2rem">
-                        <div style="display: flex; width: 8rem; justify-content: space-between">
-                            <div>
+    <div class="setting-container">
+        <div class="setting-section product-section">
+            <div class="add-product-container">
+                <div class="status-title">
+                    New Product
+                </div>
+                <form class="add-product-form">
+                    <label for="pname">Product name:</label><br>
+                    <input type="text" id="pname" name="pname"><br>
+                    <div style="display: flex; margin-top: 0.5rem;">
+                        <label for="type">Type:</label>
+                        <div style="display: inline-block; margin-left: 2rem">
+                            <div style="display: flex; width: 8rem; justify-content: space-between">
                                 <div>
-                                    <input type="radio" name="type" id="tchair" value="1">
-                                    <label for="tchair">Chair</label>
+                                    <div>
+                                        <input type="radio" name="type" id="tchair" value="1">
+                                        <label for="tchair">Chair</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="type" id="ttable" value="2">
+                                        <label for="ttable">Table</label><br>
+                                    </div>
                                 </div>
                                 <div>
-                                    <input type="radio" name="type" id="ttable" value="2">
-                                    <label for="ttable">Table</label><br>
-                                </div>
-                            </div>
-                            <div>
-                                <div>
-                                    <input type="radio" name="type" id="tbed" value="4">
-                                    <label for="tbed">Bed</label>
-                                </div>
-                                <div>
-                                    <input type="radio" name="type" id="tdecor" value="3">
-                                    <label for="tdecor">Decor</label>
+                                    <div>
+                                        <input type="radio" name="type" id="tbed" value="4">
+                                        <label for="tbed">Bed</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="type" id="tdecor" value="3">
+                                        <label for="tdecor">Decor</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <label for="supplier">Supplier:</label><br>
-                <select name="supplier" id="supplier">
-                    {{#each suppliers}}
+                    <label for="supplier">Supplier:</label><br>
+                    <select name="supplier" id="supplier">
+                        {{#each suppliers}}
                         <option value="{{this.id}}">{{this.name}}</option>
-                    {{/each}}
-                </select><br>
-                <label for="price">Price:</label><br>
-                <input type="number" min="0" id="price" name="price"><br>
-                <label for="number">Number:</label><br>
-                <input type="number" min="0" id="number" name="number"><br>
-                <label for="image">Image:</label>
-                <input type="file" name="image" id="image"><br>
-                <div style="margin-top: 0.6rem; display: flex; justify-content:space-between;">
-                    <input type="submit" id="submit-btn" value="Add Product">
-                    <input type="button" id="reset-btn" value="Clear">
-                </div>
-            </form>
-        </div>
-        <div class="product-status">
-            <div class="status-title">
-                Product status
+                        {{/each}}
+                    </select><br>
+                    <label for="price">Price:</label><br>
+                    <input type="number" min="0" id="price" name="price"><br>
+                    <label for="number">Number:</label><br>
+                    <input type="number" min="0" id="number" name="number"><br>
+                    <label for="image">Image:</label>
+                    <input type="file" name="image" id="image"><br>
+                    <div style="margin-top: 0.6rem; display: flex; justify-content:space-between;">
+                        <input type="submit" class="submit-btn" id="product-submit" value="Add Product">
+                        <input type="button" id="reset-btn" value="Clear">
+                    </div>
+                </form>
             </div>
-            <table>
-                <tr>
-                    <th class="id-field">
-                        <div class="table-header">
-                            <div>
-                                ID
-                            </div>
-                            <div>
-                                <button class="sort-btn">
-                                    <i class="fas fa-sort-up"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </th>
-                    <th class="name-field">
-                        <div class="table-header">
-                            <div>
-                                Name
-                            </div>
-                            <div>
-                                <button class="sort-btn">
-                                    <i class="fas fa-sort-up"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </th>
-                    <th class="type-field">
-                        <div class="table-header">
-                            <div>
-                                Type
-                            </div>
-                            <div>
-                                <button class="sort-btn">
-                                    <span style="color: rgb(175, 175, 175);">
-                                        <i class="fas fa-sort"></i>
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-                    </th>
-                    <th class="price-field">
-                        <div class="table-header">
-                            <div>
-                                Price
-                            </div>
-                            <div>
-                                <button class="sort-btn">
-                                    <span style="color: rgb(175, 175, 175);">
-                                        <i class="fas fa-sort"></i>
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-                    </th>
-                    <th class="status-field">
-                        <div class="table-header">
-                            <div>
-                                Status
-                            </div>
-                            <div>
-                                <button class="sort-btn">
-                                    <span style="color: rgb(175, 175, 175);">
-                                        <i class="fas fa-sort"></i>
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-                    </th>
-                    <th class="action-field">
-                        <div class="table-header">
-                            <div>
-                                Action
-                            </div>
-                            <div>
-                                <button class="sort-btn">
-                                    <span style="color: rgb(175, 175, 175);">
-                                        <i class="fas fa-sort"></i>
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-                    </th>
-                </tr>
-            </table>
-            <div class="table-container">
+            <div class="product-status">
+                <div class="status-title">
+                    All products
+                </div>
                 <table>
                     <tr>
                         <th class="id-field">
+                            <div class="table-header">
+                                <div>
+                                    ID
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <i class="fas fa-sort-up"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </th>
                         <th class="name-field">
+                            <div class="table-header">
+                                <div>
+                                    Name
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <i class="fas fa-sort-up"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </th>
                         <th class="type-field">
+                            <div class="table-header">
+                                <div>
+                                    Type
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
                         </th>
                         <th class="price-field">
+                            <div class="table-header">
+                                <div>
+                                    Price
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
                         </th>
                         <th class="status-field">
+                            <div class="table-header">
+                                <div>
+                                    Status
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
                         </th>
                         <th class="action-field">
+                            <div class="table-header">
+                                <div>
+                                    Action
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
                         </th>
                     </tr>
-                    {{#each products}}
-                    <tr class="product-data" link="{{this.image}}" number="{{this.number}}">
-                        <td class="pinfoid">{{this.id}}</td>
-                        <td class="pinfoname">{{this.name}}</td>
-                        <td class="pinfotype">{{this.type}}</td>
-                        <td class="pinfoprice">{{this.price}}</td>
-                        <td>
-                            <div class="instock">
-                                In stock
-                            </div>
-                        </td>
-                        <td>
-                            <div class="action">
-                                <button class="action-btn btn-edit">
-                                    <i class="far fa-edit"></i>
-                                </button>
-                                <button class="action-btn btn-delete">
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    {{/each}}
                 </table>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th class="id-field">
+                            </th>
+                            <th class="name-field">
+                            </th>
+                            <th class="type-field">
+                            </th>
+                            <th class="price-field">
+                            </th>
+                            <th class="status-field">
+                            </th>
+                            <th class="action-field">
+                            </th>
+                        </tr>
+                        {{#each products}}
+                        <tr class="product-data" link="{{this.image}}" number="{{this.number}}">
+                            <td class="pinfoid">{{this.id}}</td>
+                            <td class="pinfoname">{{this.name}}</td>
+                            <td class="pinfotype">{{this.type}}</td>
+                            <td class="pinfoprice">{{this.price}}</td>
+                            <td>
+                                <div class="instock">
+                                    In stock
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action">
+                                    <button class="action-btn btn-edit">
+                                        <i class="far fa-edit"></i>
+                                    </button>
+                                    {{!-- <button class="action-btn btn-delete">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button> --}}
+                                </div>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="setting-section supplier-section">
+            <div class="add-supplier-container">
+                <div class="status-title">
+                    New Supplier
+                </div>
+                <form class="add-supplier-form">
+                    <label for="sname">Supplier name:</label><br>
+                    <input type="text" id="sname" name="sname"><br>
+                    <label for="saddress">Address:</label><br>
+                    <input type="text" id="saddress" name="saddress"><br>
+                    <label for="spnumber">Phone number:</label><br>
+                    <input type="text" id="spnumber" name="spnumber"><br>
+                    <label for="simage">Image:</label>
+                    <input type="file" name="simage" id="simage"><br>
+                    <div style="margin-top: 0.6rem; display: flex; justify-content:space-between;">
+                        <input type="submit" class="submit-btn" id="supplier-submit" value="Add Product">
+                        <input type="button" id="reset-btn" value="Clear">
+                    </div>
+                </form>
+            </div>
+            <div class="supplier-status">
+                <div class="status-title">
+                    Supplier management
+                </div>
+                <table>
+                    <tr>
+                        <th class="id-field">
+                            <div class="table-header">
+                                <div>
+                                    ID
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <i class="fas fa-sort-up"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="name-field">
+                            <div class="table-header">
+                                <div>
+                                    Name
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <i class="fas fa-sort-up"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="address-field">
+                            <div class="table-header">
+                                <div>
+                                    Address
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="pnumber-field">
+                            <div class="table-header">
+                                <div>
+                                    Phone number
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="action-field">
+                            <div class="table-header">
+                                <div>
+                                    Action
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th class="id-field">
+                            </th>
+                            <th class="name-field">
+                            </th>
+                            <th class="address-field">
+                            </th>
+                            <th class="pnumber-field">
+                            </th>
+                            <th class="action-field">
+                            </th>
+                        </tr>
+                        {{#each suppliers}}
+                        <tr class="supplier-data" link="{{this.image}}">
+                            <td class="sinfoid">{{this.id}}</td>
+                            <td class="sinfoname">{{this.name}}</td>
+                            <td class="sinfoaddress">{{this.address}}</td>
+                            <td class="sinfopnumber">{{this.phonenumber}}</td>
+                            <td>
+                                <div class="action">
+                                    <button class="action-btn btn-edit">
+                                        <i class="far fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="setting-section staff-section">
+            <div class="add-staff-container">
+                <div class="status-title">
+                    New Staff
+                </div>
+                <form class="add-staff-form">
+                    <label for="stname">Name:</label><br>
+                    <input type="text" id="stname" name="stname" class="form-input"><br>
+                    <label for="staddress">Address:</label><br>
+                    <input type="text" id="staddress" name="staddress" class="form-input"><br>
+                    <label for="stpnumber">Phone number:</label><br>
+                    <input type="text" id="stpnumber" name="stpnumber" class="form-input"><br>
+                    <label for="stpnumber">Role:</label><br>
+                    <select name="sttype" id="sttype" class="form-input">
+                        {{#each suppliers}}
+                        <option value="{{this.id}}">{{this.name}}</option>
+                        {{/each}}
+                    </select><br>
+                    <label for="stusername">Username:</label><br>
+                    <input type="text" id="stusername" name="stusername" class="form-input"><br>
+                    <label for="stpassword">Default password:</label><br>
+                    <input type="password" id="stpassword" name="stpassword" class="form-input"><br>
+                    <div style="margin-top: 0.6rem; display: flex; justify-content:space-between;">
+                        <input type="submit" class="submit-btn" id="supplier-submit" value="Add Product">
+                        <input type="button" id="reset-btn" value="Clear">
+                    </div>
+                </form>
+            </div>
+            <div class="staff-status">
+                <div class="status-title">
+                    Staff management
+                </div>
+                <table>
+                    <tr>
+                        <th class="id-field">
+                            <div class="table-header">
+                                <div>
+                                    ID
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <i class="fas fa-sort-up"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="name-field">
+                            <div class="table-header">
+                                <div>
+                                    Name
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <i class="fas fa-sort-up"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="type-field">
+                            <div class="table-header">
+                                <div>
+                                    Type
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="pnumber-field">
+                            <div class="table-header">
+                                <div>
+                                    Phone number
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="status-field">
+                            <div class="table-header">
+                                <div>
+                                    Status
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="action-field">
+                            <div class="table-header">
+                                <div>
+                                    Action
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th class="id-field">
+                            </th>
+                            <th class="name-field">
+                            </th>
+                            <th class="type-field">
+                            </th>
+                            <th class="pnumber-field">
+                            </th>
+                            <th class="status-field">
+                            </th>
+                            <th class="action-field">
+                            </th>
+                        </tr>
+                        <tr class="supplier-data" link="{{this.image}}">
+                            <td class="infoid">NV01</td>
+                            <td class="infoname">Mosh Hamedani</td>
+                            <td class="infotype">Teacher</td>
+                            <td class="infopnumber">0139281312</td>
+                            <td class="infostatus">Working</td>
+                            <td>
+                                <div class="action">
+                                    <button class="action-btn btn-edit">
+                                        <i class="far fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="setting-section sale-section">
+            <div class="sale-status">
+                <div class="status-title">
+                    Sale management
+                </div>
+                <table>
+                    <tr>
+                        <th class="id-field">
+                            <div class="table-header">
+                                <div>
+                                    ID
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <i class="fas fa-sort-up"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="cname-field">
+                            <div class="table-header">
+                                <div>
+                                    Customer name
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <i class="fas fa-sort-up"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="date-field">
+                            <div class="table-header">
+                                <div>
+                                    Date create
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="tprice-field">
+                            <div class="table-header">
+                                <div>
+                                    Total price
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="status-field">
+                            <div class="table-header">
+                                <div>
+                                    Status
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="staffid-field">
+                            <div class="table-header">
+                                <div>
+                                    Staff ID
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="action-field">
+                            <div class="table-header">
+                                <div>
+                                    Action
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th class="id-field"></th>
+                            <th class="cname-field"></th>
+                            <th class="date-field"></th>
+                            <th class="tprice-field"></th>
+                            <th class="status-field"></th>
+                            <th class="staffid-field"></th>
+                            <th class="action-field"></th>
+                        </tr>
+                        <tr class="supplier-data" link="{{this.image}}">
+                            <td class="infoid">1</td>
+                            <td class="infoname">Mosh Hamedani</td>
+                            <td class="infodate">2020-12-1</td>
+                            <td class="infotprice">12704</td>
+                            <td class="infostatus">Paid</td>
+                            <td class="infostaffid">NV01</td>
+                            <td>
+                                <div class="action">
+                                    <button class="action-btn btn-edit">
+                                        <i class="far fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="setting-section instalment-section">
+            <div class="instalment-status">
+                <div class="status-title">
+                    Instalment sale management
+                </div>
+                <table>
+                    <tr>
+                        <th class="id-field">
+                            <div class="table-header">
+                                <div>
+                                    ID
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <i class="fas fa-sort-up"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="cname-field">
+                            <div class="table-header">
+                                <div>
+                                    Customer name
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <i class="fas fa-sort-up"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="cid-field">
+                            <div class="table-header">
+                                <div>
+                                    Customer ID
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <i class="fas fa-sort-up"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="date-field">
+                            <div class="table-header">
+                                <div>
+                                    Date of payment
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="mpayment-field">
+                            <div class="table-header">
+                                <div>
+                                    Monthly payment
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="status-field">
+                            <div class="table-header">
+                                <div>
+                                    Status
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="action-field">
+                            <div class="table-header">
+                                <div>
+                                    Action
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th class="id-field"></th>
+                            <th class="cname-field"></th>
+                            <th class="cid-field"></th>
+                            <th class="date-field"></th>
+                            <th class="mpayment-field"></th>
+                            <th class="status-field"></th>
+                            <th class="action-field"></th>
+                        </tr>
+                        <tr class="supplier-data" link="{{this.image}}">
+                            <td class="infoid">1</td>
+                            <td class="infoname">Mosh Hamedani</td>
+                            <td class="infodate">2020-12-1</td>
+                            <td class="infotprice">12704</td>
+                            <td class="infostatus">Paid</td>
+                            <td class="infostaffid">NV01</td>
+                            <td>
+                                <div class="action">
+                                    <button class="action-btn btn-edit">
+                                        <i class="far fa-edit"></i>
+                                    </button>
+                                    <button class="action-btn btn-payment">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="setting-section warranty-section">
+            <div class="warranty-status">
+                <div class="status-title">
+                    Warranty management
+                </div>
+                <table>
+                    <tr>
+                        <th class="id-field">
+                            <div class="table-header">
+                                <div>
+                                    ID
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <i class="fas fa-sort-up"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="cname-field">
+                            <div class="table-header">
+                                <div>
+                                    Customer name
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <i class="fas fa-sort-up"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="cid-field">
+                            <div class="table-header">
+                                <div>
+                                    Product
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <i class="fas fa-sort-up"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="date-field">
+                            <div class="table-header">
+                                <div>
+                                    Date exprired
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="note-field">
+                            <div class="table-header">
+                                <div>
+                                    Note
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                        <th class="action-field">
+                            <div class="table-header">
+                                <div>
+                                    Action
+                                </div>
+                                <div>
+                                    <button class="sort-btn">
+                                        <span style="color: rgb(175, 175, 175);">
+                                            <i class="fas fa-sort"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th class="id-field"></th>
+                            <th class="cname-field"></th>
+                            <th class="product-field"></th>
+                            <th class="date-field"></th>
+                            <th class="note-field"></th>
+                            <th class="action-field"></th>
+                        </tr>
+                        <tr class="supplier-data" link="{{this.image}}">
+                            <td class="infoid">1</td>
+                            <td class="infoname">Mosh Hamedani</td>
+                            <td class="infoproduct">HR Modern chair</td>
+                            <td class="infodate">2020-12-1</td>
+                            <td class="infotprice">12704</td>
+                            <td>
+                                <div class="action">
+                                    <button class="action-btn btn-edit">
+                                        <i class="far fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -279,9 +940,9 @@
                     </div>
                     <label for="pesupplier">Supplier:</label><br>
                     <select name="pesupplier" id="pesupplier">
-                    {{#each suppliers}}
+                        {{#each suppliers}}
                         <option value="{{this.id}}">{{this.name}}</option>
-                    {{/each}}
+                        {{/each}}
                     </select><br>
                     <label for="peprice">Price:</label><br>
                     <input type="number" min="0" id="peprice" name="peprice"><br>
@@ -293,3 +954,8 @@
         </div>
     </div>
 </div>
+<script>
+    {{#each products}}
+        console.log("{{this.name}}");
+    {{/each}}
+</script>

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
+const Convert = require('../../util/mongoose');
 const Schema = mongoose.Schema;
-
 const Product = new Schema({
     name: {type: String},
     image: {type: String},

@@ -6,6 +6,14 @@
     position: absolute;
     font-size: 1.5rem;
 }
+.nav-header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-left: 0;
+    z-index: 16;
+    width: 100vw;
+}
 .account-info{
     display: none;
 }
@@ -32,6 +40,21 @@
 }
 .color-grey{
     color: #636e72;
+}
+.category-dropdown{
+    position: relative;
+}
+.dropdown-content{
+    position: absolute;
+    display: none;
+    min-width: 8rem;
+    left: 0;
+    a{
+        text-align: left;
+    }
+}
+.category-dropdown:hover .dropdown-content{
+    display: block;
 }
 .white-text{
     margin-left: 1rem;

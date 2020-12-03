@@ -5,9 +5,15 @@ body {
 .bg-light {
   background: #f1f1f1 !important; }
 
+button {
+  cursor: pointer; }
+
 body::-webkit-scrollbar {
   display: none;
   scrollbar-width: 0; }
+
+button:focus {
+  outline: none; }
 
 a {
   text-decoration: none !important;
@@ -187,8 +193,10 @@ a.product-name {
   margin-top: 2.5rem;
   margin-bottom: 1rem; }
 
-a.btn-addcart {
+.btn-addcart {
   text-decoration: none;
+  background: none;
+  outline: none;
   color: #929292;
   border: solid   1px    #babdbe;
   width: 7rem;
@@ -287,6 +295,14 @@ a.btn-addcart {
   position: absolute;
   font-size: 1.5rem; }
 
+.nav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-left: 0;
+  z-index: 16;
+  width: 100vw; }
+
 .account-info {
   display: none; }
 
@@ -313,6 +329,20 @@ a.btn-addcart {
 
 .color-grey {
   color: #636e72; }
+
+.category-dropdown {
+  position: relative; }
+
+.dropdown-content {
+  position: absolute;
+  display: none;
+  min-width: 8rem;
+  left: 0; }
+  .dropdown-content a {
+    text-align: left; }
+
+.category-dropdown:hover .dropdown-content {
+  display: block; }
 
 .white-text {
   margin-left: 1rem;
@@ -344,7 +374,8 @@ a.btn-addcart {
   object-fit: scale-down !important;
   display: flex; }
   .product-page .category-banner div img {
-    width: 35vw;
+    width: 30vw;
+    max-height: 30vw;
     margin-left: 5rem; }
   .product-page .category-banner .category-detail h1 {
     font-family: 'Audiowide', cursive;
@@ -396,7 +427,7 @@ a.btn-addcart {
   left: 0;
   top: 0;
   display: none;
-  z-index: 1;
+  z-index: 20;
   /* Sit on top */
   width: 100%;
   /* Full width */
@@ -663,27 +694,49 @@ a.btn-addcart {
   margin-top: 0.3rem;
   color: #5f5b5b; }
 
+.setting-container {
+  position: relative; }
+
 .product-section {
   display: flex; }
 
-.add-product-container {
+.supplier-section {
+  display: flex; }
+
+.staff-section {
+  display: flex;
+  z-index: 2; }
+
+.sale-section {
+  display: flex;
+  z-index: 2; }
+
+.warranty-section {
+  display: flex;
+  z-index: 2; }
+
+.setting-section {
+  width: 100%;
+  top: 0; }
+
+.add-product-container, .add-supplier-container, .add-staff-container {
   width: 23.5vw;
   height: 29.7rem;
   margin-left: 1vw;
   border-radius: 0.5rem;
   background: white; }
-  .add-product-container form {
+  .add-product-container form, .add-supplier-container form, .add-staff-container form {
     margin-top: 1rem;
     margin-left: 0.5rem;
     margin-right: 0.5rem; }
-    .add-product-container form #pname, .add-product-container form #price, .add-product-container form #number, .add-product-container form #supplier {
+    .add-product-container form #pname, .add-product-container form #price, .add-product-container form #number, .add-product-container form #supplier, .add-product-container form #sname, .add-product-container form #spnumber, .add-product-container form #saddress, .add-product-container form #stname, .add-product-container form #staddress, .add-product-container form .form-input, .add-supplier-container form #pname, .add-supplier-container form #price, .add-supplier-container form #number, .add-supplier-container form #supplier, .add-supplier-container form #sname, .add-supplier-container form #spnumber, .add-supplier-container form #saddress, .add-supplier-container form #stname, .add-supplier-container form #staddress, .add-supplier-container form .form-input, .add-staff-container form #pname, .add-staff-container form #price, .add-staff-container form #number, .add-staff-container form #supplier, .add-staff-container form #sname, .add-staff-container form #spnumber, .add-staff-container form #saddress, .add-staff-container form #stname, .add-staff-container form #staddress, .add-staff-container form .form-input {
       width: 100%;
       height: 1.8rem;
       outline: none;
       border: solid 1px #616161;
       border-radius: 0.125rem;
       color: #616161; }
-    .add-product-container form #submit-btn {
+    .add-product-container form .submit-btn, .add-supplier-container form .submit-btn, .add-staff-container form .submit-btn {
       border-radius: 0.25rem;
       width: 48%;
       text-align: center;
@@ -692,7 +745,7 @@ a.btn-addcart {
       outline: none;
       color: white;
       height: 2rem; }
-    .add-product-container form #reset-btn {
+    .add-product-container form #reset-btn, .add-supplier-container form #reset-btn, .add-staff-container form #reset-btn {
       border-radius: 0.25rem;
       width: 48%;
       text-align: center;
@@ -769,6 +822,268 @@ a.btn-addcart {
       .product-status table tr .price-field {
         width: 15%; }
 
+.supplier-status {
+  width: 73.1vw;
+  margin-left: auto;
+  margin-right: 1vw;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  background: white;
+  color: #333333; }
+  .supplier-status table {
+    margin-top: 1rem;
+    width: 100%; }
+    .supplier-status table tr {
+      width: 100%; }
+      .supplier-status table tr .table-header {
+        display: flex; }
+        .supplier-status table tr .table-header .sort-btn {
+          width: auto;
+          height: auto;
+          background: none;
+          border: none;
+          outline: none; }
+      .supplier-status table tr td:first-child, .supplier-status table tr th:first-child {
+        padding-left: 0.5rem; }
+      .supplier-status table tr td {
+        border-top: solid 2px #f7f7f7;
+        color: #616161;
+        height: 3rem; }
+        .supplier-status table tr td .action {
+          display: flex; }
+          .supplier-status table tr td .action .action-btn {
+            width: auto;
+            height: auto;
+            background: none;
+            border: none;
+            outline: none; }
+          .supplier-status table tr td .action .btn-delete {
+            color: #e44f4f; }
+          .supplier-status table tr td .action .btn-edit {
+            color: #53d8b7; }
+      .supplier-status table tr .id-field {
+        width: 10%; }
+      .supplier-status table tr .name-field {
+        width: 15%; }
+      .supplier-status table tr .address-field {
+        width: 45%; }
+      .supplier-status table tr .pnumber-field {
+        width: 20%; }
+      .supplier-status table tr .action-field {
+        width: 10%; }
+
+.staff-status {
+  width: 73.1vw;
+  margin-left: auto;
+  margin-right: 1vw;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  background: white;
+  color: #333333; }
+  .staff-status table {
+    margin-top: 1rem;
+    width: 100%; }
+    .staff-status table tr {
+      width: 100%; }
+      .staff-status table tr .table-header {
+        display: flex; }
+        .staff-status table tr .table-header .sort-btn {
+          width: auto;
+          height: auto;
+          background: none;
+          border: none;
+          outline: none; }
+      .staff-status table tr td:first-child, .staff-status table tr th:first-child {
+        padding-left: 0.5rem; }
+      .staff-status table tr td {
+        border-top: solid 2px #f7f7f7;
+        color: #616161;
+        height: 3rem; }
+        .staff-status table tr td .action {
+          display: flex; }
+          .staff-status table tr td .action .action-btn {
+            width: auto;
+            height: auto;
+            background: none;
+            border: none;
+            outline: none; }
+          .staff-status table tr td .action .btn-delete {
+            color: #e44f4f; }
+          .staff-status table tr td .action .btn-edit {
+            color: #53d8b7; }
+      .staff-status table tr .id-field {
+        width: 10%; }
+      .staff-status table tr .name-field {
+        width: 25%; }
+      .staff-status table tr .type-field {
+        width: 20%; }
+      .staff-status table tr .pnumber-field {
+        width: 20%; }
+      .staff-status table tr .status-field {
+        width: 15%; }
+      .staff-status table tr .action-field {
+        width: 10%; }
+
+.sale-status {
+  width: 98vw;
+  margin-left: auto;
+  margin-right: 1vw;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  background: white;
+  color: #333333; }
+  .sale-status table {
+    margin-top: 1rem;
+    width: 100%; }
+    .sale-status table tr {
+      width: 100%; }
+      .sale-status table tr .table-header {
+        display: flex; }
+        .sale-status table tr .table-header .sort-btn {
+          width: auto;
+          height: auto;
+          background: none;
+          border: none;
+          outline: none; }
+      .sale-status table tr td:first-child, .sale-status table tr th:first-child {
+        padding-left: 0.5rem; }
+      .sale-status table tr td {
+        border-top: solid 2px #f7f7f7;
+        color: #616161;
+        height: 3rem; }
+        .sale-status table tr td .action {
+          display: flex; }
+          .sale-status table tr td .action .action-btn {
+            width: auto;
+            height: auto;
+            background: none;
+            border: none;
+            outline: none; }
+          .sale-status table tr td .action .btn-delete {
+            color: #e44f4f; }
+          .sale-status table tr td .action .btn-edit {
+            color: #53d8b7; }
+      .sale-status table tr .id-field {
+        width: 10%; }
+      .sale-status table tr .cname-field {
+        width: 20%; }
+      .sale-status table tr .date-field {
+        width: 15%; }
+      .sale-status table tr .tprice-field {
+        width: 15%; }
+      .sale-status table tr .status-field {
+        width: 15%; }
+      .sale-status table tr .staffif-field {
+        width: 15%; }
+      .sale-status table tr .action-field {
+        width: 10%; }
+
+.instalment-status {
+  width: 98vw;
+  margin-left: auto;
+  margin-right: 1vw;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  background: white;
+  color: #333333; }
+  .instalment-status table {
+    margin-top: 1rem;
+    width: 100%; }
+    .instalment-status table tr {
+      width: 100%; }
+      .instalment-status table tr .table-header {
+        display: flex; }
+        .instalment-status table tr .table-header .sort-btn {
+          width: auto;
+          height: auto;
+          background: none;
+          border: none;
+          outline: none; }
+      .instalment-status table tr td:first-child, .instalment-status table tr th:first-child {
+        padding-left: 0.5rem; }
+      .instalment-status table tr td {
+        border-top: solid 2px #f7f7f7;
+        color: #616161;
+        height: 3rem; }
+        .instalment-status table tr td .action {
+          display: flex; }
+          .instalment-status table tr td .action .action-btn {
+            width: auto;
+            height: auto;
+            background: none;
+            border: none;
+            outline: none; }
+          .instalment-status table tr td .action .btn-payment {
+            color: #137c6b; }
+          .instalment-status table tr td .action .btn-edit {
+            color: #53d8b7; }
+      .instalment-status table tr .id-field {
+        width: 10%; }
+      .instalment-status table tr .cname-field {
+        width: 20%; }
+      .instalment-status table tr .date-field {
+        width: 15%; }
+      .instalment-status table tr .mpayment-field {
+        width: 15%; }
+      .instalment-status table tr .status-field {
+        width: 15%; }
+      .instalment-status table tr .cid-field {
+        width: 15%; }
+      .instalment-status table tr .action-field {
+        width: 10%; }
+
+.warranty-status {
+  width: 98vw;
+  margin-left: auto;
+  margin-right: 1vw;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  background: white;
+  color: #333333; }
+  .warranty-status table {
+    margin-top: 1rem;
+    width: 100%; }
+    .warranty-status table tr {
+      width: 100%; }
+      .warranty-status table tr .table-header {
+        display: flex; }
+        .warranty-status table tr .table-header .sort-btn {
+          width: auto;
+          height: auto;
+          background: none;
+          border: none;
+          outline: none; }
+      .warranty-status table tr td:first-child, .warranty-status table tr th:first-child {
+        padding-left: 0.5rem; }
+      .warranty-status table tr td {
+        border-top: solid 2px #f7f7f7;
+        color: #616161;
+        height: 3rem; }
+        .warranty-status table tr td .action {
+          display: flex; }
+          .warranty-status table tr td .action .action-btn {
+            width: auto;
+            height: auto;
+            background: none;
+            border: none;
+            outline: none; }
+          .warranty-status table tr td .action .btn-payment {
+            color: #137c6b; }
+          .warranty-status table tr td .action .btn-edit {
+            color: #53d8b7; }
+      .warranty-status table tr .id-field {
+        width: 10%; }
+      .warranty-status table tr .cname-field {
+        width: 20%; }
+      .warranty-status table tr .product-field {
+        width: 15%; }
+      .warranty-status table tr .date-field {
+        width: 15%; }
+      .warranty-status table tr .note-field {
+        width: 30%; }
+      .warranty-status table tr .action-field {
+        width: 10%; }
+
 .status-title {
   font-size: 1rem;
   font-family: "Audiowide", cursive;
@@ -780,7 +1095,7 @@ a.btn-addcart {
   left: 0;
   top: 0;
   display: none;
-  z-index: 1;
+  z-index: 16;
   /* Sit on top */
   width: 100%;
   height: 100%;
@@ -863,6 +1178,52 @@ a.btn-addcart {
       color: white;
       height: 2.25rem; }
 
+.setting {
+  position: fixed;
+  bottom: 1rem;
+  right: 0.5rem;
+  z-index: 15; }
+
+.setting-select {
+  position: fixed;
+  display: none;
+  bottom: 6rem;
+  right: 0.5rem;
+  height: 19rem;
+  z-index: 16; }
+  .setting-select .setting-option {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+    outline: none;
+    border: none;
+    background: #5f5b5b;
+    opacity: 0.4;
+    border-radius: 0.25rem;
+    color: white; }
+  .setting-select .setting-option:hover {
+    opacity: 0.8; }
+
+.cart {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 15; }
+
+#cart-btn-2, #setting-btn {
+  border: none;
+  outline: none;
+  opacity: 0.5;
+  background: #5e5e5e;
+  border-radius: 4rem;
+  width: 3rem;
+  height: 3rem;
+  color: whitesmoke; }
+
+#cart-btn-2:hover, #setting-btn:hover {
+  opacity: 0.8; }
+
 .cart-popup {
   position: fixed;
   left: 0;
@@ -879,7 +1240,7 @@ a.btn-addcart {
   height: 100%;
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
-  background-color: whitesmoke;
+  background-color: white;
   position: fixed;
   right: 0;
   top: 0; }
@@ -889,7 +1250,7 @@ a.btn-addcart {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2rem; }
+  margin-top: 1rem; }
 
 @keyframes cartshow {
   from {
@@ -904,13 +1265,139 @@ a.btn-addcart {
     right: 0vh;
     opacity: 1; }
   to {
-    right: -4-vw;
+    right: -40vw;
     opacity: 0; } }
 
 .cart-show {
   animation-name: cartshow;
-  animation-duration: 1.5s; }
+  animation-duration: 0.5s; }
 
 .cart-hide {
   animation-name: carthide;
-  animation-duration: 1.5s; }
+  animation-duration: 0.5s; }
+
+.cart-item {
+  width: 95%;
+  height: auto;
+  max-height: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: scroll;
+  box-sizing: border-box; }
+
+.cart-item::-webkit-scrollbar {
+  display: none;
+  width: 0; }
+
+.item {
+  width: 98%;
+  height: 20%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  padding-bottom: 0.5rem;
+  box-sizing: border-box;
+  padding-top: 1rem;
+  border-bottom: #e7e7e7 solid 2px; }
+
+.item-img {
+  width: 25%;
+  height: calc(100vw*0.3*0.95*0.2);
+  border-radius: 0.5rem;
+  background-color: #f3f3f3;
+  box-sizing: border-box;
+  padding-top: 0.25rem;
+  position: relative; }
+  .item-img img {
+    width: 90%;
+    max-height: calc(100vw*0.3*0.95*0.15);
+    object-fit: contain;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto; }
+
+.item-info {
+  margin-left: 1rem;
+  width: 75%;
+  box-sizing: border-box;
+  display: flex;
+  height: calc(100vw*0.3*0.95*0.2);
+  align-items: center; }
+  .item-info .item-name-price {
+    width: 75%;
+    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly; }
+    .item-info .item-name-price .item-name {
+      font-weight: 500; }
+    .item-info .item-name-price .item-price {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #cacaca; }
+  .item-info .item-quantity {
+    width: 20%;
+    text-align: center;
+    border: #cfcfcf 1px solid;
+    outline: none;
+    height: 2.5rem; }
+  .item-info input[type=number]::-webkit-inner-spin-button,
+  .item-info input[type=number]::-webkit-outer-spin-button {
+    height: 2rem;
+    width: 2rem;
+    opacity: 1;
+    margin: 0;
+    background: none; }
+  .item-info #remove-item-btn {
+    margin-left: 0.5rem;
+    color: #cfcfcf;
+    font-size: 1.25rem;
+    background: none;
+    border: none;
+    outline: none; }
+  .item-info #remove-item-btn:hover {
+    color: #b3b3b3; }
+
+.cart-total {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: space-between; }
+
+#checkout-btn {
+  margin-top: 0.5rem;
+  border: none;
+  outline: none;
+  border-radius: 0.25rem;
+  background-color: #73bbff;
+  width: 95%;
+  height: 2.5rem;
+  color: white;
+  display: block;
+  text-align: center;
+  font-weight: 600;
+  margin-left: auto;
+  margin-right: auto; }
+
+.total-txt {
+  font-weight: bold;
+  color: #9090ff; }
+
+.cart-nitem {
+  position: absolute;
+  left: -0.5rem;
+  top: -0.5rem;
+  background-color: #ebca8d;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: white;
+  line-height: 1.5rem;
+  text-align: center;
+  border-radius: 4rem; }
