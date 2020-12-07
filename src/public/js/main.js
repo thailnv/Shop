@@ -1,3 +1,4 @@
+
 //slick slider
 $('.second-carousel').slick({
   slidesToShow: 5,
@@ -232,7 +233,8 @@ function createCartFunction() {
   checkout_btn.onclick = ()=>{
     cart_action.classList.remove('cart-show-item');
     cart_action.classList.add('cart-show-checkout');
-    document.querySelector('.checkout-form .provisional-cost').textContent = cart_form.querySelector('.cart-total .total-price').textContent;
+    document.querySelector('.checkout-form .provisional-cost').textContent =
+     cart_form.querySelector('.cart-total .total-price').textContent;
   }
   window.onclick = (e) => {
     if (e.target == cart_popup) {
@@ -309,6 +311,42 @@ function createProductFunction() {
   }
 }
 
+function createProduct(){
+  let submit = document.querySelector('#product-submit');
+  submit.onclick = function () {
+    let product = document.querySelector('.add-product-form');
+    let name = product.querySelector('#pname').value;
+    let type = product.querySelector('input[name = "type"]').value;
+    let price = product.querySelector('#price').value;
+    let number = product.querySelector('#number').value;
+    let supplier = product.querySelector('#supplier').value;
+    let image = product.querySelector('#image').value.replace('C:\\fakepath\\','');
+    let product2Insert = {
+      name, 
+      type,
+      price,
+      supplier,
+      image,
+      number
+    }
+      console.log(product2Insert);
+      fetch('/admin', {
+        method: 'POST', // or 'PUT'
+        headers: {
+          'Content-Type': 'application/json',
+        },      
+        body: JSON.stringify(product2Insert),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.status);
+        if(data.status == 'success'){
+          window.alert("Create new product successfully!");
+          window.location = 'http://localhost:3000/admin';
+        }
+      })
+  }
+}
 //remove localStorage when close tab
 window.onbeforeunload = function (e) {
   window.localStorage.unloadTime = JSON.stringify(new Date());
@@ -331,6 +369,7 @@ if (window.location.href === 'http://localhost:3000/admin') {
   prepareAdmin();
   manageProduct();
   manageSupplier();
+  createProduct();
 }
 else {
   document.querySelector('.cart').style.display = 'block';
@@ -338,4 +377,6 @@ else {
   createCartFunction();
   createProductFunction();
 }
+
+
 
