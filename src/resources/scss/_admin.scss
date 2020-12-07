@@ -89,7 +89,7 @@
             color: white;
             height: 2rem;
         }
-        #reset-btn{
+        .reset-btn{
             border-radius: 0.25rem;
             width: 48%;
             text-align: center;
@@ -623,7 +623,7 @@
             border-radius: 0.125rem;
             color: #616161;
         }
-        #submit-edit-btn{
+        .submit-edit-btn{
             border-radius: 0.25rem;
             width: 45%;
             display: block;
@@ -637,11 +637,111 @@
         }
     }
 }
+
+.edit-supplier-popup{
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: none;
+    z-index: 16; /* Sit on top */
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+}
+.edit-supplier-form{
+    width: 70vw;
+    height: 65vh;
+    position: relative;
+    margin: auto;
+    background-color: rgb(202, 202, 202);
+    border-radius: 0.5rem;
+    margin-top: calc((100vh - 65vh)/2);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    display: flex;
+    .edit-form-image{
+        width: 40%;
+        height: 100%;
+        display: block;
+        white-space: nowrap; 
+        img{
+            width: 80%;
+            height: auto;
+            margin-top: auto;
+            margin-bottom: auto;
+            margin: auto;
+            display: block;
+            margin-top: calc(0.5*(65vh - 80%));
+        }
+    }
+    .edit-form-input{
+        width: 60%;
+        display: block;
+        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+        background-color: rgb(255, 255, 255);
+    }
+}
+.edit-supplier-container{
+    width: 85%;
+    height: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    border-radius: 0.5rem;
+    background: rgb(255, 255, 255);
+        button{
+        position: absolute;
+        right: 0.5rem;
+        top: 0.5rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        font-family: $default-font;
+        border: none;
+        outline: none;
+        background: whitesmoke;
+        border-radius: 10rem;
+        color: rgb(170, 170, 170);
+    }
+    button:hover{
+        background-color: rgb(231, 156, 156);
+        color: white;
+    }
+    form{
+        input[type = "radio"]{
+            pointer-events: none;
+        }
+        label{
+            margin-top: 0.5rem;
+        }
+        #sename, #seaddress, #sepnumber{
+            width: 100%;
+            height: 1.8rem;
+            outline: none;
+            border: solid 1px #616161;
+            border-radius: 0.125rem;
+            color: #616161;
+        }
+        .submit-edit-btn{
+            border-radius: 0.25rem;
+            width: 45%;
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            background: rgb(116, 216, 186);
+            border: none;
+            outline: none;
+            color: white;
+            height: 2.25rem;
+        }
+    }
+}
+
 .setting{
     position: fixed; 
     bottom: 1rem; 
     right: 0.5rem; 
     z-index: 15; 
+    display: none;
 }
 .setting-select{
     position: fixed;

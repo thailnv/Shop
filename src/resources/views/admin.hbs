@@ -59,7 +59,7 @@
                 <div class="status-title">
                     New Product
                 </div>
-                <form class="add-product-form">
+                <form class="add-product-form" method="POST" autocomplete="off">
                     <label for="pname">Product name:</label><br>
                     <input type="text" id="pname" name="pname"><br>
                     <div style="display: flex; margin-top: 0.5rem;">
@@ -103,7 +103,7 @@
                     <input type="file" name="image" id="image"><br>
                     <div style="margin-top: 0.6rem; display: flex; justify-content:space-between;">
                         <input type="submit" class="submit-btn" id="product-submit" value="Add Product">
-                        <input type="button" id="reset-btn" value="Clear">
+                        <input type="button" class="reset-btn" value="Clear">
                     </div>
                 </form>
             </div>
@@ -253,8 +253,8 @@
                     <label for="simage">Image:</label>
                     <input type="file" name="simage" id="simage"><br>
                     <div style="margin-top: 0.6rem; display: flex; justify-content:space-between;">
-                        <input type="submit" class="submit-btn" id="supplier-submit" value="Add Product">
-                        <input type="button" id="reset-btn" value="Clear">
+                        <input type="submit" class="submit-btn" value="Add Product">
+                        <input type="button" class="reset-btn" value="Clear">
                     </div>
                 </form>
             </div>
@@ -388,8 +388,8 @@
                     <label for="stpassword">Default password:</label><br>
                     <input type="password" id="stpassword" name="stpassword" class="form-input"><br>
                     <div style="margin-top: 0.6rem; display: flex; justify-content:space-between;">
-                        <input type="submit" class="submit-btn" id="supplier-submit" value="Add Product">
-                        <input type="button" id="reset-btn" value="Clear">
+                        <input type="submit" class="submit-btn" value="Add Product">
+                        <input type="button" class="reset-btn" value="Clear">
                     </div>
                 </form>
             </div>
@@ -907,8 +907,8 @@
         </div>
         <div class="edit-form-input">
             <div class="edit-product-container">
-                <button id="close-edit-btn">X</button>
-                <form>
+                <button class="close-edit-btn">X</button>
+                <form method="POST">
                     <label for="pename">Product name:</label><br>
                     <input type="text" id="pename" name="pename"><br>
                     <div style="display: flex; margin-top: 0.5rem;">
@@ -948,7 +948,28 @@
                     <input type="number" min="0" id="peprice" name="peprice"><br>
                     <label for="penumber">Number:</label><br>
                     <input type="number" min="0" id="penumber" name="penumber" value="5"><br>
-                    <input type="submit" id="submit-edit-btn" value="Submit">
+                    <input type="submit" class="submit-edit-btn" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="edit-supplier-popup">
+    <div class="edit-supplier-form">
+        <div class="edit-form-image">
+            <img src="/img/logo_161.png">
+        </div>
+        <div class="edit-form-input">
+            <div class="edit-supplier-container">
+                <button class="close-edit-btn">X</button>
+                <form>
+                    <label for="sename">Supplier name:</label><br>
+                    <input type="text" id="sename" name="sename"><br>
+                    <label for="seaddress">Address:</label><br>
+                    <input type="text" id="seaddress" name="seaddress"><br>
+                    <label for="sepnumber">Phone number:</label><br>
+                    <input type="number" id="sepnumber" name="sepnumber"><br>
+                    <input type="submit" class="submit-edit-btn" value="Submit">
                 </form>
             </div>
         </div>

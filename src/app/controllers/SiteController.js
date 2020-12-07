@@ -30,5 +30,29 @@ class SiteController {
             .catch(next);
         }).catch(next);
     }
+    createProduct(req, res, next) {
+        let product = {
+            name : req.body.pname,
+            image : '/img/' + req.body.image,
+            price : parseInt(req.body.price),
+            type : parseInt(req.body.type),
+            discount : 0,
+            number : parseInt(req.body.number),
+        };
+        console.log(product);
+        let pro = new Product(product);
+        pro.save();
+        var nItem = 0;
+        Supplier.find({}).then(suppliers=>{
+            suppliers = Convert.cvDataToObjects(suppliers);
+            Product.find({})//find field 'name' of all document with type = 1
+            .then(products => {
+                products = Convert.cvDataToObjects(products);
+                nItem = products.length;
+                res.render('admin', { suppliers, products, nItem });
+            })
+            .catch(next);
+        }).catch(next);
+    }
 }
 module.exports = new SiteController;

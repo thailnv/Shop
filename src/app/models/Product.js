@@ -8,6 +8,8 @@ const Product = new Schema({
     price: {type: Number},
     type: {type: Number},
     discount: {type: Number},
+}, {
+    versionKey : false,
 });
 
 module.exports = mongoose.model('Product', Product);

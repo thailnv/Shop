@@ -131,13 +131,48 @@
   </div>
 </div>
 <div class="cart-popup">
-  <div class="cart-form">
-    <div class="shopping-title cart-show">Shopping cart</div>
-    <div class="cart-item">
+  <div class="cart-action">
+    <div class="cart-form">
+      <div class="shopping-title cart-show">Shopping cart</div>
+      <div class="cart-item">
+      </div>
+      <div class="cart-total">
+      </div>
+      <button id="checkout-btn">Checkout</button>
     </div>
-    <div class="cart-total">
+    <div class="cart-checkout">
+      <div class="checkout-form">
+        <div class="shopping-title">
+          Purchase order
+        </div>
+        <label for="cusname">Name:</label><br>
+        <input type="text" name="cusname" id="cusname">
+        <label for="cusname">Address:</label><br>
+        <input type="text" name="cusname" id="cusname">
+        <label for="cusname">Phonenumber:</label><br>
+        <input type="text" name="cusname" id="cusname">
+        <label for="cusname">Type of payment:</label><br>
+        <div>
+          <input type="radio" name="type" id="otpay" value="2">
+          <label for="otpay">One-time payments</label><br>
+          <input type="radio" name="type" id="inspay" value="1">
+          <label for="inspay">Installment payment</label>
+        </div>
+        <div style="display: flex; justify-content: space-between">
+          <label>Provisional cost:</label>
+          <label class="provisional-cost">$50</label>
+        </div>
+        <div style="display: flex; justify-content: space-between">
+          <label>Transportation cost:</label>
+          <label class="transportation-cost">$50</label>
+        </div>        <div style="display: flex; justify-content: space-between">
+          <label>Total:</label>
+          <label class="transportation-cost">$9350</label>
+        </div>
+        <button>Order</button>
+      </div>
+      <div class="ver-line"></div>
     </div>
-    <button id="checkout-btn">Checkout</button>
   </div>
 </div>
 <div class="cart">

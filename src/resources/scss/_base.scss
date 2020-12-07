@@ -5,6 +5,9 @@ body{
 .bg-light{
     background: $background-color !important;
 }
+input[type=button], input[type=submit]{
+    cursor: pointer;
+}
 button{
     cursor: pointer;
 }
