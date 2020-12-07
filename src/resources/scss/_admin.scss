@@ -766,3 +766,60 @@
         opacity: 0.8;
     }
 }
+
+.message-popup{
+    z-index: 17;
+    display: none;
+    position: fixed;
+    top: 0%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    .message{
+        width: 35%;
+        height: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 25vh;
+        border-radius: 0.5rem;
+        background: white;
+        box-sizing: border-box;
+        .title{
+            margin-top: 0;
+            font-size: 2rem;
+            color: rgb(97, 94, 92);
+        }
+        .icon{
+            box-sizing: border-box;
+            width: 7rem;
+            height: 7rem;
+            padding: 1rem;
+            margin-left: auto;
+            margin-right: auto;
+            i{
+               font-size: 5rem;
+               color: rgb(151, 228, 151); 
+            }
+        }
+        .content{
+            color: rgb(139, 137, 131);
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .next-btn{
+            border: none;
+            outline: none;
+            width: 5rem;
+            height: 2.5rem;
+            background-color: rgb(128, 229, 236);
+            color: white;
+            font-weight: 600;
+            border-radius: 0.25rem;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+    }
+}

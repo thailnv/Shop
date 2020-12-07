@@ -114,6 +114,12 @@
         margin-top: 2rem;
         margin-left: 2rem;
     }
+    .wrong-input{
+        border-bottom: rgb(231, 128, 128) solid 2px !important;
+    }
+    .wrong-icon{
+        color : rgb(231, 128, 128) !important;
+    }
     .login-sign-up{
         display: flex;
         height: 80%;
@@ -174,7 +180,7 @@
         .sign-up{
             width: 47%;
             margin-left: 2rem;
-            div{
+            .signup-title{
                 font-family: $default-font;
                 color: rgb(110, 106, 110);
             }
@@ -190,6 +196,13 @@
                         top: 1.5rem;
                         left: 82%;
                         color: rgb(164, 175, 214);;
+                    }
+                    p{
+                        display: none;
+                        margin-bottom: 0;
+                        position: absolute;
+                        font-size: 0.75rem;
+                        color: rgb(231, 128, 128);
                     }
                 }
                 input[type = "text"],input[type = "password"] {

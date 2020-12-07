@@ -313,6 +313,9 @@ function createProductFunction() {
 
 function createProduct(){
   let submit = document.querySelector('#product-submit');
+  let nextbtn = document.querySelector('.message-popup .next-btn').onclick = ()=>{
+    location.reload();
+  }
   submit.onclick = function () {
     let product = document.querySelector('.add-product-form');
     let name = product.querySelector('#pname').value;
@@ -331,7 +334,7 @@ function createProduct(){
     }
       console.log(product2Insert);
       fetch('/admin', {
-        method: 'POST', // or 'PUT'
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },      
@@ -341,10 +344,67 @@ function createProduct(){
       .then(data => {
         console.log(data.status);
         if(data.status == 'success'){
-          window.alert("Create new product successfully!");
-          window.location = 'http://localhost:3000/admin';
+          let message = document.querySelector('.message-popup');
+          message.querySelector('.content').textContent = 'Adding product successfully!';
+          message.style.display = 'block';
         }
       })
+  }
+}
+
+function register(){
+  let signupbtn = document.querySelector('.sign-up #signup-btn');
+  let name = document.getElementById('uName');
+  let address = document.getElementById('uAddress');
+  let username = document.getElementById('uUsername');
+  let password = document.getElementById('uPassword');
+  let icons = document.querySelectorAll('.signup-icon');
+  let message = document.querySelectorAll('.input-container p');
+  signupbtn.onclick = () =>{
+    let wrongCount = 0;
+    if(name.value === ''){
+      wrongCount++;
+      name.classList.add('wrong-input');
+      icons[0].classList.add('wrong-icon');
+      message[0].style.display = 'block';
+    }else{
+      name.classList.remove('wrong-input');
+      icons[0].classList.remove('wrong-icon');
+      message[0].style.display = 'none';
+    }
+    if(address.value === ''){
+      wrongCount++;
+      address.classList.add('wrong-input');
+      icons[1].classList.add('wrong-icon');
+      message[1].style.display = 'block';
+    }else{
+      address.classList.remove('wrong-input');
+      icons[1].classList.remove('wrong-icon');
+      message[1].style.display = 'none';
+    }
+    if(username.value === '' || username.value.trim().includes(' ')){
+      wrongCount++;
+      username.classList.add('wrong-input');
+      icons[2].classList.add('wrong-icon');
+      if(username.value.trim().includes(' ')){
+        message[2].innerHTML = 'Username must not contain space!';
+      }
+      message[2].style.display = 'block';
+    }else{
+      username.classList.remove('wrong-input');
+      icons[2].classList.remove('wrong-icon');
+      message[2].style.display = 'none';
+    }
+    if(password.value === ''){
+      wrongCount++;
+      password.classList.add('wrong-input');
+      icons[3].classList.add('wrong-icon');
+      message[3].style.display = 'block';
+    }else{
+      password.classList.remove('wrong-input');
+      icons[3].classList.remove('wrong-icon');
+      message[3].style.display = 'none';
+    }
   }
 }
 //remove localStorage when close tab
@@ -374,6 +434,7 @@ if (window.location.href === 'http://localhost:3000/admin') {
 else {
   document.querySelector('.cart').style.display = 'block';
   createLoginFunction();
+  register();
   createCartFunction();
   createProductFunction();
 }

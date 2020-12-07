@@ -7,16 +7,6 @@ class SiteController {
         res.render('home');
     }
     admin(req, res, next) {
-        //use callback
-        // Product.find({}, function(err , Product){
-        //     if(!err){
-        //         res.json(Product);
-        //         console.log('get data');
-        //     }
-        //     else
-        //         res.status(400).json({error: 'ERROR!'});
-        // })
-        //use promise
         var productsAPI;
         var nItem = 0;
         Supplier.find({}).then(suppliers => {

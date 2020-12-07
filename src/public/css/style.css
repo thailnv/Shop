@@ -550,6 +550,10 @@ a.product-name {
     font-family: "Audiowide", cursive;
     margin-top: 2rem;
     margin-left: 2rem; }
+  .login-input .wrong-input {
+    border-bottom: #e78080 solid 2px !important; }
+  .login-input .wrong-icon {
+    color: #e78080 !important; }
   .login-input .login-sign-up {
     display: flex;
     height: 80%;
@@ -601,7 +605,7 @@ a.product-name {
     .login-input .login-sign-up .sign-up {
       width: 47%;
       margin-left: 2rem; }
-      .login-input .login-sign-up .sign-up div {
+      .login-input .login-sign-up .sign-up .signup-title {
         font-family: "Audiowide", cursive;
         color: #6e6a6e; }
       .login-input .login-sign-up .sign-up form {
@@ -616,6 +620,12 @@ a.product-name {
             top: 1.5rem;
             left: 82%;
             color: #a4afd6; }
+          .login-input .login-sign-up .sign-up form .input-container p {
+            display: none;
+            margin-bottom: 0;
+            position: absolute;
+            font-size: 0.75rem;
+            color: #e78080; }
         .login-input .login-sign-up .sign-up form input[type="text"], .login-input .login-sign-up .sign-up form input[type="password"] {
           margin-top: 2rem;
           width: 90%;
@@ -1295,6 +1305,56 @@ a.product-name {
     color: white; }
   .setting-select .setting-option:hover {
     opacity: 0.8; }
+
+.message-popup {
+  z-index: 17;
+  display: none;
+  position: fixed;
+  top: 0%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); }
+  .message-popup .message {
+    width: 35%;
+    height: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25vh;
+    border-radius: 0.5rem;
+    background: white;
+    box-sizing: border-box; }
+    .message-popup .message .title {
+      margin-top: 0;
+      font-size: 2rem;
+      color: #615e5c; }
+    .message-popup .message .icon {
+      box-sizing: border-box;
+      width: 7rem;
+      height: 7rem;
+      padding: 1rem;
+      margin-left: auto;
+      margin-right: auto; }
+      .message-popup .message .icon i {
+        font-size: 5rem;
+        color: #97e497; }
+    .message-popup .message .content {
+      color: #8b8983;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      text-align: center; }
+    .message-popup .message .next-btn {
+      border: none;
+      outline: none;
+      width: 5rem;
+      height: 2.5rem;
+      background-color: #80e5ec;
+      color: white;
+      font-weight: 600;
+      border-radius: 0.25rem;
+      margin-left: auto;
+      margin-right: auto;
+      display: block; }
 
 .cart {
   position: fixed;
