@@ -333,7 +333,7 @@ function createProduct(){
       number
     }
       console.log(product2Insert);
-      fetch('/admin', {
+      fetch('/api/newproduct', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -356,6 +356,7 @@ function register(){
   let signupbtn = document.querySelector('.sign-up #signup-btn');
   let name = document.getElementById('uName');
   let address = document.getElementById('uAddress');
+  let phonenumber = document.getElementById('uPnumber');
   let username = document.getElementById('uUsername');
   let password = document.getElementById('uPassword');
   let icons = document.querySelectorAll('.signup-icon');
@@ -382,28 +383,54 @@ function register(){
       icons[1].classList.remove('wrong-icon');
       message[1].style.display = 'none';
     }
+    if(phonenumber.value === ''){
+      wrongCount++;
+      phonenumber.classList.add('wrong-input');
+      icons[2].classList.add('wrong-icon');
+      message[2].style.display = 'block';
+    }else{
+      phonenumber.classList.remove('wrong-input');
+      icons[2].classList.remove('wrong-icon');
+      message[2].style.display = 'none';
+    }
     if(username.value === '' || username.value.trim().includes(' ')){
       wrongCount++;
       username.classList.add('wrong-input');
-      icons[2].classList.add('wrong-icon');
+      icons[3].classList.add('wrong-icon');
       if(username.value.trim().includes(' ')){
-        message[2].innerHTML = 'Username must not contain space!';
+        message[3].innerHTML = 'Username must not contain space!';
       }
-      message[2].style.display = 'block';
+      message[3].style.display = 'block';
     }else{
       username.classList.remove('wrong-input');
-      icons[2].classList.remove('wrong-icon');
-      message[2].style.display = 'none';
+      icons[3].classList.remove('wrong-icon');
+      message[3].style.display = 'none';
     }
     if(password.value === ''){
       wrongCount++;
       password.classList.add('wrong-input');
-      icons[3].classList.add('wrong-icon');
-      message[3].style.display = 'block';
+      icons[4].classList.add('wrong-icon');
+      message[4].style.display = 'block';
     }else{
       password.classList.remove('wrong-input');
-      icons[3].classList.remove('wrong-icon');
-      message[3].style.display = 'none';
+      icons[4].classList.remove('wrong-icon');
+      message[4].style.display = 'none';
+    }
+    if(wrongCount === 0){
+      let customer = {
+        name: name.value,
+        address: address.value,
+        phonenumber :phonenumber.value, 
+        username: username.value,
+        password: password.value
+      }
+      fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },      
+        body: JSON.stringify(customer),
+      })
     }
   }
 }

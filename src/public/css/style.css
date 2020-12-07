@@ -608,49 +608,51 @@ a.product-name {
       .login-input .login-sign-up .sign-up .signup-title {
         font-family: "Audiowide", cursive;
         color: #6e6a6e; }
-      .login-input .login-sign-up .sign-up form {
-        margin-top: 1.5rem; }
-        .login-input .login-sign-up .sign-up form .input-container {
-          position: relative; }
-          .login-input .login-sign-up .sign-up form .input-container i {
-            position: absolute;
-            padding-top: 0.5rem;
-            font-size: 1.5rem;
-            font-weight: 400;
-            top: 1.5rem;
-            left: 82%;
-            color: #a4afd6; }
-          .login-input .login-sign-up .sign-up form .input-container p {
-            display: none;
-            margin-bottom: 0;
-            position: absolute;
-            font-size: 0.75rem;
-            color: #e78080; }
-        .login-input .login-sign-up .sign-up form input[type="text"], .login-input .login-sign-up .sign-up form input[type="password"] {
-          margin-top: 2rem;
-          width: 90%;
-          font-family: sans-serif;
-          border: none;
-          outline: none;
-          border-bottom: 1px solid #a4afd6;
+      .login-input .login-sign-up .sign-up form .input-container {
+        position: relative; }
+        .login-input .login-sign-up .sign-up form .input-container i {
+          position: absolute;
+          padding-top: 0.5rem;
+          font-size: 1.5rem;
+          font-weight: 400;
+          top: 1.5rem;
+          left: 82%;
           color: #a4afd6; }
-        .login-input .login-sign-up .sign-up form input[type="text"]:focus, .login-input .login-sign-up .sign-up form input[type="password"]:focus {
-          color: #a4afd6;
-          font-size: 500;
-          border-bottom: 2px solid #a4afd6; }
-        .login-input .login-sign-up .sign-up form input[type="button"] {
-          margin-left: auto;
-          outline: none;
-          margin-top: 2.5rem;
-          width: 6rem;
-          height: 2rem;
-          display: block;
-          margin-right: auto;
-          border: none;
-          border-radius: 0.5rem;
-          background: #86e9e1;
-          font-weight: 500;
-          color: white; }
+        .login-input .login-sign-up .sign-up form .input-container p {
+          display: none;
+          margin-bottom: 0;
+          position: absolute;
+          font-size: 0.75rem;
+          color: #e78080; }
+      .login-input .login-sign-up .sign-up form input[type="text"], .login-input .login-sign-up .sign-up form input[type=number], .login-input .login-sign-up .sign-up form input[type="password"] {
+        margin-top: 2rem;
+        width: 90%;
+        font-family: sans-serif;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid #a4afd6;
+        color: #a4afd6; }
+      .login-input .login-sign-up .sign-up form input[type=number]::-webkit-inner-spin-button,
+      .login-input .login-sign-up .sign-up form input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0; }
+      .login-input .login-sign-up .sign-up form input[type="text"]:focus, .login-input .login-sign-up .sign-up form input[type="number"]:focus, .login-input .login-sign-up .sign-up form input[type="password"]:focus {
+        color: #a4afd6;
+        font-size: 500;
+        border-bottom: 2px solid #a4afd6; }
+      .login-input .login-sign-up .sign-up form input[type="button"] {
+        margin-left: auto;
+        outline: none;
+        margin-top: 2.5rem;
+        width: 6rem;
+        height: 2rem;
+        display: block;
+        margin-right: auto;
+        border: none;
+        border-radius: 0.5rem;
+        background: #86e9e1;
+        font-weight: 500;
+        color: white; }
     .login-input .login-sign-up .ver-line {
       width: 6%;
       height: 100%; }

@@ -185,7 +185,6 @@
                 color: rgb(110, 106, 110);
             }
             form{
-                margin-top: 1.5rem;
                 .input-container{
                     position: relative;
                     i{
@@ -205,7 +204,7 @@
                         color: rgb(231, 128, 128);
                     }
                 }
-                input[type = "text"],input[type = "password"] {
+                input[type = "text"],input[type = number],input[type = "password"] {
                     margin-top: 2rem;
                     width: 90%;
                     font-family: sans-serif;
@@ -214,8 +213,12 @@
                     border-bottom: 1px solid rgb(164, 175, 214);
                     color: rgb(164, 175, 214);
                 }
-
-                input[type = "text"]:focus, input[type = "password"]:focus{
+                input[type = number]::-webkit-inner-spin-button, 
+                input[type = number]::-webkit-outer-spin-button{
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+                input[type = "text"]:focus, input[type = "number"]:focus, input[type = "password"]:focus{
                     color: rgb(164, 175, 214);
                     font-size: 500;
                     border-bottom: 2px solid rgb(164, 175, 214);

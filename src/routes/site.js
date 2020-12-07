@@ -4,7 +4,9 @@ const siteController = require('../app/controllers/SiteController');
 
 router.get('/admin', siteController.admin);
 
-router.post('/admin', siteController.createProduct);
+router.post('/api/newproduct', siteController.createProduct);
+
+router.post('/api/register', siteController.createCustomer);
 
 router.get('/',siteController.index);
 

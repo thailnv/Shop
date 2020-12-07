@@ -1,4 +1,5 @@
 const Product = require('../models/Product');
+const Customer = require('../models/Customer');
 const Convert = require('../../util/mongoose');
 const Supplier = require('../models/Supplier');
 class SiteController {
@@ -35,6 +36,28 @@ class SiteController {
         res.json({
             status : "success"
         })
+    }
+    createCustomer(req, res, next) {
+        let customer = {
+            name: req.body.name,
+            address: req.body.address,
+            phonenumber: req.body.phonenumber,
+            username: req.body.username,
+            password: req.body.password,
+        };
+        console.log(customer);
+        let cus = new Customer(customer);
+        cus.save().then(()=>{
+            res.json({
+                status : "success"
+            })
+        })
+        .catch(()=>{
+            res.json({
+                status : "fail"
+            })
+        })
+
     }
 }
 module.exports = new SiteController;
