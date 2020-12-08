@@ -5,7 +5,16 @@ const Supplier = require('../models/Supplier');
 class SiteController {
 
     index(req, res, next) {
-        res.render('home');
+        let lstBestSeller, lstNewArrivals;
+        Product.find({}).sort({orderTime : 'desc'}).limit(10)
+        .then(bestSellers=> {
+            lstBestSeller = Convert.cvDataToObjects(bestSellers);
+            Product.find({}).sort({createdAt : 'desc'}).limit(10)
+            .then(newArrivals=>{
+                lstNewArrivals = Convert.cvDataToObjects(newArrivals);
+                res.render('home', {lstBestSeller,lstNewArrivals});
+            })
+        })
     }
     admin(req, res, next) {
         var productsAPI;
@@ -15,6 +24,7 @@ class SiteController {
             Product.find({})//find field 'name' of all document with type = 1
                 .then(products => {
                     products = Convert.cvDataToObjects(products);
+                    //console.log(products);
                     nItem = products.length;
                     res.render('admin', { suppliers, products, nItem });
                 })
@@ -27,6 +37,7 @@ class SiteController {
             image: '/img/' + req.body.image,
             price: parseInt(req.body.price),
             type: parseInt(req.body.type),
+            supplier: parseInt(req.body.supplier),
             discount: 0,
             number: parseInt(req.body.number),
         };
@@ -49,7 +60,9 @@ class SiteController {
         let cus = new Customer(customer);
         cus.save().then(()=>{
             res.json({
-                status : "success"
+                status : "success",
+                name: customer.name,
+                address : customer.address
             })
         })
         .catch(()=>{
@@ -57,6 +70,9 @@ class SiteController {
                 status : "fail"
             })
         })
+
+    }
+    getNewArrivals(req, res, next){
 
     }
 }

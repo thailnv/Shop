@@ -109,104 +109,22 @@
   </div>
   <div class="third-slider">
   <div class="third-carousel">
+    {{#each lstBestSeller}}
     <div class="product-card">
       <div class="product-img">
-        <img src="/img/chair.png">
+        <img src="{{this.image}}">
       </div>
       <a href="#" class="product-name">
-        HMR Bamboo Chair 
+        {{this.name}}
       </a>
       <p class="product-price">
-        $300
+        ${{this.price}}
       </p>
-      <a href="#" class="btn-addcart">
+      <button href="#" class="btn-addcart">
         Add to cart 
-      </a>
+      </button>
     </div>
-    <div class="product-card">
-      <div class="product-img">
-        <img src="/img/salt_lamp1.png">
-      </div>
-      <a href="#" class="product-name">
-        Himalayans Salt Lamp
-      </a>
-      <p class="product-price">
-        $1300
-      </p>
-      <a href="#" class="btn-addcart">
-        Add to cart 
-      </a>
-    </div>
-    <div class="product-card">
-      <div class="product-img">
-        <img src="/img/lamp6.png">
-      </div>
-      <a href="#" class="product-name">
-        Modern Lamp 
-      </a>
-      <p class="product-price">
-        $190
-      </p>
-      <a href="#" class="btn-addcart">
-        Add to cart 
-      </a>
-    </div>
-    <div class="product-card">
-      <div class="product-img">
-        <img src="/img/seat.png">
-      </div>
-      <a href="#" class="product-name">
-        Green Seat 
-      </a>
-      <p class="product-price">
-        $380
-      </p>
-      <a href="#" class="btn-addcart">
-        Add to cart 
-      </a>
-    </div>
-    <div class="product-card">
-      <div class="product-img">
-        <img src="/img/table1.png">
-      </div>
-      <a href="#" class="product-name">
-        Coffee Table
-      </a>
-      <p class="product-price">
-        $300
-      </p>
-      <a href="#" class="btn-addcart">
-        Add to cart 
-      </a>
-    </div>
-    <div class="product-card">
-      <div class="product-img">
-        <img src="/img/chair4.png">
-      </div>
-      <a href="#" class="product-name">
-        Modern Seat 
-      </a>
-      <p class="product-price">
-        $300
-      </p>
-      <a href="#" class="btn-addcart">
-        Add to cart 
-      </a>
-    </div>
-    <div class="product-card">
-      <div class="product-img">
-        <img src="/img/chair3.png">
-      </div>
-      <a href="#" class="product-name">
-        Small Seat
-      </a>
-      <p class="product-price">
-        $300
-      </p>
-      <a href="#" class="btn-addcart">
-        Add to cart 
-      </a>
-    </div>
+    {{/each}}
   </div>
   <button id="p1Btn" class="btn-slider">
       <i class="fas fa-arrow-left fa-lg"></i>
@@ -224,12 +142,9 @@
   <div class="fourth-slider">
     <div class="slider-info">
       <div class="slider-info-img">
-        <img src="/img/combo.png">
-        <img src="/img/table3.png">
-        <img src="/img/sofa.png">
-        <img src="/img/table2.png">
-        <img src="/img/bed2.png">
-        <img src="/img/sofa1.png">
+        {{#each lstNewArrivals}}
+          <img src="{{this.image}}">
+        {{/each}}
       </div>
       <div class="slider-info-detail">
         <a class="product-name">
@@ -244,42 +159,16 @@
         <a class="product-name">
           Consectetur adipisicing elit. Dolores.
         </a>
-      <a href="#" class="btn-addcart">
-        Add to cart 
-      </a>
       </div>
     </div>
     <div class="slider-nav">
-      <div class="fourth-slider-card">
-        <div class="fourth-slider-img">
-          <img src="/img/combo.png">
-        </div>
-      </div> 
-            <div class="fourth-slider-card">
-        <div class="fourth-slider-img">
-          <img src="/img/table3.png">
-        </div>
-      </div>           
-      <div class="fourth-slider-card">
-        <div class="fourth-slider-img">
-          <img src="/img/sofa.png">
-        </div>
-      </div>
-      <div class="fourth-slider-card">
-        <div class="fourth-slider-img">
-          <img src="/img/table2.png">
-        </div>
-      </div>
-      <div class="fourth-slider-card">
-        <div class="fourth-slider-img">
-          <img src="/img/bed2.png">
-        </div>
-      </div>
-      <div class="fourth-slider-card">
-        <div class="fourth-slider-img">
-          <img src="/img/sofa1.png">
-        </div>
-      </div>
+      {{#each lstNewArrivals}}
+        <div class="fourth-slider-card">
+          <div class="fourth-slider-img">
+            <img src="{{this.image}}">
+          </div>
+        </div> 
+      {{/each}}
     </div>
   </div>
 </div>

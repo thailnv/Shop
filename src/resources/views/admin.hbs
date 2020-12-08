@@ -60,47 +60,62 @@
                     New Product
                 </div>
                 <form class="add-product-form" method="POST" autocomplete="off">
-                    <label for="pname">Product name:</label><br>
-                    <input type="text" id="pname" name="pname"><br>
-                    <div style="display: flex; margin-top: 0.5rem;">
-                        <label for="type">Type:</label>
-                        <div style="display: inline-block; margin-left: 2rem">
-                            <div style="display: flex; width: 8rem; justify-content: space-between">
-                                <div>
+                    <div class="input-container">
+                        <label for="pname">Product name:</label><br>
+                        <input type="text" id="pname" name="pname"><br>
+                        <p class="wrong-input-message">Please enter product name!</p>
+                    </div>
+                    <div class="input-container">
+                        <div style="display: flex; margin-top: 0.5rem;">
+                            <label for="type">Type:</label>
+                            <div style="display: inline-block; margin-left: 2rem">
+                                <div style="display: flex; width: 8rem; justify-content: space-between">
                                     <div>
-                                        <input type="radio" name="type" id="tchair" value="1">
-                                        <label for="tchair">Chair</label>
+                                        <div>
+                                            <input type="radio" name="type" id="tchair" value="1">
+                                            <label for="tchair">Chair</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="type" id="ttable" value="2">
+                                            <label for="ttable">Table</label><br>
+                                        </div>
                                     </div>
                                     <div>
-                                        <input type="radio" name="type" id="ttable" value="2">
-                                        <label for="ttable">Table</label><br>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div>
-                                        <input type="radio" name="type" id="tbed" value="4">
-                                        <label for="tbed">Bed</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="type" id="tdecor" value="3">
-                                        <label for="tdecor">Decor</label>
+                                        <div>
+                                            <input type="radio" name="type" id="tbed" value="4">
+                                            <label for="tbed">Bed</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="type" id="tdecor" value="3">
+                                            <label for="tdecor">Decor</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <p class="wrong-input-message">Please select product type!</p>
                     </div>
-                    <label for="supplier">Supplier:</label><br>
-                    <select name="supplier" id="supplier">
-                        {{#each suppliers}}
-                        <option value="{{this.id}}">{{this.name}}</option>
-                        {{/each}}
-                    </select><br>
-                    <label for="price">Price:</label><br>
-                    <input type="number" min="0" id="price" name="price"><br>
-                    <label for="number">Number:</label><br>
-                    <input type="number" min="0" id="number" name="number"><br>
-                    <label for="image">Image:</label>
-                    <input type="file" name="image" id="image"><br>
+                    <div class="input-container">
+                        <label for="supplier">Supplier:</label><br>
+                        <select name="supplier" id="supplier">
+                            {{#each suppliers}}
+                            <option value="{{this.id}}">{{this.name}}</option>
+                            {{/each}}
+                        </select><br>
+                    </div>
+                    <div class="input-container">
+                        <label for="price">Price:</label><br>
+                        <input type="number" min="0" id="price" name="price"><br>
+                        <p class="wrong-input-message">Please enter product price!</p>
+                    </div>
+                    <div class="input-container">
+                        <label for="number">Number:</label><br>
+                        <input type="number" min="0" id="number" name="number" value="1"><br>
+                    </div>
+                    <div class="input-container">
+                        <label for="image">Image:</label>
+                        <input type="file" name="image" id="image"><br>
+                    </div>
                     <div style="margin-top: 0.6rem; display: flex; justify-content:space-between;">
                         <input type="button" class="submit-btn" id="product-submit" value="Add Product">
                         <input type="button" class="reset-btn" value="Clear">
@@ -212,13 +227,14 @@
                             </th>
                         </tr>
                         {{#each products}}
-                        <tr class="product-data" link="{{this.image}}" number="{{this.number}}">
+                        <tr class="product-data" link="{{this.image}}" number="{{this.number}}"
+                            supplier="{{this.supplier}}" status="{{this.status}}">
                             <td class="pinfoid">{{this.id}}</td>
                             <td class="pinfoname">{{this.name}}</td>
                             <td class="pinfotype">{{this.type}}</td>
                             <td class="pinfoprice">{{this.price}}</td>
                             <td>
-                                <div class="instock">
+                                <div class="instock status">
                                     In stock
                                 </div>
                             </td>
@@ -227,9 +243,6 @@
                                     <button class="action-btn btn-edit">
                                         <i class="far fa-edit"></i>
                                     </button>
-                                    {{!-- <button class="action-btn btn-delete">
-                                        <i class="far fa-trash-alt"></i>
-                                    </button> --}}
                                 </div>
                             </td>
                         </tr>
@@ -975,18 +988,8 @@
         </div>
     </div>
 </div>
-<div class="message-popup">
-    <div class="message show">
-        <div class="icon">
-            <i class="far fa-check-circle"></i>
-        </div>
-        <div class="title">Congrats!</div>
-        <div class="content">Adding product successfully!</div>
-        <button class="next-btn">OK</button>
-    </div>
-</div>
 <script>
-    {{#each products}}
-        console.log("{{this.name}}");
+    {{#each products }}
+    console.log("{{this.name}}");
     {{/each}}
 </script>

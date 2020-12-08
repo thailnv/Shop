@@ -70,6 +70,13 @@ h1 {
   font-size: 2rem;
   text-align: center; }
 
+.wrong-input-message {
+  display: none;
+  margin-bottom: 0;
+  position: absolute;
+  font-size: 0.75rem;
+  color: #e78080; }
+
 .carousel-item {
   width: 100vw !important;
   height: 35vw !important;
@@ -618,12 +625,6 @@ a.product-name {
           top: 1.5rem;
           left: 82%;
           color: #a4afd6; }
-        .login-input .login-sign-up .sign-up form .input-container p {
-          display: none;
-          margin-bottom: 0;
-          position: absolute;
-          font-size: 0.75rem;
-          color: #e78080; }
       .login-input .login-sign-up .sign-up form input[type="text"], .login-input .login-sign-up .sign-up form input[type=number], .login-input .login-sign-up .sign-up form input[type="password"] {
         margin-top: 2rem;
         width: 90%;
@@ -741,9 +742,12 @@ a.product-name {
   border-radius: 0.5rem;
   background: white; }
   .add-product-container form, .add-supplier-container form, .add-staff-container form {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     margin-left: 0.5rem;
     margin-right: 0.5rem; }
+    .add-product-container form label, .add-supplier-container form label, .add-staff-container form label {
+      margin-top: 0.5rem;
+      margin-bottom: 0; }
     .add-product-container form #pname, .add-product-container form #price, .add-product-container form #number, .add-product-container form #supplier, .add-product-container form #sname, .add-product-container form #spnumber, .add-product-container form #saddress, .add-product-container form #stname, .add-product-container form #staddress, .add-product-container form .form-input, .add-supplier-container form #pname, .add-supplier-container form #price, .add-supplier-container form #number, .add-supplier-container form #supplier, .add-supplier-container form #sname, .add-supplier-container form #spnumber, .add-supplier-container form #saddress, .add-supplier-container form #stname, .add-supplier-container form #staddress, .add-supplier-container form .form-input, .add-staff-container form #pname, .add-staff-container form #price, .add-staff-container form #number, .add-staff-container form #supplier, .add-staff-container form #sname, .add-staff-container form #spnumber, .add-staff-container form #saddress, .add-staff-container form #stname, .add-staff-container form #staddress, .add-staff-container form .form-input {
       width: 100%;
       height: 1.8rem;
@@ -751,6 +755,8 @@ a.product-name {
       border: solid 1px #616161;
       border-radius: 0.125rem;
       color: #616161; }
+    .add-product-container form .input-container, .add-supplier-container form .input-container, .add-staff-container form .input-container {
+      position: relative; }
     .add-product-container form .submit-btn, .add-supplier-container form .submit-btn, .add-staff-container form .submit-btn {
       border-radius: 0.25rem;
       width: 48%;

@@ -70,4 +70,11 @@ h1{
     font-size: 2rem;
     text-align: center;
 }
+.wrong-input-message{
+    display: none;
+    margin-bottom: 0;
+    position: absolute;
+    font-size: 0.75rem;
+    color: rgb(231, 128, 128);
+}
 

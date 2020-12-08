@@ -42,6 +42,8 @@ $('.slider-nav').slick({
 
 //function & base define
 const lstType = ['Chair', 'Table', 'Decor', 'Bed'];
+const lstSupplier = ['Chair', 'Table', 'Decor', 'Bed'];
+
 
 function prepareAdmin() {
   document.querySelector('.cart').style.display = 'none';
@@ -114,6 +116,7 @@ function manageProduct() {
   let edit_form_img = edit_form.querySelector('.edit-form-image img');
   let edit_form_price = edit_form.querySelector('#peprice');
   let edit_form_number = edit_form.querySelector('#penumber');
+  let edit_form_supplier = edit_form.querySelectorAll('#pesupplier option');
   let close_edit_btn = edit_popup.querySelector('.close-edit-btn');
   for (let i = 0; i < lst_product.length; i++) {
     let product = lst_product[i];
@@ -127,6 +130,7 @@ function manageProduct() {
       edit_form_price.value = product.querySelector('.pinfoprice').textContent;
       edit_form_number.value = product.getAttribute('number');
       edit_form_img.src = product.getAttribute('link');
+      edit_form_supplier[parseInt(product.getAttribute('supplier') - 1)].selected = true;
       edit_form.querySelector(`#petype${typename.toLowerCase()}`).checked = true;
     })
   }
@@ -311,19 +315,51 @@ function createProductFunction() {
   }
 }
 
+document.querySelector('.message-popup .next-btn').onclick = ()=>{
+  location.reload();
+}
+
 function createProduct(){
   let submit = document.querySelector('#product-submit');
-  let nextbtn = document.querySelector('.message-popup .next-btn').onclick = ()=>{
-    location.reload();
-  }
   submit.onclick = function () {
     let product = document.querySelector('.add-product-form');
     let name = product.querySelector('#pname').value;
-    let type = product.querySelector('input[name = "type"]').value;
+    let radios = product.querySelectorAll('input[name = "type"]');
+    let type = 0; 
+    for(let i = 0; i < radios.length ; i++){
+      if(radios[i].checked){
+        console.log(radios[i].value);
+        type = radios[i].value;
+      }
+    }
     let price = product.querySelector('#price').value;
     let number = product.querySelector('#number').value;
     let supplier = product.querySelector('#supplier').value;
     let image = product.querySelector('#image').value.replace('C:\\fakepath\\','');
+    let wrongCount = 0;
+    let message = product.querySelectorAll('.wrong-input-message');
+    if(name === ''){
+      wrongCount++;
+      message[0].style.display = 'block';
+    }else{
+      message[0].style.display = 'none';
+    }
+    if(type == 0){
+      wrongCount++;
+      message[1].style.display = 'block';
+    }else{
+      message[1].style.display = 'none';
+    }
+    if(price === ''){
+      wrongCount++;
+      message[2].style.display = 'block';
+    }else{
+      message[2].style.display = 'none';
+    }
+    if(image === ''){
+      image = 'shortcut.png';
+    }
+    if(wrongCount === 0){
     let product2Insert = {
       name, 
       type,
@@ -349,6 +385,7 @@ function createProduct(){
           message.style.display = 'block';
         }
       })
+    }
   }
 }
 
@@ -430,6 +467,20 @@ function register(){
           'Content-Type': 'application/json',
         },      
         body: JSON.stringify(customer),
+      })      
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.status);
+        if(data.status == 'success'){
+          let message = document.querySelector('.message-popup');
+          message.querySelector('.content').textContent = 'Adding product successfully!';
+          message.style.display = 'block';
+        }
+        else{
+          let message = document.querySelector('.message-popup');
+          message.querySelector('.content').textContent = 'Adding product fail!';
+          message.style.display = 'block';
+        }
       })
     }
   }
