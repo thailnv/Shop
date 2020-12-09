@@ -14,9 +14,6 @@
     z-index: 16;
     width: 100vw;
 }
-.account-info{
-    display: none;
-}
 #login-btn{
     border: none;
     color: white;
@@ -87,5 +84,14 @@
                 margin-left: 1rem;
             }
         }
+    }
+}
+.account-info{
+    .account-name{
+        font-weight: 600;
+    }
+    button{
+        outline: none;
+        border: none;
     }
 }

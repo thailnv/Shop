@@ -196,19 +196,40 @@ function createLoginFunction() {
     if (login_form.classList.contains('hide')) {
       login_form.classList.remove('hide');
       login_popup.style.display = 'none';
+      let name = document.getElementById('uName');
+      let address = document.getElementById('uAddress');
+      let phonenumber = document.getElementById('uPnumber');
+      let username = document.getElementById('uUsername');
+      let password = document.getElementById('uPassword');
+      let icons = document.querySelectorAll('.signup-icon');
+      let message = document.querySelectorAll('.input-container p');
+      name.classList.remove('wrong-input');
+      address.classList.remove('wrong-input');
+      phonenumber.classList.remove('wrong-input');
+      username.classList.remove('wrong-input');
+      password.classList.remove('wrong-input');
+      name.value = '';
+      address.value = '';
+      phonenumber.value = '';
+      username.value = '';
+      password.value = '';
+      for (let i = 0; i < icons.length; i++) {
+        icons[i].classList.remove('wrong-icon');
+        message[i].style.display = 'none';
+      }
     }
   })
 }
 
-function createCartItemFunction(){
+function createCartItemFunction() {
   let lstItemQuantity = document.querySelectorAll('.item .item-info .item-quantity');
-  for(let i = 0 ; i < lstItemQuantity.length ; i++){
-    lstItemQuantity[i].addEventListener('input', ()=>{
+  for (let i = 0; i < lstItemQuantity.length; i++) {
+    lstItemQuantity[i].addEventListener('input', () => {
       let cart_info = JSON.parse(localStorage.getItem('cart_info'));
       for (let j = 0; j < cart_info.length; j++) {
-        if(cart_info[j].name === lstItemQuantity[i].parentElement.querySelector('.item-name').textContent){
+        if (cart_info[j].name === lstItemQuantity[i].parentElement.querySelector('.item-name').textContent) {
           cart_info[j].num = lstItemQuantity[i].value;
-          if(cart_info[j].num == 0){
+          if (cart_info[j].num == 0) {
             lstItemQuantity[i].parentElement.parentElement.remove();
             cart_info.splice(j, 1);
           }
@@ -234,37 +255,37 @@ function createCartFunction() {
     cart_action.classList.remove('cart-hide-item');
     cart_action.classList.add('cart-show-item');
   })
-  checkout_btn.onclick = ()=>{
+  checkout_btn.onclick = () => {
     cart_action.classList.remove('cart-show-item');
     cart_action.classList.add('cart-show-checkout');
     document.querySelector('.checkout-form .provisional-cost').textContent =
-     cart_form.querySelector('.cart-total .total-price').textContent;
+      cart_form.querySelector('.cart-total .total-price').textContent;
   }
   window.onclick = (e) => {
     if (e.target == cart_popup) {
-      if(cart_action.classList.contains('cart-show-item')){
+      if (cart_action.classList.contains('cart-show-item')) {
         cart_action.classList.remove('cart-show-item');
         cart_action.classList.add('cart-hide-item');
       }
-      else if(cart_action.classList.contains('cart-show-checkout')){
+      else if (cart_action.classList.contains('cart-show-checkout')) {
         cart_action.classList.remove('cart-show-checkout');
         cart_action.classList.add('cart-hide-checkout');
       }
     }
   }
-  cart_action.addEventListener('animationend', ()=>{
-    if(cart_action.classList.contains('cart-show-item')){
+  cart_action.addEventListener('animationend', () => {
+    if (cart_action.classList.contains('cart-show-item')) {
       cart_action.classList.add('cart-action-item');
     }
-    if(cart_action.classList.contains('cart-show-checkout')){
+    if (cart_action.classList.contains('cart-show-checkout')) {
       cart_action.classList.remove('cart-action-item');
       cart_action.classList.add('cart-action-checkout');
     }
-    if(cart_action.classList.contains('cart-hide-item')){
+    if (cart_action.classList.contains('cart-hide-item')) {
       cart_action.classList.remove('cart-action-item');
       cart_popup.style.display = 'none';
     }
-    if(cart_action.classList.contains('cart-hide-checkout')){
+    if (cart_action.classList.contains('cart-hide-checkout')) {
       cart_action.classList.remove('cart-action-checkout');
       cart_action.classList.remove('cart-hide-checkout');
       cart_popup.style.display = 'none';
@@ -315,19 +336,19 @@ function createProductFunction() {
   }
 }
 
-document.querySelector('.message-popup .next-btn').onclick = ()=>{
+document.querySelector('.message-popup .next-btn').onclick = () => {
   location.reload();
 }
 
-function createProduct(){
+function createProduct() {
   let submit = document.querySelector('#product-submit');
   submit.onclick = function () {
     let product = document.querySelector('.add-product-form');
     let name = product.querySelector('#pname').value;
     let radios = product.querySelectorAll('input[name = "type"]');
-    let type = 0; 
-    for(let i = 0; i < radios.length ; i++){
-      if(radios[i].checked){
+    let type = 0;
+    for (let i = 0; i < radios.length; i++) {
+      if (radios[i].checked) {
         console.log(radios[i].value);
         type = radios[i].value;
       }
@@ -335,61 +356,61 @@ function createProduct(){
     let price = product.querySelector('#price').value;
     let number = product.querySelector('#number').value;
     let supplier = product.querySelector('#supplier').value;
-    let image = product.querySelector('#image').value.replace('C:\\fakepath\\','');
+    let image = product.querySelector('#image').value.replace('C:\\fakepath\\', '');
     let wrongCount = 0;
     let message = product.querySelectorAll('.wrong-input-message');
-    if(name === ''){
+    if (name === '') {
       wrongCount++;
       message[0].style.display = 'block';
-    }else{
+    } else {
       message[0].style.display = 'none';
     }
-    if(type == 0){
+    if (type == 0) {
       wrongCount++;
       message[1].style.display = 'block';
-    }else{
+    } else {
       message[1].style.display = 'none';
     }
-    if(price === ''){
+    if (price === '') {
       wrongCount++;
       message[2].style.display = 'block';
-    }else{
+    } else {
       message[2].style.display = 'none';
     }
-    if(image === ''){
+    if (image === '') {
       image = 'shortcut.png';
     }
-    if(wrongCount === 0){
-    let product2Insert = {
-      name, 
-      type,
-      price,
-      supplier,
-      image,
-      number
-    }
+    if (wrongCount === 0) {
+      let product2Insert = {
+        name,
+        type,
+        price,
+        supplier,
+        image,
+        number
+      }
       console.log(product2Insert);
       fetch('/api/newproduct', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-        },      
+        },
         body: JSON.stringify(product2Insert),
       })
-      .then(response => response.json())
-      .then(data => {
-        console.log(data.status);
-        if(data.status == 'success'){
-          let message = document.querySelector('.message-popup');
-          message.querySelector('.content').textContent = 'Adding product successfully!';
-          message.style.display = 'block';
-        }
-      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.status);
+          if (data.status == 'success') {
+            let message = document.querySelector('.message-popup');
+            message.querySelector('.content').textContent = 'Adding product successfully!';
+            message.style.display = 'block';
+          }
+        })
     }
   }
 }
 
-function register(){
+function register() {
   let signupbtn = document.querySelector('.sign-up #signup-btn');
   let name = document.getElementById('uName');
   let address = document.getElementById('uAddress');
@@ -398,66 +419,68 @@ function register(){
   let password = document.getElementById('uPassword');
   let icons = document.querySelectorAll('.signup-icon');
   let message = document.querySelectorAll('.input-container p');
-  signupbtn.onclick = () =>{
+  signupbtn.onclick = () => {
     let wrongCount = 0;
-    if(name.value === ''){
-      wrongCount++;
-      name.classList.add('wrong-input');
-      icons[0].classList.add('wrong-icon');
-      message[0].style.display = 'block';
-    }else{
-      name.classList.remove('wrong-input');
-      icons[0].classList.remove('wrong-icon');
-      message[0].style.display = 'none';
-    }
-    if(address.value === ''){
-      wrongCount++;
-      address.classList.add('wrong-input');
-      icons[1].classList.add('wrong-icon');
-      message[1].style.display = 'block';
-    }else{
-      address.classList.remove('wrong-input');
-      icons[1].classList.remove('wrong-icon');
-      message[1].style.display = 'none';
-    }
-    if(phonenumber.value === ''){
-      wrongCount++;
-      phonenumber.classList.add('wrong-input');
-      icons[2].classList.add('wrong-icon');
-      message[2].style.display = 'block';
-    }else{
-      phonenumber.classList.remove('wrong-input');
-      icons[2].classList.remove('wrong-icon');
-      message[2].style.display = 'none';
-    }
-    if(username.value === '' || username.value.trim().includes(' ')){
-      wrongCount++;
-      username.classList.add('wrong-input');
-      icons[3].classList.add('wrong-icon');
-      if(username.value.trim().includes(' ')){
-        message[3].innerHTML = 'Username must not contain space!';
+    {
+      if (name.value === '') {
+        wrongCount++;
+        name.classList.add('wrong-input');
+        icons[0].classList.add('wrong-icon');
+        message[0].style.display = 'block';
+      } else {
+        name.classList.remove('wrong-input');
+        icons[0].classList.remove('wrong-icon');
+        message[0].style.display = 'none';
       }
-      message[3].style.display = 'block';
-    }else{
-      username.classList.remove('wrong-input');
-      icons[3].classList.remove('wrong-icon');
-      message[3].style.display = 'none';
+      if (address.value === '') {
+        wrongCount++;
+        address.classList.add('wrong-input');
+        icons[1].classList.add('wrong-icon');
+        message[1].style.display = 'block';
+      } else {
+        address.classList.remove('wrong-input');
+        icons[1].classList.remove('wrong-icon');
+        message[1].style.display = 'none';
+      }
+      if (phonenumber.value === '') {
+        wrongCount++;
+        phonenumber.classList.add('wrong-input');
+        icons[2].classList.add('wrong-icon');
+        message[2].style.display = 'block';
+      } else {
+        phonenumber.classList.remove('wrong-input');
+        icons[2].classList.remove('wrong-icon');
+        message[2].style.display = 'none';
+      }
+      if (username.value === '' || username.value.trim().includes(' ')) {
+        wrongCount++;
+        username.classList.add('wrong-input');
+        icons[3].classList.add('wrong-icon');
+        if (username.value.trim().includes(' ')) {
+          message[3].innerHTML = 'Username must not contain space!';
+        }
+        message[3].style.display = 'block';
+      } else {
+        username.classList.remove('wrong-input');
+        icons[3].classList.remove('wrong-icon');
+        message[3].style.display = 'none';
+      }
+      if (password.value === '') {
+        wrongCount++;
+        password.classList.add('wrong-input');
+        icons[4].classList.add('wrong-icon');
+        message[4].style.display = 'block';
+      } else {
+        password.classList.remove('wrong-input');
+        icons[4].classList.remove('wrong-icon');
+        message[4].style.display = 'none';
+      }
     }
-    if(password.value === ''){
-      wrongCount++;
-      password.classList.add('wrong-input');
-      icons[4].classList.add('wrong-icon');
-      message[4].style.display = 'block';
-    }else{
-      password.classList.remove('wrong-input');
-      icons[4].classList.remove('wrong-icon');
-      message[4].style.display = 'none';
-    }
-    if(wrongCount === 0){
+    if (wrongCount === 0) {
       let customer = {
         name: name.value,
         address: address.value,
-        phonenumber :phonenumber.value, 
+        phonenumber: phonenumber.value,
         username: username.value,
         password: password.value
       }
@@ -465,23 +488,98 @@ function register(){
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-        },      
+        },
         body: JSON.stringify(customer),
-      })      
-      .then(response => response.json())
-      .then(data => {
-        console.log(data.status);
-        if(data.status == 'success'){
-          let message = document.querySelector('.message-popup');
-          message.querySelector('.content').textContent = 'Adding product successfully!';
-          message.style.display = 'block';
-        }
-        else{
-          let message = document.querySelector('.message-popup');
-          message.querySelector('.content').textContent = 'Adding product fail!';
-          message.style.display = 'block';
-        }
       })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.status);
+          if (data.status == 'success') {
+            console.log(data);
+            localStorage.setItem('account_info', JSON.stringify(data));
+            location.reload();
+          }
+          else {
+            username.classList.add('wrong-input');
+            icons[3].classList.add('wrong-icon');
+            message[3].innerHTML = 'Username already exists!';
+            message[3].style.display = 'block';
+          }
+        })
+    }
+  }
+}
+
+function login() {
+  document.querySelector('.login #login-submit').onclick = () => {
+    let wrongCount = 0;
+    let username = document.querySelector('.login #Username');
+    let password = document.querySelector('.login #Password');
+    let message = document.querySelectorAll('.login .wrong-input-message');
+    let icons = document.querySelectorAll('.login .login-icon');
+    if (username.value == '') {
+      username.classList.add('wrong-input');
+      icons[0].classList.add('wrong-icon');
+      message[0].style.display = 'block';
+      wrongCount++;
+    }else{
+      username.classList.remove('wrong-input');
+      icons[0].classList.remove('wrong-icon');
+      message[0].style.display = 'none';
+    }
+    if (password.value == '') {
+      password.classList.add('wrong-input');
+      icons[1].classList.add('wrong-icon');
+      message[1].style.display = 'block';
+      wrongCount++;
+    }else{
+      password.classList.remove('wrong-input');
+      icons[1].classList.remove('wrong-icon');
+      message[1].style.display = 'none';
+    }
+    if (wrongCount === 0) {
+      let user = {
+        username: username.value,
+        password: password.value
+      }
+      fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.status);
+          if (data.status == 'success') {
+            console.log(data);
+            localStorage.setItem('account_info', JSON.stringify(data));
+            if(data.role == 3){
+              window.location.href === 'http://localhost:3000/admin';
+            }else
+              location.reload();
+          }
+          else {
+          }
+        })
+    }
+  }
+}
+
+function prepareNormal() {
+  document.querySelector('.cart').style.display = 'block';
+  if (localStorage.getItem('account_info') === null) {
+    document.querySelector('.login-info').style.display = 'block';
+    document.querySelector('.account-info').style.display = 'none';
+  } else {
+    document.querySelector('.account-info').style.display = 'block';
+    document.querySelector('.login-info').style.display = 'none';
+    document.querySelector('.account-info .account-name').innerHTML =
+      JSON.parse(localStorage.getItem('account_info')).name;
+    document.querySelector('.account-info .logout-btn').onclick = () => {
+      localStorage.removeItem('account_info');
+      location.reload();
     }
   }
 }
@@ -510,9 +608,10 @@ if (window.location.href === 'http://localhost:3000/admin') {
   createProduct();
 }
 else {
-  document.querySelector('.cart').style.display = 'block';
+  prepareNormal();
   createLoginFunction();
   register();
+  login();
   createCartFunction();
   createProductFunction();
 }

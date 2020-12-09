@@ -32,23 +32,17 @@
   </div>
   <div>
     <ul class="navbar-nav mr-auto">
-      {{!-- <li class="nav-item" id="cart-btn">
-        <a class="nav-link" href="#">
-          <i class="fas fa-shopping-cart"></i>
-        </a>
-      </li> --}}
       <li class="nav-item dropdown account-info">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Account
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Pofile</a>
-          <a class="dropdown-item" href="#">Activity log</a>
-          <a class="dropdown-item" href="#">Logout</a>
+        <div class="category-dropdown">
+          <button class="nav-link account-name">ACCOUNT</button>
+          <div class="dropdown-content bg-light">
+            <button class="nav-link">Profile</button>
+            <button class="nav-link">Your order</button>
+            <button class="nav-link logout-btn">Logout</button>
+          </div>
         </div>
       </li>
-      <li class="nav-item">
+      <li class="nav-item login-info">
         <button id="login-btn">
           Login
         </button>
@@ -125,13 +119,15 @@
             <form action="post">
               <div class="input-container">
                 <input type="text" name="Username" id="Username" placeholder="Username">
-                <i class="far fa-user"></i>
+                <i class="far fa-user login-icon"></i>
               </div>
+              <p class="wrong-input-message">Please give us your username!</p>
               <div class="input-container">
                 <input type="password" name="Password" id="Password" placeholder="Password">
-                <i class="far fa-keyboard"></i>
+                <i class="far fa-keyboard login-icon"></i>
               </div>
-              <input type="button" value="Login">
+              <p class="wrong-input-message">Please give us your password!</p>
+              <input id="login-submit" type="button" value="Login">
             </form>
           </div>
         </div>
@@ -209,12 +205,12 @@
   <button class="setting-option">Report</button>
 </div>
 <div class="message-popup">
-    <div class="message show">
-        <div class="icon">
-            <i class="far fa-check-circle"></i>
-        </div>
-        <div class="title">Congrats!</div>
-        <div class="content">Adding product successfully!</div>
-        <button class="next-btn">OK</button>
+  <div class="message show">
+    <div class="icon">
+      <i class="far fa-check-circle"></i>
     </div>
+    <div class="title">Congrats!</div>
+    <div class="content">Adding product successfully!</div>
+    <button class="next-btn">OK</button>
+  </div>
 </div>

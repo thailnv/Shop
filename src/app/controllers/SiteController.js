@@ -62,7 +62,9 @@ class SiteController {
             res.json({
                 status : "success",
                 name: customer.name,
-                address : customer.address
+                address : customer.address,
+                phone : customer.phonenumber,
+                role : 0,
             })
         })
         .catch(()=>{
@@ -72,8 +74,21 @@ class SiteController {
         })
 
     }
-    getNewArrivals(req, res, next){
-
+    login(req, res, next){
+        Customer.find({username : req.body.username, password : req.body.password})
+        .then(users => {
+            users = Convert.cvDataToObjects(users);
+            console.log(users[0]);
+            if(users.length > 0){
+                res.json({
+                    status : 'success',
+                    name: users[0].name,
+                    address : users[0].address,
+                    phone : users[0].phonenumber,
+                    role : 0,
+                })
+            }
+        })
     }
 }
 module.exports = new SiteController;

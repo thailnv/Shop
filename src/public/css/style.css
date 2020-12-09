@@ -313,9 +313,6 @@ a.product-name {
   z-index: 16;
   width: 100vw; }
 
-.account-info {
-  display: none; }
-
 #login-btn {
   border: none;
   color: white;
@@ -377,6 +374,13 @@ a.product-name {
       margin-left: 0.5rem; }
     .footer .detail-info a .contact-icon {
       margin-left: 1rem; }
+
+.account-info .account-name {
+  font-weight: 600; }
+
+.account-info button {
+  outline: none;
+  border: none; }
 
 .product-page .category-banner {
   width: 100vw !important;
