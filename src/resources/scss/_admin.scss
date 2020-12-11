@@ -615,14 +615,14 @@
         color: white;
     }
     form{
-        margin-top: 2rem;
-        input[type = "radio"]{
-            pointer-events: none;
-        }
+        margin-top: 1rem;
+        // input[type = "radio"]{
+        //     pointer-events: none;
+        // }
         label{
-            margin-top: 0.5rem;
+            margin-top: 0rem;
         }
-        #pename, #peprice, #penumber, #pesupplier{
+        #pename, #peprice, #penumber, #pesupplier, #pediscount, #pestatus{
             width: 100%;
             height: 1.8rem;
             outline: none;
@@ -635,7 +635,7 @@
             width: 45%;
             display: block;
             text-align: center;
-            margin-top: 2rem;
+            margin-top: 1rem;
             background: rgb(116, 216, 186);
             border: none;
             outline: none;

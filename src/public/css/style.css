@@ -574,7 +574,7 @@ a.product-name {
       margin-left: 1rem;
       margin-right: 1rem;
       width: 47%; }
-      .login-input .login-sign-up .login div {
+      .login-input .login-sign-up .login .login-title {
         font-family: "Audiowide", cursive;
         color: #6a6e6e; }
       .login-input .login-sign-up .login form {
@@ -1179,12 +1179,10 @@ a.product-name {
     background-color: #e79c9c;
     color: white; }
   .edit-product-container form {
-    margin-top: 2rem; }
-    .edit-product-container form input[type="radio"] {
-      pointer-events: none; }
+    margin-top: 1rem; }
     .edit-product-container form label {
-      margin-top: 0.5rem; }
-    .edit-product-container form #pename, .edit-product-container form #peprice, .edit-product-container form #penumber, .edit-product-container form #pesupplier {
+      margin-top: 0rem; }
+    .edit-product-container form #pename, .edit-product-container form #peprice, .edit-product-container form #penumber, .edit-product-container form #pesupplier, .edit-product-container form #pediscount, .edit-product-container form #pestatus {
       width: 100%;
       height: 1.8rem;
       outline: none;
@@ -1196,7 +1194,7 @@ a.product-name {
       width: 45%;
       display: block;
       text-align: center;
-      margin-top: 2rem;
+      margin-top: 1rem;
       background: #74d8ba;
       border: none;
       outline: none;

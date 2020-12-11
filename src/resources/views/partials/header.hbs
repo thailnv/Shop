@@ -113,7 +113,7 @@
             <div></div>
           </div>
           <div class="login">
-            <div>
+            <div class="login-title">
               Also you can...
             </div>
             <form action="post">
@@ -127,7 +127,10 @@
                 <i class="far fa-keyboard login-icon"></i>
               </div>
               <p class="wrong-input-message">Please give us your password!</p>
-              <input id="login-submit" type="button" value="Login">
+              <div class="input-container">
+                <input id="login-submit" type="button" value="Login">
+                <p class="wrong-input-message" style="text-align: center; width: 100%;">Wrong username or password!</p>
+              </div>
             </form>
           </div>
         </div>
@@ -148,15 +151,15 @@
     <div class="cart-checkout">
       <div class="checkout-form">
         <div class="shopping-title">
-          Purchase order
+          Order information
         </div>
         <label for="cusname">Name:</label><br>
         <input type="text" name="cusname" id="cusname">
-        <label for="cusname">Address:</label><br>
-        <input type="text" name="cusname" id="cusname">
-        <label for="cusname">Phonenumber:</label><br>
-        <input type="text" name="cusname" id="cusname">
-        <label for="cusname">Type of payment:</label><br>
+        <label for="cusaddress">Address:</label><br>
+        <input type="text" name="cusaddress" id="cusaddress">
+        <label for="cusphone">Phonenumber:</label><br>
+        <input type="text" name="cusphone" id="cusphone">
+        <label for="paymenttype">Type of payment:</label><br>
         <div>
           <input type="radio" name="type" id="otpay" value="2">
           <label for="otpay">One-time payments</label><br>
@@ -173,7 +176,7 @@
         </div>
         <div style="display: flex; justify-content: space-between">
           <label>Total:</label>
-          <label class="transportation-cost">$9350</label>
+          <label class="total-cost">$9350</label>
         </div>
         <button>Order</button>
       </div>

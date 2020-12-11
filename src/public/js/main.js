@@ -75,6 +75,7 @@ function calcTotalPrice() {
   <div class="total-txt">Total</div>
   <div class="total-price">$${total_price}</div>
   `
+  document.querySelector('.cart-checkout .total-cost').textContent = '$' + (50 + total_price);
 }
 
 function createCartItem(name, img, price, num) {
@@ -410,6 +411,10 @@ function createProduct() {
   }
 }
 
+function updateProduct() {
+  let submitbtn = document.querySelector('.submit-edit-btn');
+}
+
 function register() {
   let signupbtn = document.querySelector('.sign-up #signup-btn');
   let name = document.getElementById('uName');
@@ -522,7 +527,7 @@ function login() {
       icons[0].classList.add('wrong-icon');
       message[0].style.display = 'block';
       wrongCount++;
-    }else{
+    } else {
       username.classList.remove('wrong-input');
       icons[0].classList.remove('wrong-icon');
       message[0].style.display = 'none';
@@ -532,7 +537,7 @@ function login() {
       icons[1].classList.add('wrong-icon');
       message[1].style.display = 'block';
       wrongCount++;
-    }else{
+    } else {
       password.classList.remove('wrong-input');
       icons[1].classList.remove('wrong-icon');
       message[1].style.display = 'none';
@@ -555,12 +560,13 @@ function login() {
           if (data.status == 'success') {
             console.log(data);
             localStorage.setItem('account_info', JSON.stringify(data));
-            if(data.role == 3){
+            if (data.role == 3) {
               window.location.href === 'http://localhost:3000/admin';
-            }else
+            } else
               location.reload();
           }
           else {
+            message[2].style.display = 'block';
           }
         })
     }
@@ -596,6 +602,7 @@ window.onload = function () {
   {
     console.log('remove localStg');
     window.localStorage.removeItem('cart_info');
+    localStorage.removeItem('account_info');
   }
   calcCartItem();
 }

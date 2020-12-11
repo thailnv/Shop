@@ -1,3 +1,10 @@
+<script>
+    if(localStorage.getItem('account_info') == null){
+      //location.href = 'http://localhost:3000/403';
+      sessionStorage.setItem('role', 1);
+    }else{
+    }
+</script>
 <div class="admin-page">
     <div class="income-status">
         <div class="income-container">
@@ -931,21 +938,21 @@
                                 <div>
                                     <div>
                                         <input type="radio" name="petype" id="petypechair" value="1">
-                                        <label for="tchair">Chair</label>
+                                        <label for="petypechair">Chair</label>
                                     </div>
                                     <div>
                                         <input type="radio" name="petype" id="petypetable" value="2">
-                                        <label for="ttable">Table</label><br>
+                                        <label for="petypetable">Table</label><br>
                                     </div>
                                 </div>
                                 <div>
                                     <div>
                                         <input type="radio" name="petype" id="petypebed" value="4">
-                                        <label for="tbed">Bed</label>
+                                        <label for="petypebed">Bed</label>
                                     </div>
                                     <div>
                                         <input type="radio" name="petype" id="petypedecor" value="3">
-                                        <label for="tdecor">Decor</label>
+                                        <label for="petypedecor">Decor</label>
                                     </div>
                                 </div>
                             </div>
@@ -960,7 +967,11 @@
                     <label for="peprice">Price:</label><br>
                     <input type="number" min="0" id="peprice" name="peprice"><br>
                     <label for="penumber">Number:</label><br>
-                    <input type="number" min="0" id="penumber" name="penumber" value="5"><br>
+                    <input type="number" min="0" id="penumber" name="penumber"><br>
+                    <label for="pediscount">Discount:</label><br>
+                    <input type="number" min="0" id="pediscount" name="pediscount"><br>
+                    <label for="pestatus">Status:</label><br>
+                    <input type="number" min="0" id="pestatus" name="pestatus" value="5"><br>
                     <input type="submit" class="submit-edit-btn" value="Submit">
                 </form>
             </div>
@@ -989,7 +1000,7 @@
     </div>
 </div>
 <script>
-    {{#each products }}
+    {{#each products}}
     console.log("{{this.name}}");
     {{/each}}
 </script>
