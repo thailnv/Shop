@@ -739,29 +739,68 @@ a.product-name {
   width: 100%;
   top: 0; }
 
-.add-product-container, .add-supplier-container, .add-staff-container {
+.add-product-container,
+.add-supplier-container,
+.add-staff-container {
   width: 23.5vw;
   height: 29.7rem;
   margin-left: 1vw;
   border-radius: 0.5rem;
   background: white; }
-  .add-product-container form, .add-supplier-container form, .add-staff-container form {
+  .add-product-container form,
+  .add-supplier-container form,
+  .add-staff-container form {
     margin-top: 0.5rem;
     margin-left: 0.5rem;
     margin-right: 0.5rem; }
-    .add-product-container form label, .add-supplier-container form label, .add-staff-container form label {
+    .add-product-container form label,
+    .add-supplier-container form label,
+    .add-staff-container form label {
       margin-top: 0.5rem;
       margin-bottom: 0; }
-    .add-product-container form #pname, .add-product-container form #price, .add-product-container form #number, .add-product-container form #supplier, .add-product-container form #sname, .add-product-container form #spnumber, .add-product-container form #saddress, .add-product-container form #stname, .add-product-container form #staddress, .add-product-container form .form-input, .add-supplier-container form #pname, .add-supplier-container form #price, .add-supplier-container form #number, .add-supplier-container form #supplier, .add-supplier-container form #sname, .add-supplier-container form #spnumber, .add-supplier-container form #saddress, .add-supplier-container form #stname, .add-supplier-container form #staddress, .add-supplier-container form .form-input, .add-staff-container form #pname, .add-staff-container form #price, .add-staff-container form #number, .add-staff-container form #supplier, .add-staff-container form #sname, .add-staff-container form #spnumber, .add-staff-container form #saddress, .add-staff-container form #stname, .add-staff-container form #staddress, .add-staff-container form .form-input {
+    .add-product-container form #pname,
+    .add-product-container form #price,
+    .add-product-container form #number,
+    .add-product-container form #supplier,
+    .add-product-container form #sname,
+    .add-product-container form #spnumber,
+    .add-product-container form #saddress,
+    .add-product-container form #stname,
+    .add-product-container form #staddress,
+    .add-product-container form .form-input,
+    .add-supplier-container form #pname,
+    .add-supplier-container form #price,
+    .add-supplier-container form #number,
+    .add-supplier-container form #supplier,
+    .add-supplier-container form #sname,
+    .add-supplier-container form #spnumber,
+    .add-supplier-container form #saddress,
+    .add-supplier-container form #stname,
+    .add-supplier-container form #staddress,
+    .add-supplier-container form .form-input,
+    .add-staff-container form #pname,
+    .add-staff-container form #price,
+    .add-staff-container form #number,
+    .add-staff-container form #supplier,
+    .add-staff-container form #sname,
+    .add-staff-container form #spnumber,
+    .add-staff-container form #saddress,
+    .add-staff-container form #stname,
+    .add-staff-container form #staddress,
+    .add-staff-container form .form-input {
       width: 100%;
       height: 1.8rem;
       outline: none;
       border: solid 1px #616161;
       border-radius: 0.125rem;
       color: #616161; }
-    .add-product-container form .input-container, .add-supplier-container form .input-container, .add-staff-container form .input-container {
+    .add-product-container form .input-container,
+    .add-supplier-container form .input-container,
+    .add-staff-container form .input-container {
       position: relative; }
-    .add-product-container form .submit-btn, .add-supplier-container form .submit-btn, .add-staff-container form .submit-btn {
+    .add-product-container form .submit-btn,
+    .add-supplier-container form .submit-btn,
+    .add-staff-container form .submit-btn {
       border-radius: 0.25rem;
       width: 48%;
       text-align: center;
@@ -769,8 +808,11 @@ a.product-name {
       border: none;
       outline: none;
       color: white;
-      height: 2rem; }
-    .add-product-container form .reset-btn, .add-supplier-container form .reset-btn, .add-staff-container form .reset-btn {
+      height: 2rem;
+      margin-top: 0.5rem; }
+    .add-product-container form .reset-btn,
+    .add-supplier-container form .reset-btn,
+    .add-staff-container form .reset-btn {
       border-radius: 0.25rem;
       width: 48%;
       text-align: center;
@@ -778,7 +820,8 @@ a.product-name {
       border: none;
       outline: none;
       color: white;
-      height: 2rem; }
+      height: 2rem;
+      margin-top: 0.5rem; }
 
 .table-container::-webkit-scrollbar {
   display: none; }
@@ -808,7 +851,8 @@ a.product-name {
           background: none;
           border: none;
           outline: none; }
-      .product-status table tr td:first-child, .product-status table tr th:first-child {
+      .product-status table tr td:first-child,
+      .product-status table tr th:first-child {
         padding-left: 0.5rem; }
       .product-status table tr td {
         border-top: solid 2px #f7f7f7;
@@ -868,7 +912,8 @@ a.product-name {
           background: none;
           border: none;
           outline: none; }
-      .supplier-status table tr td:first-child, .supplier-status table tr th:first-child {
+      .supplier-status table tr td:first-child,
+      .supplier-status table tr th:first-child {
         padding-left: 0.5rem; }
       .supplier-status table tr td {
         border-top: solid 2px #f7f7f7;
@@ -918,7 +963,8 @@ a.product-name {
           background: none;
           border: none;
           outline: none; }
-      .staff-status table tr td:first-child, .staff-status table tr th:first-child {
+      .staff-status table tr td:first-child,
+      .staff-status table tr th:first-child {
         padding-left: 0.5rem; }
       .staff-status table tr td {
         border-top: solid 2px #f7f7f7;
@@ -970,7 +1016,8 @@ a.product-name {
           background: none;
           border: none;
           outline: none; }
-      .sale-status table tr td:first-child, .sale-status table tr th:first-child {
+      .sale-status table tr td:first-child,
+      .sale-status table tr th:first-child {
         padding-left: 0.5rem; }
       .sale-status table tr td {
         border-top: solid 2px #f7f7f7;
@@ -1024,7 +1071,8 @@ a.product-name {
           background: none;
           border: none;
           outline: none; }
-      .instalment-status table tr td:first-child, .instalment-status table tr th:first-child {
+      .instalment-status table tr td:first-child,
+      .instalment-status table tr th:first-child {
         padding-left: 0.5rem; }
       .instalment-status table tr td {
         border-top: solid 2px #f7f7f7;
@@ -1078,7 +1126,8 @@ a.product-name {
           background: none;
           border: none;
           outline: none; }
-      .warranty-status table tr td:first-child, .warranty-status table tr th:first-child {
+      .warranty-status table tr td:first-child,
+      .warranty-status table tr th:first-child {
         padding-left: 0.5rem; }
       .warranty-status table tr td {
         border-top: solid 2px #f7f7f7;
@@ -1133,7 +1182,7 @@ a.product-name {
   margin: auto;
   background-color: #cacaca;
   border-radius: 0.5rem;
-  margin-top: calc((100vh - 85vh)/2);
+  margin-top: calc((100vh - 85vh) / 2);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   display: flex; }
   .edit-product-form .edit-form-image {
@@ -1148,7 +1197,7 @@ a.product-name {
       margin-bottom: auto;
       margin: auto;
       display: block;
-      margin-top: calc(0.5*(85vh - 80%)); }
+      margin-top: calc(0.5 * (85vh - 80%)); }
   .edit-product-form .edit-form-input {
     width: 40%;
     display: block;
@@ -1182,7 +1231,12 @@ a.product-name {
     margin-top: 1rem; }
     .edit-product-container form label {
       margin-top: 0rem; }
-    .edit-product-container form #pename, .edit-product-container form #peprice, .edit-product-container form #penumber, .edit-product-container form #pesupplier, .edit-product-container form #pediscount, .edit-product-container form #pestatus {
+    .edit-product-container form #pename,
+    .edit-product-container form #peprice,
+    .edit-product-container form #penumber,
+    .edit-product-container form #pesupplier,
+    .edit-product-container form #pediscount,
+    .edit-product-container form #pestatus {
       width: 100%;
       height: 1.8rem;
       outline: none;
@@ -1219,7 +1273,7 @@ a.product-name {
   margin: auto;
   background-color: #cacaca;
   border-radius: 0.5rem;
-  margin-top: calc((100vh - 65vh)/2);
+  margin-top: calc((100vh - 65vh) / 2);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   display: flex; }
   .edit-supplier-form .edit-form-image {
@@ -1234,7 +1288,7 @@ a.product-name {
       margin-bottom: auto;
       margin: auto;
       display: block;
-      margin-top: calc(0.5*(65vh - 80%)); }
+      margin-top: calc(0.5 * (65vh - 80%)); }
   .edit-supplier-form .edit-form-input {
     width: 60%;
     display: block;
@@ -1269,7 +1323,9 @@ a.product-name {
     pointer-events: none; }
   .edit-supplier-container form label {
     margin-top: 0.5rem; }
-  .edit-supplier-container form #sename, .edit-supplier-container form #seaddress, .edit-supplier-container form #sepnumber {
+  .edit-supplier-container form #sename,
+  .edit-supplier-container form #seaddress,
+  .edit-supplier-container form #sepnumber {
     width: 100%;
     height: 1.8rem;
     outline: none;

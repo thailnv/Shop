@@ -1,16 +1,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const Customer = new Schema({
+const Employee = new Schema({
     name: { type: String },
-    address: { type: String },
+    personalID: {type: String, default: ''},
     phonenumber: { type: String },
+    role : {type: Number, required: true},
     username: {type: String, unique: true},
     password: {type: String},
-    idnumber: {type: String, default: ''},
-    role : {type: Number, default: 4},
 },{
     versionKey : false,
 });
 
-module.exports = mongoose.model('Customer', Customer);
+module.exports = mongoose.model('Employee', Employee);

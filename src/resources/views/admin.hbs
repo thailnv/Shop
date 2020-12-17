@@ -1,10 +1,3 @@
-<script>
-    if(localStorage.getItem('account_info') == null){
-      //location.href = 'http://localhost:3000/403';
-      sessionStorage.setItem('role', 1);
-    }else{
-    }
-</script>
 <div class="admin-page">
     <div class="income-status">
         <div class="income-container">
@@ -13,7 +6,7 @@
                     370
                 </div>
                 <div class="income-detail-name">
-                    NEW CUSTOMERS
+                    CUSTOMERS
                 </div>
             </div>
             <div class="income-icon">
@@ -264,16 +257,25 @@
                     New Supplier
                 </div>
                 <form class="add-supplier-form">
-                    <label for="sname">Supplier name:</label><br>
-                    <input type="text" id="sname" name="sname"><br>
-                    <label for="saddress">Address:</label><br>
-                    <input type="text" id="saddress" name="saddress"><br>
-                    <label for="spnumber">Phone number:</label><br>
-                    <input type="text" id="spnumber" name="spnumber"><br>
+                    <div class="input-container">
+                        <label for="sname">Supplier name:</label><br>
+                        <input type="text" id="sname" name="sname"><br>
+                        <p class="wrong-input-message">Please enter supplier name!</p>
+                    </div>
+                    <div class="input-container">
+                        <label for="saddress">Address:</label><br>
+                        <input type="text" id="saddress" name="saddress"><br>
+                        <p class="wrong-input-message">Please enter supplier address!</p>
+                    </div>
+                    <div class="input-container">
+                        <label for="spnumber">Phone number:</label><br>
+                        <input type="number" id="spnumber" name="spnumber"><br>
+                        <p class="wrong-input-message">Please enter supplier phonenumber!</p>
+                    </div>
                     <label for="simage">Image:</label>
                     <input type="file" name="simage" id="simage"><br>
                     <div style="margin-top: 0.6rem; display: flex; justify-content:space-between;">
-                        <input type="submit" class="submit-btn" value="Add Product">
+                        <input type="button" class="submit-btn" id="supplier-submit" value="Add Product">
                         <input type="button" class="reset-btn" value="Clear">
                     </div>
                 </form>
@@ -391,24 +393,41 @@
                     New Staff
                 </div>
                 <form class="add-staff-form">
-                    <label for="stname">Name:</label><br>
-                    <input type="text" id="stname" name="stname" class="form-input"><br>
-                    <label for="staddress">Address:</label><br>
-                    <input type="text" id="staddress" name="staddress" class="form-input"><br>
-                    <label for="stpnumber">Phone number:</label><br>
-                    <input type="text" id="stpnumber" name="stpnumber" class="form-input"><br>
-                    <label for="stpnumber">Role:</label><br>
-                    <select name="sttype" id="sttype" class="form-input">
-                        {{#each suppliers}}
-                        <option value="{{this.id}}">{{this.name}}</option>
-                        {{/each}}
-                    </select><br>
-                    <label for="stusername">Username:</label><br>
-                    <input type="text" id="stusername" name="stusername" class="form-input"><br>
-                    <label for="stpassword">Default password:</label><br>
-                    <input type="password" id="stpassword" name="stpassword" class="form-input"><br>
+                    <div class="input-container">
+                        <label for="stname">Name:</label><br>
+                        <input type="text" id="stname" name="stname" class="form-input"><br>
+                        <p class="wrong-input-message">Please enter staff name!</p>
+                    </div>
+                    <div class="input-container">
+                        <label for="stid">Personal ID:</label><br>
+                        <input type="number" id="stid" name="stid" class="form-input"><br>
+                        <p class="wrong-input-message">Please enter personal ID!</p>
+                    </div>
+                    <div class="input-container">
+                        <label for="stpnumber">Phone number:</label><br>
+                        <input type="number" id="stpnumber" name="stpnumber" class="form-input"><br>
+                        <p class="wrong-input-message">Please enter staff phonenumber!</p>
+                    </div>
+                    <div class="input-container">
+                        <label for="stpnumber">Role:</label><br>
+                        <select name="sttype" id="sttype" class="form-input">
+                            <option value="1">Sale</option>
+                            <option value="2">Technical</option>
+                            <option value="3">Delivery</option>
+                        </select><br>
+                    </div>
+                    <div class="input-container">
+                        <label for="stusername">Username:</label><br>
+                        <input type="text" id="stusername" name="stusername" class="form-input"><br>
+                        <p class="wrong-input-message">Please enter username!</p>
+                    </div>
+                    <div class="input-container">
+                        <label for="stpassword">Default password:</label><br>
+                        <input type="text" id="stpassword" name="stpassword" class="form-input"><br>
+                        <p class="wrong-input-message">Please enter default password!</p>
+                    </div>
                     <div style="margin-top: 0.6rem; display: flex; justify-content:space-between;">
-                        <input type="submit" class="submit-btn" value="Add Product">
+                        <input type="button" class="submit-btn" id="staff-submit" value="Add Product">
                         <input type="button" class="reset-btn" value="Clear">
                     </div>
                 </form>
@@ -969,10 +988,10 @@
                     <label for="penumber">Number:</label><br>
                     <input type="number" min="0" id="penumber" name="penumber"><br>
                     <label for="pediscount">Discount:</label><br>
-                    <input type="number" min="0" id="pediscount" name="pediscount"><br>
+                    <input type="number" min="0" id="pediscount" value="0" name="pediscount"><br>
                     <label for="pestatus">Status:</label><br>
                     <input type="number" min="0" id="pestatus" name="pestatus" value="5"><br>
-                    <input type="submit" class="submit-edit-btn" value="Submit">
+                    <input type="button" class="submit-edit-btn" value="Submit">
                 </form>
             </div>
         </div>
@@ -999,8 +1018,25 @@
         </div>
     </div>
 </div>
+<div class="setting">
+    <button id="setting-btn">
+        <i class="fas fa-cog"></i>
+    </button>
+</div>
+<div class="setting-select">
+    <button class="setting-option">Product</button>
+    <button class="setting-option">Supplier</button>
+    <button class="setting-option">Staff</button>
+    <button class="setting-option">Customer</button>
+    <button class="setting-option">Sale Receipt</button>
+    <button class="setting-option">Instalment Sale</button>
+    <button class="setting-option">Product Receipt</button>
+    <button class="setting-option">Product Issue</button>
+    <button class="setting-option">Warranty</button>
+    <button class="setting-option">Report</button>
+</div>
 <script>
-    {{#each products}}
+    { {#each products } }
     console.log("{{this.name}}");
-    {{/each}}
+    { { /each}}
 </script>

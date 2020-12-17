@@ -67,15 +67,24 @@ function calcCartItem() {
 
 function calcTotalPrice() {
   var total_price = 0;
-  let cart_info = JSON.parse(localStorage.getItem('cart_info'));
-  for (let i = 0; i < cart_info.length; i++) {
-    total_price += cart_info[i].num * cart_info[i].price;
+  if (localStorage.getItem('cart_info')) {
+    let cart_info = JSON.parse(localStorage.getItem('cart_info'));
+    for (let i = 0; i < cart_info.length; i++) {
+      total_price += cart_info[i].num * cart_info[i].price;
+    }
+    document.querySelector('.cart-checkout .provisional-cost').textContent = '$' + total_price;
+    document.querySelector('.cart-checkout .total-cost').textContent = '$' + (50 + total_price);
+  }
+  else {
+    total_price = 0;
+    document.querySelector('.cart-checkout .transportation-cost').textContent = '$0';
+    document.querySelector('.cart-checkout .provisional-cost').textContent = '$0';
+    document.querySelector('.cart-checkout .total-cost').textContent = '$0';
   }
   document.querySelector('.cart-total').innerHTML = `
   <div class="total-txt">Total</div>
   <div class="total-price">$${total_price}</div>
   `
-  document.querySelector('.cart-checkout .total-cost').textContent = '$' + (50 + total_price);
 }
 
 function createCartItem(name, img, price, num) {
@@ -184,6 +193,7 @@ function createLoginFunction() {
   let close_btn = document.querySelector('#close-login-btn');
   let login_popup = document.querySelector('.login-popup');
   let login_form = document.querySelector('.login-form');
+  let logout_btn = document.querySelector('.logout-btn');
   login_btn.addEventListener('click', () => {
     login_popup.style.display = 'block';
     login_form.classList.remove('hide');
@@ -202,9 +212,13 @@ function createLoginFunction() {
       let phonenumber = document.getElementById('uPnumber');
       let username = document.getElementById('uUsername');
       let password = document.getElementById('uPassword');
-      let icons = document.querySelectorAll('.signup-icon');
-      let message = document.querySelectorAll('.input-container p');
+      let loginpass = document.getElementById('Password');
+      let loginusernam = document.getElementById('Username');
+      let icons = document.querySelectorAll('.signup-icon, .login-icon');
+      let message = document.querySelectorAll('.wrong-input-message');
       name.classList.remove('wrong-input');
+      loginpass.classList.remove('wrong-input');
+      loginusernam.classList.remove('wrong-input');
       address.classList.remove('wrong-input');
       phonenumber.classList.remove('wrong-input');
       username.classList.remove('wrong-input');
@@ -216,10 +230,22 @@ function createLoginFunction() {
       password.value = '';
       for (let i = 0; i < icons.length; i++) {
         icons[i].classList.remove('wrong-icon');
+      }
+      for (let i = 0; i < message.length; i++) {
         message[i].style.display = 'none';
       }
     }
   })
+  logout_btn.onclick = () => {
+    fetch('/api/logout', {
+      method: 'POST',
+    }).then(
+      () => {
+        localStorage.removeItem('account_info');
+        location.reload();
+      }
+    )
+  }
 }
 
 function createCartItemFunction() {
@@ -234,7 +260,10 @@ function createCartItemFunction() {
             lstItemQuantity[i].parentElement.parentElement.remove();
             cart_info.splice(j, 1);
           }
-          localStorage.setItem('cart_info', JSON.stringify(cart_info));
+          if (cart_info.length === 0)
+            localStorage.removeItem('cart_info');
+          else
+            localStorage.setItem('cart_info', JSON.stringify(cart_info));
         }
       }
       calcTotalPrice();
@@ -257,6 +286,7 @@ function createCartFunction() {
     cart_action.classList.add('cart-show-item');
   })
   checkout_btn.onclick = () => {
+    calcTotalPrice();
     cart_action.classList.remove('cart-show-item');
     cart_action.classList.add('cart-show-checkout');
     document.querySelector('.checkout-form .provisional-cost').textContent =
@@ -391,7 +421,7 @@ function createProduct() {
         number
       }
       console.log(product2Insert);
-      fetch('/api/newproduct', {
+      fetch('/api/create/product', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -411,8 +441,172 @@ function createProduct() {
   }
 }
 
+function createSupplier(){
+  let submit = document.querySelector('#supplier-submit');
+  submit.onclick = function () {
+    let supplier = document.querySelector('.add-supplier-form');
+    let name = supplier.querySelector('#sname').value;
+    let address = supplier.querySelector('#saddress').value;
+    let phonenumber = supplier.querySelector('#spnumber').value;
+    let image = supplier.querySelector('#simage').value.replace('C:\\fakepath\\', '');
+    let wrongCount = 0;
+    let message = supplier.querySelectorAll('.wrong-input-message');
+    if (name === '') {
+      wrongCount++;
+      message[0].style.display = 'block';
+    } else {
+      message[0].style.display = 'none';
+    }
+    if (address === '') {
+      wrongCount++;
+      message[1].style.display = 'block';
+    } else {
+      message[1].style.display = 'none';
+    }
+    if (phonenumber === '') {
+      wrongCount++;
+      message[2].style.display = 'block';
+    } else {
+      message[2].style.display = 'none';
+    }
+    if (image === '') {
+      image = 'shortcut.png';
+    }
+    if (wrongCount === 0) {
+      let supplier2Insert = {
+        name,
+        address,
+        phonenumber,
+        image
+      }
+      console.log(supplier2Insert);
+      fetch('/api/create/supplier', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(supplier2Insert),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.status);
+          if (data.status == 'success') {
+            let message = document.querySelector('.message-popup');
+            message.querySelector('.content').textContent = 'Adding supplier successfully!';
+            message.style.display = 'block';
+          }
+        })
+    }
+  }
+}
+
+function createStaff(){
+  let submit = document.querySelector('#staff-submit');
+  submit.onclick = function () {
+    let staff = document.querySelector('.add-staff-form');
+    let name = staff.querySelector('#stname').value;
+    let id = staff.querySelector('#stid').value;
+    let phonenumber = staff.querySelector('#stpnumber').value;
+    let type = staff.querySelector('#sttype').value;
+    let username = staff.querySelector('#stusername').value;
+    let password = staff.querySelector('#stpassword').value;
+    let wrongCount = 0;
+    let message = staff.querySelectorAll('.wrong-input-message');
+    if (name === '') {
+      wrongCount++;
+      message[0].style.display = 'block';
+    } else {
+      message[0].style.display = 'none';
+    }
+    if (id === '') {
+      wrongCount++;
+      message[1].style.display = 'block';
+    } else {
+      message[1].style.display = 'none';
+    }
+    if (phonenumber === '') {
+      wrongCount++;
+      message[2].style.display = 'block';
+    } else {
+      message[2].style.display = 'none';
+    }
+    if (username === '') {
+      wrongCount++;
+      message[3].style.display = 'block';
+    } else {
+      message[3].style.display = 'none';
+    }
+    if (password === '') {
+      wrongCount++;
+      message[4].style.display = 'block';
+    } else {
+      message[4].style.display = 'none';
+    }
+    if (wrongCount === 0) {
+      let staff2Insert = {
+        name,
+        id,
+        phonenumber,
+        type,
+        username,
+        password
+      }
+      console.log(staff2Insert);
+      fetch('/api/create/staff', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(staff2Insert),
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.status);
+          if (data.status == 'success') {
+            let message = document.querySelector('.message-popup');
+            message.querySelector('.content').textContent = 'Adding staff successfully!';
+            message.style.display = 'block';
+          }
+        })
+    }
+  }
+}
+
 function updateProduct() {
   let submitbtn = document.querySelector('.submit-edit-btn');
+  let name = document.querySelector('#pename');
+  let supplier = document.querySelector('#pesupplier');
+  let price = document.querySelector('#peprice');
+  let number = document.querySelector('#penumber');
+  let status = document.querySelector('#pestatus');
+  let discount = document.querySelector('#pediscount');
+  let radios = document.querySelectorAll('.edit-product-container input[type = "radio"]');
+  let type = 0;
+  submitbtn.onclick = () => {
+    for (let i = 0; i < radios.length; i++) {
+      console.log('submit');
+      if (radios[i].checked) {
+        type = radios[i].value;
+      }
+    }
+    let upProduct = {
+      name: name.value,
+      supplier: supplier.value,
+      price: price.value,
+      number: number.value,
+      status: status.value,
+      type,
+      discount: discount.value,
+    }
+    console.log(upProduct);
+    fetch('/api/update/product', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(upProduct),
+    })
+  }
 }
 
 function register() {
@@ -560,8 +754,9 @@ function login() {
           if (data.status == 'success') {
             console.log(data);
             localStorage.setItem('account_info', JSON.stringify(data));
-            if (data.role == 3) {
-              window.location.href === 'http://localhost:3000/admin';
+            if (data.role == 2) {
+              console.log('redirec');
+              window.location.href = 'http://localhost:3000/admin';
             } else
               location.reload();
           }
@@ -574,37 +769,36 @@ function login() {
 }
 
 function prepareNormal() {
+  console.log('prepare normal');
+  {
+    console.log('calc time to remove');
+    let loadTime = new Date();
+    let unloadTime = new Date(JSON.parse(window.localStorage.unloadTime));
+    let refreshTime = loadTime.getTime() - unloadTime.getTime();
+    if (refreshTime > 3000)//3000 milliseconds
+    {
+      console.log('remove localStg');
+      window.localStorage.removeItem('cart_info');
+      localStorage.removeItem('account_info');
+    }
+    calcCartItem();
+  }
   document.querySelector('.cart').style.display = 'block';
   if (localStorage.getItem('account_info') === null) {
+    console.log('deleted')
     document.querySelector('.login-info').style.display = 'block';
     document.querySelector('.account-info').style.display = 'none';
   } else {
+    console.log('not deleted')
     document.querySelector('.account-info').style.display = 'block';
     document.querySelector('.login-info').style.display = 'none';
     document.querySelector('.account-info .account-name').innerHTML =
       JSON.parse(localStorage.getItem('account_info')).name;
-    document.querySelector('.account-info .logout-btn').onclick = () => {
-      localStorage.removeItem('account_info');
-      location.reload();
-    }
   }
 }
 //remove localStorage when close tab
 window.onbeforeunload = function (e) {
   window.localStorage.unloadTime = JSON.stringify(new Date());
-}
-
-window.onload = function () {
-  let loadTime = new Date();
-  let unloadTime = new Date(JSON.parse(window.localStorage.unloadTime));
-  let refreshTime = loadTime.getTime() - unloadTime.getTime();
-  if (refreshTime > 3000)//3000 milliseconds
-  {
-    console.log('remove localStg');
-    window.localStorage.removeItem('cart_info');
-    localStorage.removeItem('account_info');
-  }
-  calcCartItem();
 }
 
 //admin function - normal function
@@ -613,6 +807,9 @@ if (window.location.href === 'http://localhost:3000/admin') {
   manageProduct();
   manageSupplier();
   createProduct();
+  createStaff();
+  createSupplier();
+  updateProduct();
 }
 else {
   prepareNormal();
