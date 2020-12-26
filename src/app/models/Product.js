@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Convert = require('../../util/mongoose');
 const Schema = mongoose.Schema;
-const Product = new Schema({
+const Pro = new Schema({
     name: {type: String, required: true},
     image: {type: String, required: true},
     number: {type: Number, default: 1},
@@ -16,4 +16,91 @@ const Product = new Schema({
     timestamps : true,
 });
 
-module.exports = mongoose.model('Product', Product);
+const product = mongoose.model('product', Pro);
+
+class Product {
+    async findAll(data){
+        await product.find({})
+        .then((products)=>{
+            products = Convert.cvDataToObjects(products);
+            data.products = products;
+        })
+        .catch(()=>{
+            data.products = [];
+            console.log('[ERROR] Get product fail');
+        })
+    }
+
+    async findByType(ptype, data){
+        await product.find({type : ptype})
+        .then((products)=>{
+            products = Convert.cvDataToObjects(products);
+            data.products = products;
+            data.Banner = products[products.length - 1].image;
+        })
+        .catch(()=>{
+            data.products = [];
+            console.log('[ERROR] Get product fail');
+        })
+    }
+
+    async findBestSeller(data){
+        await product.find({}).sort({ orderTime: 'desc' }).limit(10)
+        .then((products)=>{
+            products = Convert.cvDataToObjects(products);
+            data.lstBestSeller = products;
+        })
+        .catch(()=>{
+            data.lstBestSeller = [];
+            console.log('[ERROR] Get product fail');
+        })
+    }
+
+    async findNewArrival(data){
+        await product.find({}).sort({ createdAt: 'desc' }).limit(10)
+        .then((products)=>{
+            products = Convert.cvDataToObjects(products);
+            data.lstNewArrivals = products;
+        })
+        .catch(()=>{
+            data.lstNewArrivals = [];
+            console.log('[ERROR] Get product fail');
+        })
+    }
+
+    async create(data, result){
+        let pro = new product(data);
+        await pro.save()
+        .then(()=>{
+            result.status = 'success';
+        })
+        .catch((err)=>{
+            result.status = 'fail';
+            result.err = err;
+        })
+    }
+
+    async update(data, result){
+        await product.findOne({_id : data._id})
+        .then(async (doc)=>{
+            doc.name = data.name;
+            doc.price = data.price;
+            doc.discount = data.discount;
+            doc.number = data.number;
+            doc.supplier = data.supplier;
+            doc.status = data.status;
+            await doc.save()
+            .then(()=>{
+                result.status = 'success';
+            })
+            .catch(()=>{
+                result.status = 'fail';
+            })
+        })
+        .catch(()=>{
+            result.status = 'fail';
+        })
+    }
+}
+
+module.exports = new Product;

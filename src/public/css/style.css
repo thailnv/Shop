@@ -859,11 +859,27 @@ a.product-name {
         color: #616161;
         height: 3rem; }
         .product-status table tr td .instock {
-          width: 5rem;
+          width: 7rem;
           height: 1.8rem;
           border-radius: 1rem;
           border: none;
           background: #74d8ba;
+          color: white;
+          text-align: center; }
+        .product-status table tr td .outstock {
+          width: 7rem;
+          height: 1.8rem;
+          border-radius: 1rem;
+          border: none;
+          background: #dbd795;
+          color: white;
+          text-align: center; }
+        .product-status table tr td .suspension {
+          width: 7rem;
+          height: 1.8rem;
+          border-radius: 1rem;
+          border: none;
+          background: #faa5a5;
           color: white;
           text-align: center; }
         .product-status table tr td .action {
@@ -970,6 +986,22 @@ a.product-name {
         border-top: solid 2px #f7f7f7;
         color: #616161;
         height: 3rem; }
+        .staff-status table tr td .working {
+          width: 6rem;
+          height: 1.8rem;
+          border-radius: 1rem;
+          border: none;
+          background: #74d8ba;
+          color: white;
+          text-align: center; }
+        .staff-status table tr td .quit {
+          width: 6rem;
+          height: 1.8rem;
+          border-radius: 1rem;
+          border: none;
+          background: #faa5a5;
+          color: white;
+          text-align: center; }
         .staff-status table tr td .action {
           display: flex; }
           .staff-status table tr td .action .action-btn {
@@ -1344,6 +1376,97 @@ a.product-name {
     color: white;
     height: 2.25rem; }
 
+.edit-staff-popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: none;
+  z-index: 16;
+  /* Sit on top */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); }
+
+.edit-staff-form {
+  width: 70vw;
+  height: 80vh;
+  position: relative;
+  margin: auto;
+  background-color: #cacaca;
+  border-radius: 0.5rem;
+  margin-top: calc((100vh - 80vh) / 2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex; }
+  .edit-staff-form .edit-form-image {
+    width: 40%;
+    height: 100%;
+    display: block;
+    white-space: nowrap; }
+    .edit-staff-form .edit-form-image img {
+      width: 80%;
+      height: auto;
+      margin-top: auto;
+      margin-bottom: auto;
+      margin: auto;
+      display: block;
+      margin-top: calc(0.5 * (65vh - 80%)); }
+  .edit-staff-form .edit-form-input {
+    width: 60%;
+    display: block;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    background-color: white; }
+
+.edit-staff-container {
+  width: 85%;
+  height: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+  border-radius: 0.5rem;
+  background: white; }
+  .edit-staff-container button {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-family: "Audiowide", cursive;
+    border: none;
+    outline: none;
+    background: whitesmoke;
+    border-radius: 10rem;
+    color: #aaaaaa; }
+  .edit-staff-container button:hover {
+    background-color: #e79c9c;
+    color: white; }
+  .edit-staff-container form input[type="radio"] {
+    pointer-events: none; }
+  .edit-staff-container form label {
+    margin-top: 0.5rem; }
+  .edit-staff-container form #stename,
+  .edit-staff-container form #stepid,
+  .edit-staff-container form #stepnumber,
+  .edit-staff-container form #sterole,
+  .edit-staff-container form #stestatus {
+    width: 100%;
+    height: 1.8rem;
+    outline: none;
+    border: solid 1px #616161;
+    border-radius: 0.125rem;
+    color: #616161; }
+  .edit-staff-container form .submit-edit-btn {
+    border-radius: 0.25rem;
+    width: 45%;
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    background: #74d8ba;
+    border: none;
+    outline: none;
+    color: white;
+    height: 2.25rem; }
+
 .setting {
   position: fixed;
   bottom: 1rem;
@@ -1374,25 +1497,30 @@ a.product-name {
 
 .message-popup {
   z-index: 17;
-  display: none;
+  display: block;
   position: fixed;
+  display: none;
   top: 0%;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5); }
   .message-popup .message {
+    overflow: hidden;
     width: 35%;
     height: 50%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 25vh;
     border-radius: 0.5rem;
+    position: relative;
     background: white;
     box-sizing: border-box; }
     .message-popup .message .title {
       margin-top: 0;
       font-size: 2rem;
+      text-align: center;
+      width: 100%;
       color: #615e5c; }
     .message-popup .message .icon {
       box-sizing: border-box;
@@ -1421,6 +1549,33 @@ a.product-name {
       margin-left: auto;
       margin-right: auto;
       display: block; }
+  .message-popup .waiting {
+    overflow: hidden;
+    width: 35%;
+    height: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25vh;
+    border-radius: 0.5rem;
+    background: white;
+    box-sizing: border-box;
+    display: none;
+    position: relative; }
+    .message-popup .waiting .title {
+      margin-top: 0;
+      font-size: 2rem;
+      text-align: center;
+      width: 100%;
+      color: #615e5c;
+      position: absolute;
+      bottom: 2rem; }
+    .message-popup .waiting .gif {
+      width: 90%;
+      margin-top: -2rem;
+      margin-left: auto;
+      margin-right: auto; }
+      .message-popup .waiting .gif img {
+        width: 100%; }
 
 .cart {
   position: fixed;

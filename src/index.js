@@ -16,16 +16,22 @@ db.connect();
 
 //image folder
 app.use(cors());
+
 app.use(express.static(path.join(__dirname, '/public')));
+
 app.use(bodyParser.json());
+
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.set('trust proxy', 1) // trust first proxy
+
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
   cookie: {}
 }));
+
 //template engine
 app.engine('hbs', handlebars({
     extname: '.hbs'

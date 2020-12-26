@@ -3,47 +3,36 @@ const Customer = require('../models/Customer');
 const Convert = require('../../util/mongoose');
 const Supplier = require('../models/Supplier');
 const Employee = require('../models/Employee');
+const Order = require('../models/Order');
+const fs = require('fs');
+const fetch = require('node-fetch');
+const path = require('path');
+
 class SiteController {
 
-    index(req, res, next) {
-        let lstBestSeller, lstNewArrivals;
-        Product.find({}).sort({ orderTime: 'desc' }).limit(10)
-            .then(bestSellers => {
-                lstBestSeller = Convert.cvDataToObjects(bestSellers);
-                Product.find({}).sort({ createdAt: 'desc' }).limit(10)
-                    .then(newArrivals => {
-                        lstNewArrivals = Convert.cvDataToObjects(newArrivals);
-                        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-                        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-                        res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-                        res.setHeader('Access-Control-Allow-Credentials', true);
-                        res.render('home', { lstBestSeller, lstNewArrivals });
-                    })
-            })
+    async index(req, res, next) {
+        let data = {};
+        await Product.findBestSeller(data);
+        await Product.findNewArrival(data);
+        res.render('home', {data});
     }
-    admin(req, res, next) {
-        console.log('admin');
-        var productsAPI;
-        // if (!req.session.role || req.session.role !== 2) {
+
+    async admin(req, res, next) {
+        // console.log(req.session.role);
+        // if (req.session.role === null || req.session.role !== 0) {
         //     res.status(403).render('403');
         // } else 
         {
-            console.log(req.session.role);
-            var nItem = 0;
-            Supplier.find({}).then(suppliers => {
-                suppliers = Convert.cvDataToObjects(suppliers);
-                Product.find({})//find field 'name' of all document with type = 1
-                    .then(products => {
-                        products = Convert.cvDataToObjects(products);
-                        //console.log(products);
-                        nItem = products.length;
-                        res.render('admin', { suppliers, products, nItem });
-                    })
-                    .catch(next);
-            }).catch(next);
+            let data= {};
+            await Employee.findAll(data);
+            await Product.findAll(data);
+            await Supplier.findAll(data);
+            await Customer.findAll(data);
+            res.render('admin', {data});
         }
     }
-    createProduct(req, res, next) {
+
+    async createProduct(req, res, next) {
         let product = {
             name: req.body.name,
             image: '/img/' + req.body.image,
@@ -53,16 +42,22 @@ class SiteController {
             discount: 0,
             number: parseInt(req.body.number),
         };
-        console.log(product);
-        let pro = new Product(product);
-        pro.save();
-        res.json({
-            status: "success"
-        })
+        let url = req.body.url;
+        let fileName = url.split('/')[4];
+        console.log(fileName);
+        const response = await fetch(url);
+        const buffer = await response.buffer();
+        fs.writeFile(`G:/Web/Shop/src/public/img/${fileName}`, buffer, () => 
+        console.log('finished downloading!'));
+        let result = {};
+        await Product.create(product, result);
+        console.log(result);
+        res.json(result);
     }
 
-    updateProduct(req, res, next){
+    async updateProduct(req, res, next){
         let product = {
+            _id : req.body.id,
             name: req.body.name,
             price: parseInt(req.body.price),
             type: parseInt(req.body.type),
@@ -71,46 +66,33 @@ class SiteController {
             status : parseInt(req.body.status),
             number: parseInt(req.body.number),
         };
-        console.log(product);
-        Product.findOne({name : product.name}).then((doc)=>{
-            doc.price = product.price;
-            doc.save()
-            .then(() => {
-                res.json({
-                    status: 'success'
-                })
-            })
-            .catch(() => {
-                res.json({
-                    status: 'fail'
-                })
-            })
-        })
+        let result = {};
+        await Product.update(product, result);
+        console.log(result);
+        res.json(result);
     }
 
-    createSupplier(req, res, next){
+    async createSupplier(req, res, next){
         let supplier = {
             name: req.body.name,
             image: '/img/' + req.body.image,
             address: req.body.address,
             phonenumber: req.body.phonenumber,
         };
-        console.log(supplier);
-        let sup = new Supplier(supplier);
-        sup.save()
-        .then(() => {
-            res.json({
-                status: "success"
-            })
-        })
-        .catch(() => {
-            res.json({
-                status: "fail"
-            })
-        })
+        let url = req.body.url;
+        let fileName = url.split('/')[4];
+        console.log(fileName);
+        const response = await fetch(url);
+        const buffer = await response.buffer();
+        fs.writeFile(`G:/Web/Shop/src/public/img/${fileName}`, buffer, () => 
+        console.log('finished downloading!'));
+        let result = {};
+        await Supplier.create(supplier, result);
+        console.log(result);
+        res.json(result);
     }
 
-    createStaff(req, res, next){
+    async createStaff(req, res, next){
         let staff = {
             name : req.body.name,
             personalID : req.body.id,
@@ -119,22 +101,13 @@ class SiteController {
             username : req.body.username,
             password : req.body.password,
         };
-        console.log(staff);
-        let stf = new Employee(staff);
-        stf.save()
-        .then(()=>{
-            res.json({
-                status : "success"
-            })
-        })
-        .catch(()=>{
-            res.json({
-                status : 'fail'
-            })
-        })
+        let result = {};
+        await Employee.create(staff, result);
+        console.log(result);
+        res.json(result);
     }
 
-    createCustomer(req, res, next) {
+    async createCustomer(req, res, next) {
         let customer = {
             name: req.body.name,
             address: req.body.address,
@@ -142,65 +115,26 @@ class SiteController {
             username: req.body.username,
             password: req.body.password,
         };
-        console.log(customer);
-        let cus = new Customer(customer);
-        cus.save().then(() => {
-            req.session.role = 4;
-            res.json({
-                status: "success",
-                name: customer.name,
-                address: customer.address,
-                phone: customer.phonenumber,
-                role: 0,
-            })
-        })
-            .catch(() => {
-                res.json({
-                    status: "fail"
-                })
-            })
-
+        let result = {};
+        await Customer.create(customer, result);
+        console.log(result);
+        res.json(result);
     }
 
-    login(req, res, next) {
-        console.log('login');
-        Customer.find({ username: req.body.username, password: req.body.password })
-            .then(users => {
-                users = Convert.cvDataToObjects(users);
-                if (users.length > 0) {
-                    console.log('customer');
-                    console.log(users[0]);
-                    req.session.role = 0;
-                    res.json({
-                        status: 'success',
-                        name: users[0].name,
-                        address: users[0].address,
-                        phone: users[0].phonenumber,
-                        role: 0,
-                    })
-                }
-                else {
-                    Employee.find({username: req.body.username, password: req.body.password})
-                    .then(employees => {
-                        employees = Convert.cvDataToObjects(employees);
-                        if(employees.length > 0){
-                            console.log('employee');
-                            console.log(employees[0]);
-                            req.session.role = employees[0].role;
-                            res.json({
-                                status: 'success',
-                                name: employees[0].name,
-                                address: employees[0].address,
-                                phone: employees[0].phonenumber,
-                                role: employees[0].role,
-                            })
-                        }
-                        else{
-
-                        }
-                    })
-                }
-            })
+    async login(req, res, next) {
+        let data = {
+            username : req.body.username,
+            password : req.body.password,
+        };
+        let result = {};
+        await Employee.login(data, result);
+        if(result.status == 'fail'){
+            console.log('try cus');
+            await Customer.login(data, result);
+        }
+        console.log(result);
+        req.session.role = result.role;
+        res.json(result);
     }
 
     logout(req, res, next){
@@ -211,12 +145,22 @@ class SiteController {
         })
     }
 
+    async order(req, res, next){
+        let result = {};
+        let data = {
+            customer_id : req.body.customer_id,
+            order : req.body.order,
+            totalprice : req.body.totalprice
+        }
+        await Order.create(data, result);
+        res.json(result);
+    }
+
     denied(req, res, next) {
         res.status(403).render('403');
     }
 
     notfound(req, res, next) {
-        console.log('not found');
         res.status(404).render('404');
     }
 }

@@ -2,11 +2,11 @@
     <div >
         <div class="category-banner">
             <div >
-                <img src="{{Banner}}">
+                <img src="{{data.Banner}}">
             </div>
             <div class="category-detail">
                 <h1>
-                    {{Title}}
+                    {{data.Title}}
                 </h1>
                 <p>
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.<br>
@@ -23,8 +23,8 @@
         Product
     </h1>
     <div class="product-container">
-        {{#each products}}
-        <div class="product-card">
+        {{#each data.products}}
+        <div class="product-card" pid = "{{this._id}}">
             <div class="product-img">
                 <img src="{{this.image}}">
             </div>
@@ -43,7 +43,7 @@
     <div class="line"></div>
     <div class="container-category">
         <div class="brand-slider">
-            {{#each suppliers}}
+            {{#each data.suppliers}}
             <div class="product-brand">
                 <img src="{{this.image}}">
             </div>

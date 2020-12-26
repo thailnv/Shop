@@ -3,7 +3,7 @@
         <div class="income-container">
             <div class="income-detail">
                 <div class="income-detail-value">
-                    370
+                    {{data.customers.length}}
                 </div>
                 <div class="income-detail-name">
                     CUSTOMERS
@@ -19,7 +19,7 @@
             </div>
             <div class="income-detail">
                 <div class="income-detail-value">
-                    {{nItem}}
+                    {{data.products.length}}
                 </div>
                 <div class="income-detail-name">
                     SHOP ITEMS
@@ -98,7 +98,7 @@
                     <div class="input-container">
                         <label for="supplier">Supplier:</label><br>
                         <select name="supplier" id="supplier">
-                            {{#each suppliers}}
+                            {{#each data.suppliers}}
                             <option value="{{this.id}}">{{this.name}}</option>
                             {{/each}}
                         </select><br>
@@ -120,6 +120,7 @@
                         <input type="button" class="submit-btn" id="product-submit" value="Add Product">
                         <input type="button" class="reset-btn" value="Clear">
                     </div>
+                    <a style="display: none;" id="link" download=""></a>
                 </form>
             </div>
             <div class="product-status">
@@ -226,18 +227,26 @@
                             <th class="action-field">
                             </th>
                         </tr>
-                        {{#each products}}
-                        <tr class="product-data" link="{{this.image}}" number="{{this.number}}"
+                        {{#each data.products}}
+                        <tr class="product-data"1 status="{{this.status}}" link="{{this.image}}" number="{{this.number}}" pid="{{this._id}}"
                             supplier="{{this.supplier}}" status="{{this.status}}">
                             <td class="pinfoid">{{this.id}}</td>
                             <td class="pinfoname">{{this.name}}</td>
                             <td class="pinfotype">{{this.type}}</td>
                             <td class="pinfoprice">{{this.price}}</td>
-                            <td>
-                                <div class="instock status">
-                                    In stock
-                                </div>
+                            <td class="pinfostatus">
                             </td>
+                                <script>
+                                    if({{this.status}} == 1){
+                                        document.querySelectorAll('.pinfostatus')[{{this.id}} - 1].innerHTML =
+                                        '<div class="instock status">In stock</div>'}
+                                    else if({{this.status}} == 2){
+                                        document.querySelectorAll('.pinfostatus')[{{this.id}} - 1].innerHTML =
+                                        '<div class="outstock status">Out of stock</div>'}
+                                    else if({{this.status}} == 3){
+                                        document.querySelectorAll('.pinfostatus')[{{this.id}} - 1].innerHTML =
+                                        '<div class="suspension status">Suspension</div>'}
+                                </script>
                             <td>
                                 <div class="action">
                                     <button class="action-btn btn-edit">
@@ -275,7 +284,7 @@
                     <label for="simage">Image:</label>
                     <input type="file" name="simage" id="simage"><br>
                     <div style="margin-top: 0.6rem; display: flex; justify-content:space-between;">
-                        <input type="button" class="submit-btn" id="supplier-submit" value="Add Product">
+                        <input type="button" class="submit-btn" id="supplier-submit" value="Add Supplier">
                         <input type="button" class="reset-btn" value="Clear">
                     </div>
                 </form>
@@ -368,7 +377,7 @@
                             <th class="action-field">
                             </th>
                         </tr>
-                        {{#each suppliers}}
+                        {{#each data.suppliers}}
                         <tr class="supplier-data" link="{{this.image}}">
                             <td class="sinfoid">{{this.id}}</td>
                             <td class="sinfoname">{{this.name}}</td>
@@ -427,7 +436,7 @@
                         <p class="wrong-input-message">Please enter default password!</p>
                     </div>
                     <div style="margin-top: 0.6rem; display: flex; justify-content:space-between;">
-                        <input type="button" class="submit-btn" id="staff-submit" value="Add Product">
+                        <input type="button" class="submit-btn" id="staff-submit" value="Add Staff">
                         <input type="button" class="reset-btn" value="Clear">
                     </div>
                 </form>
@@ -465,7 +474,7 @@
                         <th class="type-field">
                             <div class="table-header">
                                 <div>
-                                    Type
+                                    Role
                                 </div>
                                 <div>
                                     <button class="sort-btn">
@@ -536,12 +545,13 @@
                             <th class="action-field">
                             </th>
                         </tr>
-                        <tr class="supplier-data" link="{{this.image}}">
-                            <td class="infoid">NV01</td>
-                            <td class="infoname">Mosh Hamedani</td>
-                            <td class="infotype">Teacher</td>
-                            <td class="infopnumber">0139281312</td>
-                            <td class="infostatus">Working</td>
+                        {{#each data.employees}}
+                        <tr class="staff-data" pid = "{{this.personalID}}" role="{{this.role}}" status = "{{this.status}}">
+                            <td class="infoid">{{this.id}}</td>
+                            <td class="infoname">{{this.name}}</td>
+                            <td class="infotype"></td>
+                            <td class="infopnumber">{{this.phonenumber}}</td>
+                            <td class="infostatus"></td>
                             <td>
                                 <div class="action">
                                     <button class="action-btn btn-edit">
@@ -549,7 +559,37 @@
                                     </button>
                                 </div>
                             </td>
+                            <script>
+                                switch ({{this.role}}){
+                                    case 0: 
+                                        document.querySelectorAll('.infotype')[{{this.id}} - 1].textContent = 'Admin';
+                                        break;
+                                    case 1:
+                                        document.querySelectorAll('.infotype')[{{this.id}} - 1].textContent = 'Sale';
+                                        break;
+                                    case 2: 
+                                        document.querySelectorAll('.infotype')[{{this.id}} - 1].textContent = 'Technical';
+                                        break;
+                                    case 3:
+                                        document.querySelectorAll('.infotype')[{{this.id}} - 1].textContent = 'Delivery';
+                                        break;
+                                }
+                                if({{this.role}}==0){
+                                    document.querySelectorAll('.staff-data .infostatus')[{{this.id}} - 1].innerHTML =
+                                        '<div class="working status">Working</div>'}
+                                else{
+                                    document.querySelectorAll('.staff-data .infostatus')[{{this.id}} - 1].innerHTML =
+                                        '<div class="quit status">Quit</div>'}  
+
+                                if({{this.status}}==1){
+                                    document.querySelectorAll('.staff-data .infostatus')[{{this.id}} - 1].innerHTML =
+                                        '<div class="working status">Working</div>'}
+                                else{
+                                    document.querySelectorAll('.staff-data .infostatus')[{{this.id}} - 1].innerHTML =
+                                        '<div class="quit status">Quit</div>'}                                
+                            </script>
                         </tr>
+                        {{/each}}
                     </table>
                 </div>
             </div>
@@ -630,7 +670,7 @@
                         <th class="staffid-field">
                             <div class="table-header">
                                 <div>
-                                    Staff ID
+                                    Note
                                 </div>
                                 <div>
                                     <button class="sort-btn">
@@ -674,7 +714,7 @@
                             <td class="infodate">2020-12-1</td>
                             <td class="infotprice">12704</td>
                             <td class="infostatus">Paid</td>
-                            <td class="infostaffid">NV01</td>
+                            <td class="infostaffid"></td>
                             <td>
                                 <div class="action">
                                     <button class="action-btn btn-edit">
@@ -938,7 +978,7 @@
         </div>
     </div>
 </div>
-<div class="edit-product-popup">
+<div class="edit-product-popup" pid="1">
     <div class="edit-product-form">
         <div class="edit-form-image">
             <span class="helper"></span>
@@ -979,7 +1019,7 @@
                     </div>
                     <label for="pesupplier">Supplier:</label><br>
                     <select name="pesupplier" id="pesupplier">
-                        {{#each suppliers}}
+                        {{#each data.suppliers}}
                         <option value="{{this.id}}">{{this.name}}</option>
                         {{/each}}
                     </select><br>
@@ -991,13 +1031,13 @@
                     <input type="number" min="0" id="pediscount" value="0" name="pediscount"><br>
                     <label for="pestatus">Status:</label><br>
                     <input type="number" min="0" id="pestatus" name="pestatus" value="5"><br>
-                    <input type="button" class="submit-edit-btn" value="Submit">
+                    <input type="button" class="submit-edit-btn edit-product-submit" value="Submit">
                 </form>
             </div>
         </div>
     </div>
 </div>
-<div class="edit-supplier-popup">
+<div class="edit-supplier-popup" sid = "1">
     <div class="edit-supplier-form">
         <div class="edit-form-image">
             <img src="/img/logo_161.png">
@@ -1012,7 +1052,40 @@
                     <input type="text" id="seaddress" name="seaddress"><br>
                     <label for="sepnumber">Phone number:</label><br>
                     <input type="number" id="sepnumber" name="sepnumber"><br>
-                    <input type="submit" class="submit-edit-btn" value="Submit">
+                    <input type="submit" class="submit-edit-btn edit-supplier-submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="edit-staff-popup" stid="1">
+    <div class="edit-staff-form">
+        <div class="edit-form-image">
+            <span class="helper"></span>
+            <img src="/img/brand.png">
+        </div>
+        <div class="edit-form-input">
+            <div class="edit-staff-container">
+                <button class="close-edit-btn">X</button>
+                <form method="POST">
+                    <label for="stename">Staff name:</label><br>
+                    <input type="text" id="stename" name="pename"><br>
+                    <label for="stepid">Personal ID:</label><br>
+                    <input type="number" id="stepid" name="stepid"><br>
+                    <label for="stepnumber">Phone number:</label><br>
+                    <input type="number" id="stepnumber" name="stepnumber"><br>
+                    <label for="sterole">Role:</label><br>
+                    <select name="sterole" id="sterole">
+                        <option value="1">Sale</option>
+                        <option value="2">Technical</option>
+                        <option value="3">Delivery</option>
+                    </select><br>
+                    <label for="stestatus">Status:</label><br>
+                    <select name="stestatus" id="stestatus">
+                        <option value="1">Working</option>
+                        <option value="2">Quit</option>
+                    </select><br>
+                    <input type="button" class="submit-edit-btn edit-staff-submit" value="Submit">
                 </form>
             </div>
         </div>
@@ -1036,7 +1109,7 @@
     <button class="setting-option">Report</button>
 </div>
 <script>
-    { {#each products } }
-    console.log("{{this.name}}");
-    { { /each}}
+    //#each data.allEmp 
+    //console.log("{{this.name}}");
+    ///each
 </script>

@@ -4,65 +4,42 @@ const Supplier = require('../models/Supplier');
 class ProductsController{
     
     // [GET] /products
-    index(req , res, next){
-        Product.find({}).then(products=>{
-            products = Convert.cvDataToObjects(products);
-            res.render('products', {products});
-        }).catch(next);
+    async index(req , res, next){
+        let data = {};
+        await Product.findAll(data);
+        res.render('products', {data});
     }
     
-    //[GET] /products/...
-    chair(req, res, next){
-        var Title = 'Chair & Sofa';
-        Supplier.find({}).then(suppliers=>{
-            suppliers = Convert.cvDataToObjects(suppliers);
-            Product.find({type:1})
-            .then(products => {
-                products = Convert.cvDataToObjects(products);
-                var Banner = products[products.length - 1].image;
-                res.render('category', { Banner, Title, suppliers, products});
-            })
-            .catch(next);
-        }).catch(next);
+    async chair(req, res, next){
+        let data = {};
+        data.Title = 'Chair & Sofa';
+        await Product.findByType(1, data);
+        await Supplier.findAll(data);
+        res.render('category', {data});
     }
-    table(req, res, next){
-        var Title = 'Table';
-        Supplier.find({}).then(suppliers=>{
-            suppliers = Convert.cvDataToObjects(suppliers);
-            Product.find({type:2})
-            .then(products => {
-                products = Convert.cvDataToObjects(products);
-                var Banner = products[products.length - 1].image;
-                res.render('category', { Banner, Title, suppliers, products});
-            })
-            .catch(next);
-        }).catch(next);
+
+    async table(req, res, next){
+        let data = {};
+        data.Title = 'Table';
+        await Product.findByType(2, data);
+        await Supplier.findAll(data);
+        res.render('category', {data});
     }
-    decor(req, res, next){
-        var Title = 'Decoration';
-        Supplier.find({}).then(suppliers=>{
-            suppliers = Convert.cvDataToObjects(suppliers);
-            Product.find({type:3})
-            .then(products => {
-                products = Convert.cvDataToObjects(products);
-                var Banner = products[products.length - 1].image;
-                res.render('category', { Banner, Title, suppliers, products});
-            })
-            .catch(next);
-        }).catch(next);
+
+    async decor(req, res, next){
+        let data = {};
+        data.Title = 'Decoration';
+        await Product.findByType(3, data);
+        await Supplier.findAll(data);
+        res.render('category', {data});
     }
-    bed(req, res, next){
-        var Title = 'Bed';
-        Supplier.find({}).then(suppliers=>{
-            suppliers = Convert.cvDataToObjects(suppliers);
-            Product.find({type:4})
-            .then(products => {
-                products = Convert.cvDataToObjects(products);
-                var Banner = products[products.length - 1].image;
-                res.render('category', { Banner, Title, suppliers, products});
-            })
-            .catch(next);
-        }).catch(next);
+
+    async bed(req, res, next){
+        let data = {};
+        data.Title = 'Bed';
+        await Product.findByType(4, data);
+        await Supplier.findAll(data);
+        res.render('category', {data});
     }
 }
 

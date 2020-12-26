@@ -109,8 +109,8 @@
   </div>
   <div class="third-slider">
   <div class="third-carousel">
-    {{#each lstBestSeller}}
-    <div class="product-card">
+    {{#each data.lstBestSeller}}
+    <div class="product-card" pid="{{this._id}}">
       <div class="product-img">
         <img src="{{this.image}}">
       </div>
@@ -142,7 +142,7 @@
   <div class="fourth-slider">
     <div class="slider-info">
       <div class="slider-info-img">
-        {{#each lstNewArrivals}}
+        {{#each data.lstNewArrivals}}
           <img src="{{this.image}}">
         {{/each}}
       </div>
@@ -162,7 +162,7 @@
       </div>
     </div>
     <div class="slider-nav">
-      {{#each lstNewArrivals}}
+      {{#each data.lstNewArrivals}}
         <div class="fourth-slider-card">
           <div class="fourth-slider-img">
             <img src="{{this.image}}">

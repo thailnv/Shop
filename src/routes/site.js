@@ -20,6 +20,8 @@ router.post('/api/login', siteController.login);
 
 router.post('/api/logout', siteController.logout);
 
+router.post('/api/order', siteController.order);
+
 router.get('/',siteController.index);
 
 router.get('*',siteController.notfound);

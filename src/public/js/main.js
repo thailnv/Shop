@@ -1,4 +1,3 @@
-
 //slick slider
 $('.second-carousel').slick({
   slidesToShow: 5,
@@ -44,6 +43,13 @@ $('.slider-nav').slick({
 const lstType = ['Chair', 'Table', 'Decor', 'Bed'];
 const lstSupplier = ['Chair', 'Table', 'Decor', 'Bed'];
 
+function displayMessage(msg){
+  let message = document.querySelector('.message-popup');
+  message.style.display = 'block';
+  message.querySelector('.waiting').style.display = 'none';
+  message.querySelector('.message').style.display = 'block';
+  message.querySelector('.message .content').textContent = msg;
+}
 
 function prepareAdmin() {
   document.querySelector('.cart').style.display = 'none';
@@ -135,6 +141,7 @@ function manageProduct() {
     product.querySelector('.pinfotype').textContent = typename;
     product.querySelector('.btn-edit').addEventListener('click', () => {
       edit_popup.style.display = 'block';
+      edit_popup.setAttribute('pid', lst_product[i].getAttribute('pid'));
       edit_form.classList.add('show');
       edit_form_name.value = product.querySelector('.pinfoname').textContent;
       edit_form_price.value = product.querySelector('.pinfoprice').textContent;
@@ -188,21 +195,59 @@ function manageSupplier() {
   })
 }
 
+function manageStaff() {
+  let lst_staff = document.querySelectorAll('.staff-data');
+  let edit_popup = document.querySelector('.edit-staff-popup');
+  let edit_form = document.querySelector('.edit-staff-form');
+  let edit_form_img = edit_form.querySelector('.edit-form-image img');
+  let edit_form_name = edit_form.querySelector('#stename');
+  let edit_form_pid = edit_form.querySelector('#stepid');
+  let edit_form_pnumber = edit_form.querySelector('#stepnumber');
+  let edit_form_role = edit_form.querySelector('#sterole');
+  let edit_form_status = edit_form.querySelector('#stestatus');
+  let close_edit_btn = edit_popup.querySelector('.close-edit-btn');
+  for (let i = 0; i < lst_staff.length; i++) {
+    let staff = lst_staff[i];
+    staff.querySelector('.btn-edit').addEventListener('click', () => {
+      edit_popup.style.display = 'block';
+      edit_form.classList.add('show');
+      edit_form_name.value = staff.querySelector('.infoname').textContent;
+      edit_form_pnumber.value = staff.querySelector('.infopnumber').textContent;
+      edit_form_pid.value = staff.getAttribute('pid');
+      edit_form_role[parseInt(staff.getAttribute('role') - 1)].selected = true;
+      edit_form_status[parseInt(staff.getAttribute('status') - 1)].selected = true;
+    })
+  }
+  close_edit_btn.addEventListener('click', () => {
+    edit_form.classList.remove('show');
+    edit_form.classList.add('hide');
+  });
+  edit_form.addEventListener('animationend', () => {
+    if (edit_form.classList.contains('hide')) {
+      edit_form.classList.remove('hide');
+      edit_popup.style.display = 'none';
+    }
+  })
+}
+
 function createLoginFunction() {
   let login_btn = document.querySelector('#login-btn');
   let close_btn = document.querySelector('#close-login-btn');
   let login_popup = document.querySelector('.login-popup');
   let login_form = document.querySelector('.login-form');
   let logout_btn = document.querySelector('.logout-btn');
+
   login_btn.addEventListener('click', () => {
     login_popup.style.display = 'block';
     login_form.classList.remove('hide');
     login_form.classList.add('show');
   })
+
   close_btn.addEventListener('click', () => {
     login_popup.classList.remove('show');
     login_form.classList.add('hide');
   })
+
   login_form.addEventListener('animationend', () => {
     if (login_form.classList.contains('hide')) {
       login_form.classList.remove('hide');
@@ -236,6 +281,7 @@ function createLoginFunction() {
       }
     }
   })
+
   logout_btn.onclick = () => {
     fetch('/api/logout', {
       method: 'POST',
@@ -273,11 +319,14 @@ function createCartItemFunction() {
 }
 
 function createCartFunction() {
+
   let cart_popup = document.querySelector('.cart-popup');
   let cart_form = document.querySelector('.cart-form');
   let cart_btn = document.querySelector('#cart-btn-2');
   let cart_action = document.querySelector('.cart-action');
   let checkout_btn = cart_form.querySelector('#checkout-btn');
+  let order_btn = document.getElementById('order-btn');
+
   cart_btn.addEventListener('click', () => {
     createCart();
     createCartItemFunction();
@@ -285,13 +334,58 @@ function createCartFunction() {
     cart_action.classList.remove('cart-hide-item');
     cart_action.classList.add('cart-show-item');
   })
+
   checkout_btn.onclick = () => {
     calcTotalPrice();
     cart_action.classList.remove('cart-show-item');
     cart_action.classList.add('cart-show-checkout');
     document.querySelector('.checkout-form .provisional-cost').textContent =
       cart_form.querySelector('.cart-total .total-price').textContent;
+    if (localStorage.getItem('account_info') != null) {
+      let customer_info = JSON.parse(localStorage.getItem('account_info'));
+      document.getElementById('cusname').value = customer_info.name;
+      if (customer_info.role == 4) {
+        document.getElementById('cusaddress').value = customer_info.address;
+        document.getElementById('cusphone').value = customer_info.phone;
+      }
+    }
   }
+
+  order_btn.onclick = () => {
+    let data = {};
+    if (localStorage.getItem('cart_info') != null) {
+      let cart_info = JSON.parse(localStorage.getItem('cart_info'));
+      data.order = cart_info;
+      data.totalprice = document.querySelector('.cart-checkout .total-cost').textContent.slice(1, 30);
+    }
+    else {
+      data.order = [];
+    }
+    if (localStorage.getItem('account_info') != null) {
+      let account_info = JSON.parse(localStorage.getItem('account_info'));
+      data.customer_id = account_info.id;
+    }
+    else {
+      data.customer_id = 'Unknown'
+    }
+    console.log(JSON.stringify(data));
+    fetch('/api/order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data.status);
+        if (data.status == 'success') {
+          displayMessage('Order successfully!');
+          localStorage.removeItem('cart_info');
+        }
+      })
+  }
+
   window.onclick = (e) => {
     if (e.target == cart_popup) {
       if (cart_action.classList.contains('cart-show-item')) {
@@ -304,6 +398,7 @@ function createCartFunction() {
       }
     }
   }
+
   cart_action.addEventListener('animationend', () => {
     if (cart_action.classList.contains('cart-show-item')) {
       cart_action.classList.add('cart-action-item');
@@ -332,9 +427,11 @@ function createProductFunction() {
       let product_name = product.querySelector('.product-name').textContent.trim();
       let product_img = product.querySelector('.product-img img').src.replace('http://localhost:3000', '');
       let product_price = product.querySelector('.product-price').textContent.replace('$', '').trim();
+      let product_id = product.getAttribute('pid');
       let cart_info = [];
       if (localStorage.getItem('cart_info') === null) {
         let product_info = {
+          id: product_id,
           name: product_name,
           price: parseInt(product_price),
           img: product_img,
@@ -346,6 +443,7 @@ function createProductFunction() {
       else {
         cart_info = JSON.parse(localStorage.getItem('cart_info'));
         let product_info = {
+          id: product_id,
           name: product_name,
           price: parseInt(product_price),
           img: product_img,
@@ -371,9 +469,30 @@ document.querySelector('.message-popup .next-btn').onclick = () => {
   location.reload();
 }
 
-function createProduct() {
+async function uploadimage(img, result) {
+  var form = new FormData();
+  form.append('image', img);
+  let key = '92bd8c2c76657d6c7d7dd0eb1e7dc4d0';
+  let url = `https://api.imgbb.com/1/upload?key=${key}`;
+  let config = {
+    method: 'POST',
+    header: {
+      'processData': false,
+      'mimeType': 'multipart/form-data',
+      'contentType': false,
+    },
+    body: form
+  }
+  await fetch(url, config)
+    .then(response => response.json())
+    .then(data => {
+      result.url = data.data.url;
+    })
+}
+
+async function createProduct() {
   let submit = document.querySelector('#product-submit');
-  submit.onclick = function () {
+  submit.onclick = async function () {
     let product = document.querySelector('.add-product-form');
     let name = product.querySelector('#pname').value;
     let radios = product.querySelectorAll('input[name = "type"]');
@@ -420,6 +539,12 @@ function createProduct() {
         image,
         number
       }
+      let message = document.querySelector('.message-popup');
+      message.style.display = 'block';
+      message.querySelector('.message').style.display = 'none';
+      message.querySelector('.waiting').style.display = 'block';
+      let img = product.querySelector('#image').files[0];
+      await uploadimage(img, product2Insert);
       console.log(product2Insert);
       fetch('/api/create/product', {
         method: 'POST',
@@ -432,18 +557,18 @@ function createProduct() {
         .then(data => {
           console.log(data.status);
           if (data.status == 'success') {
-            let message = document.querySelector('.message-popup');
-            message.querySelector('.content').textContent = 'Adding product successfully!';
-            message.style.display = 'block';
+            message.querySelector('.waiting').style.display = 'none';
+            message.querySelector('.message').style.display = 'block';
+            message.querySelector('.message .content').textContent = 'Adding product successfully!';
           }
         })
     }
   }
 }
 
-function createSupplier(){
+async function createSupplier() {
   let submit = document.querySelector('#supplier-submit');
-  submit.onclick = function () {
+  submit.onclick = async function () {
     let supplier = document.querySelector('.add-supplier-form');
     let name = supplier.querySelector('#sname').value;
     let address = supplier.querySelector('#saddress').value;
@@ -479,6 +604,12 @@ function createSupplier(){
         phonenumber,
         image
       }
+      let message = document.querySelector('.message-popup');
+      message.style.display = 'block';
+      message.querySelector('.message').style.display = 'none';
+      message.querySelector('.waiting').style.display = 'block';
+      let img = supplier.querySelector('#simage').files[0];
+      await uploadimage(img, supplier2Insert);
       console.log(supplier2Insert);
       fetch('/api/create/supplier', {
         method: 'POST',
@@ -491,16 +622,16 @@ function createSupplier(){
         .then(data => {
           console.log(data.status);
           if (data.status == 'success') {
-            let message = document.querySelector('.message-popup');
-            message.querySelector('.content').textContent = 'Adding supplier successfully!';
-            message.style.display = 'block';
+            message.querySelector('.waiting').style.display = 'none';
+            message.querySelector('.message').style.display = 'block';
+            message.querySelector('.message .content').textContent = 'Adding supplier successfully!';
           }
         })
     }
   }
 }
 
-function createStaff(){
+function createStaff() {
   let submit = document.querySelector('#staff-submit');
   submit.onclick = function () {
     let staff = document.querySelector('.add-staff-form');
@@ -573,7 +704,7 @@ function createStaff(){
 }
 
 function updateProduct() {
-  let submitbtn = document.querySelector('.submit-edit-btn');
+  let submitbtn = document.querySelector('.edit-product-submit');
   let name = document.querySelector('#pename');
   let supplier = document.querySelector('#pesupplier');
   let price = document.querySelector('#peprice');
@@ -584,12 +715,13 @@ function updateProduct() {
   let type = 0;
   submitbtn.onclick = () => {
     for (let i = 0; i < radios.length; i++) {
-      console.log('submit');
       if (radios[i].checked) {
         type = radios[i].value;
       }
     }
+    let id = document.querySelector('.edit-product-popup').getAttribute('pid');
     let upProduct = {
+      id: id,
       name: name.value,
       supplier: supplier.value,
       price: price.value,
@@ -606,6 +738,13 @@ function updateProduct() {
       },
       body: JSON.stringify(upProduct),
     })
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data.status);
+        if (data.status == 'success') {
+          location.reload();
+        }
+      })
   }
 }
 
@@ -805,6 +944,7 @@ window.onbeforeunload = function (e) {
 if (window.location.href === 'http://localhost:3000/admin') {
   prepareAdmin();
   manageProduct();
+  manageStaff();
   manageSupplier();
   createProduct();
   createStaff();
