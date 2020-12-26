@@ -41,6 +41,28 @@ class Employee{
         })
     }
 
+    async update(data, result){
+        console.log(data);
+        await employee.findOne({_id : data._id})
+        .then(async (doc)=>{
+            doc.name = data.name;
+            doc.personalID = data.personalID;
+            doc.phonenumber = data.pnumber;
+            doc.role = data.role;
+            doc.status = data.status;
+            await doc.save()
+            .then(()=>{
+                result.status = 'success';
+            })
+            .catch(()=>{
+                result.status = 'fail';
+            })
+        })
+        .catch(()=>{
+            result.status = 'fail';
+        })
+    }
+
     async login(data, result){
         console.log(data);
         await employee.find({ username: data.username, password: data.password })

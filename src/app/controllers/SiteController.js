@@ -92,6 +92,19 @@ class SiteController {
         res.json(result);
     }
 
+    async updateSupplier(req, res, next){
+        console.log(req.body);
+        let data = {
+            _id : req.body.id,
+            name : req.body.name,
+            address : req.body.address,
+            pnumber : req.body.pnumber
+        }
+        let result = {};
+        await Supplier.update(data, result);
+        res.json(result);
+    }
+
     async createStaff(req, res, next){
         let staff = {
             name : req.body.name,
@@ -104,6 +117,20 @@ class SiteController {
         let result = {};
         await Employee.create(staff, result);
         console.log(result);
+        res.json(result);
+    }
+
+    async updateStaff(req, res, next){
+        let data = {
+            _id : req.body.id,
+            name : req.body.name,
+            personalID : req.body.personalID,
+            pnumber : req.body.pnumber,
+            role : req.body.role,
+            status : req.body.status
+        }
+        let result = {};
+        await Employee.update(data, result);
         res.json(result);
     }
 
@@ -129,7 +156,6 @@ class SiteController {
         let result = {};
         await Employee.login(data, result);
         if(result.status == 'fail'){
-            console.log('try cus');
             await Customer.login(data, result);
         }
         console.log(result);

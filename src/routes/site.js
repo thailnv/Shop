@@ -12,7 +12,9 @@ router.post('/api/create/staff', siteController.createStaff);
 
 router.post('/api/update/product', siteController.updateProduct);
 
-router.post('/api/update/supplier', siteController.updateProduct);
+router.post('/api/update/supplier', siteController.updateSupplier);
+
+router.post('/api/update/staff', siteController.updateStaff);
 
 router.post('/api/register', siteController.createCustomer);
 

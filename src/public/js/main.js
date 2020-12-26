@@ -131,6 +131,7 @@ function manageProduct() {
   let edit_form_name = edit_form.querySelector('#pename');
   let edit_form_img = edit_form.querySelector('.edit-form-image img');
   let edit_form_price = edit_form.querySelector('#peprice');
+  let edit_form_discount = edit_form.querySelector('#pediscount');
   let edit_form_number = edit_form.querySelector('#penumber');
   let edit_form_supplier = edit_form.querySelectorAll('#pesupplier option');
   let close_edit_btn = edit_popup.querySelector('.close-edit-btn');
@@ -146,6 +147,7 @@ function manageProduct() {
       edit_form_name.value = product.querySelector('.pinfoname').textContent;
       edit_form_price.value = product.querySelector('.pinfoprice').textContent;
       edit_form_number.value = product.getAttribute('number');
+      edit_form_discount.value = product.getAttribute('discount');
       edit_form_img.src = product.getAttribute('link');
       edit_form_supplier[parseInt(product.getAttribute('supplier') - 1)].selected = true;
       edit_form.querySelector(`#petype${typename.toLowerCase()}`).checked = true;
@@ -177,6 +179,7 @@ function manageSupplier() {
     supplier.querySelector('.btn-edit').addEventListener('click', () => {
       edit_popup.style.display = 'block';
       edit_form.classList.add('show');
+      edit_popup.setAttribute('sid', supplier.getAttribute('sid'));
       edit_form_name.value = supplier.querySelector('.sinfoname').textContent;
       edit_form_address.value = supplier.querySelector('.sinfoaddress').textContent;
       edit_form_pnumber.value = supplier.querySelector('.sinfopnumber').textContent;
@@ -199,7 +202,6 @@ function manageStaff() {
   let lst_staff = document.querySelectorAll('.staff-data');
   let edit_popup = document.querySelector('.edit-staff-popup');
   let edit_form = document.querySelector('.edit-staff-form');
-  let edit_form_img = edit_form.querySelector('.edit-form-image img');
   let edit_form_name = edit_form.querySelector('#stename');
   let edit_form_pid = edit_form.querySelector('#stepid');
   let edit_form_pnumber = edit_form.querySelector('#stepnumber');
@@ -214,6 +216,7 @@ function manageStaff() {
       edit_form_name.value = staff.querySelector('.infoname').textContent;
       edit_form_pnumber.value = staff.querySelector('.infopnumber').textContent;
       edit_form_pid.value = staff.getAttribute('pid');
+      edit_popup.setAttribute('stid', staff.getAttribute('stid'));
       edit_form_role[parseInt(staff.getAttribute('role') - 1)].selected = true;
       edit_form_status[parseInt(staff.getAttribute('status') - 1)].selected = true;
     })
@@ -748,6 +751,70 @@ function updateProduct() {
   }
 }
 
+function updateSupplier() {
+  let submitbtn = document.querySelector('.edit-supplier-submit');
+  let name = document.getElementById('sename');
+  let address = document.getElementById('seaddress');
+  let pnumber = document.getElementById('sepnumber');
+  submitbtn.onclick = () => {
+    let id = document.querySelector('.edit-supplier-popup').getAttribute('sid');
+    let upSupplier = {
+      id: id,
+      name: name.value,
+      address: address.value,
+      pnumber: pnumber.value,
+    }
+    fetch('/api/update/supplier', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(upSupplier),
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data.status);
+        if (data.status == 'success') {
+          location.reload();
+        }
+      })
+  }
+}
+
+function updateStaff(){
+  let submitbtn = document.querySelector('.edit-staff-submit');
+  let name = document.getElementById('stename');
+  let personalID = document.getElementById('stepid');
+  let pnumber = document.getElementById('stepnumber');
+  let role = document.getElementById('sterole');
+  let status = document.getElementById('stestatus');
+  submitbtn.onclick = () => {
+    let id = document.querySelector('.edit-staff-popup').getAttribute('stid');
+    let upStaff = {
+      id: id,
+      name: name.value,
+      personalID: personalID.value,
+      pnumber: pnumber.value,
+      role: role.value,
+      status: status.value
+    }
+    fetch('/api/update/staff', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(upStaff),
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data.status);
+        if (data.status == 'success') {
+          location.reload();
+        }
+      })
+  }
+}
+
 function register() {
   let signupbtn = document.querySelector('.sign-up #signup-btn');
   let name = document.getElementById('uName');
@@ -950,6 +1017,8 @@ if (window.location.href === 'http://localhost:3000/admin') {
   createStaff();
   createSupplier();
   updateProduct();
+  updateSupplier();
+  updateStaff();
 }
 else {
   prepareNormal();

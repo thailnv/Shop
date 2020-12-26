@@ -37,6 +37,25 @@ class Supplier {
             result.err = err;
         })
     }
+
+    async update(data, result){
+        await supplier.findOne({_id : data._id})
+        .then(async (doc)=>{
+            doc.name = data.name;
+            doc.address = data.address;
+            doc.phonenumber = data.pnumber;
+            await doc.save()
+            .then(()=>{
+                result.status = 'success';
+            })
+            .catch(()=>{
+                result.status = 'fail';
+            })
+        })
+        .catch(()=>{
+            result.status = 'fail';
+        })
+    }
 }
 
 module.exports = new Supplier;

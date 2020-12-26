@@ -228,7 +228,8 @@
                             </th>
                         </tr>
                         {{#each data.products}}
-                        <tr class="product-data"1 status="{{this.status}}" link="{{this.image}}" number="{{this.number}}" pid="{{this._id}}"
+                        <tr class="product-data"1 status="{{this.status}}" link="{{this.image}}" number="{{this.number}}" 
+                        discount="{{this.discount}}" pid="{{this._id}}"
                             supplier="{{this.supplier}}" status="{{this.status}}">
                             <td class="pinfoid">{{this.id}}</td>
                             <td class="pinfoname">{{this.name}}</td>
@@ -378,7 +379,7 @@
                             </th>
                         </tr>
                         {{#each data.suppliers}}
-                        <tr class="supplier-data" link="{{this.image}}">
+                        <tr class="supplier-data" link="{{this.image}}" sid="{{this._id}}">
                             <td class="sinfoid">{{this.id}}</td>
                             <td class="sinfoname">{{this.name}}</td>
                             <td class="sinfoaddress">{{this.address}}</td>
@@ -546,7 +547,7 @@
                             </th>
                         </tr>
                         {{#each data.employees}}
-                        <tr class="staff-data" pid = "{{this.personalID}}" role="{{this.role}}" status = "{{this.status}}">
+                        <tr class="staff-data" stid="{{this._id}}" pid = "{{this.personalID}}" role="{{this.role}}" status = "{{this.status}}">
                             <td class="infoid">{{this.id}}</td>
                             <td class="infoname">{{this.name}}</td>
                             <td class="infotype"></td>
@@ -1030,7 +1031,11 @@
                     <label for="pediscount">Discount:</label><br>
                     <input type="number" min="0" id="pediscount" value="0" name="pediscount"><br>
                     <label for="pestatus">Status:</label><br>
-                    <input type="number" min="0" id="pestatus" name="pestatus" value="5"><br>
+                    <select name="pestatus" id="pestatus">
+                        <option value="1">In stock</option>
+                        <option value="2">Out of stock</option>
+                        <option value="3">Suspension</option>
+                    </select><br>
                     <input type="button" class="submit-edit-btn edit-product-submit" value="Submit">
                 </form>
             </div>
@@ -1052,7 +1057,7 @@
                     <input type="text" id="seaddress" name="seaddress"><br>
                     <label for="sepnumber">Phone number:</label><br>
                     <input type="number" id="sepnumber" name="sepnumber"><br>
-                    <input type="submit" class="submit-edit-btn edit-supplier-submit" value="Submit">
+                    <input type="button" class="submit-edit-btn edit-supplier-submit" value="Submit">
                 </form>
             </div>
         </div>

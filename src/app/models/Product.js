@@ -101,6 +101,16 @@ class Product {
             result.status = 'fail';
         })
     }
+
+    async order(id, number){
+        await product.findOne({_id : id})
+        .then(async (doc)=>{
+            doc.number = doc.number - number;
+            doc.order  = doc.orderTime + 1;
+            await doc.save();
+            console.log(`order product ${doc._id}`);
+        })
+    }
 }
 
 module.exports = new Product;
