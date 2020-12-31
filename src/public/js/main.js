@@ -38,21 +38,16 @@ $('.slider-nav').slick({
     focusOnSelect: true,
     arrows: false,
 })
+
 $(document).ready(function() {
     $('.navbar-collapse').click(() => {
         $(".search-product").css('display', 'block');
     });
-    $('.search-product-button').click(() => {
-        let temp = 'product/name=' + $(".search-product-text").val();
-        $(".search-product").attr('action', temp);
-        $(".search-product-text").val("");
-
-    });
+    
 });
 
 //function & base define
 const lstType = ['Chair', 'Table', 'Decor', 'Bed'];
-const lstSupplier = ['Chair', 'Table', 'Decor', 'Bed'];
 
 function displayMessage(msg) {
     let message = document.querySelector('.message-popup');
@@ -426,6 +421,11 @@ function createCartFunction() {
             cart_popup.style.display = 'none';
         }
     })
+}
+
+document.querySelector('.search-product-button').onclick = () => {
+    let value = document.querySelector(".search-product-text").value; 
+    location.href ='http://' + window.location.hostname + ':' + window.location.port + `/products/search/${value}`;
 }
 
 function createProductFunction() {

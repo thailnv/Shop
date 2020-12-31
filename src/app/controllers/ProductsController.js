@@ -45,9 +45,7 @@ class ProductsController {
 
     async search(req, res, next) {
         let data = {};
-        data.Title = 'Name';
-        await Product.findByName(param.name, data);
-        await Supplier.findAll(data);
+        await Product.findByName(req.params.name, data);
         res.render('products', { data });
     }
 }

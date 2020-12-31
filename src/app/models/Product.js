@@ -31,14 +31,14 @@ class Product {
             })
     }
 
-    async findByName(ptype, data) {
-        await product.find({ name: ptype })
+    async findByName(pname, data) {
+        await product.find({ 'name': {'$regex': pname } })
             .then((products) => {
                 products = Convert.cvDataToObjects(products);
                 data.products = products;
-                data.Banner = products[products.length - 1].image;
             })
-            .catch(() => {
+            .catch((error) => {
+                console.log(error);
                 data.products = [];
                 console.log('[ERROR] Get product fail');
             })
