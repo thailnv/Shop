@@ -42,6 +42,12 @@ $(document).ready(function() {
     $('.navbar-collapse').click(() => {
         $(".search-product").css('display', 'block');
     });
+    $('.search-product-button').click(() => {
+        let temp = 'product/name=' + $(".search-product-text").val();
+        $(".search-product").attr('action', temp);
+        $(".search-product-text").val("");
+
+    });
 });
 
 //function & base define

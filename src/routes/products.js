@@ -13,4 +13,6 @@ router.get('/bed', productsController.bed);
 
 router.get('/', productsController.index);
 
+router.get('/product/:name', productsController.search)
+
 module.exports = router;
