@@ -709,12 +709,13 @@
                             <th class="staffid-field"></th>
                             <th class="action-field"></th>
                         </tr>
+                        {{#each data.orders}}
                         <tr class="supplier-data" link="{{this.image}}">
-                            <td class="infoid">1</td>
-                            <td class="infoname">Mosh Hamedani</td>
-                            <td class="infodate">2020-12-1</td>
-                            <td class="infotprice">12704</td>
-                            <td class="infostatus">Paid</td>
+                            <td class="infoid">{{this.id}}</td>
+                            <td class="infoname">{{this.customer_name}}</td>
+                            <td class="infodate">{{this.order_date}}</td>
+                            <td class="infotprice">{{this.totalprice}}</td>
+                            <td class="infostatus">{{this.status}}</td>
                             <td class="infostaffid"></td>
                             <td>
                                 <div class="action">
@@ -724,6 +725,7 @@
                                 </div>
                             </td>
                         </tr>
+                        {{/each}}
                     </table>
                 </div>
             </div>
@@ -762,7 +764,7 @@
                         <th class="cid-field">
                             <div class="table-header">
                                 <div>
-                                    Customer ID
+                                    Product Name
                                 </div>
                                 <div>
                                     <button class="sort-btn">
@@ -774,7 +776,7 @@
                         <th class="date-field">
                             <div class="table-header">
                                 <div>
-                                    Date of payment
+                                    Total Price
                                 </div>
                                 <div>
                                     <button class="sort-btn">
@@ -802,7 +804,7 @@
                         <th class="status-field">
                             <div class="table-header">
                                 <div>
-                                    Status
+                                    Month Paid
                                 </div>
                                 <div>
                                     <button class="sort-btn">
@@ -840,13 +842,14 @@
                             <th class="status-field"></th>
                             <th class="action-field"></th>
                         </tr>
-                        <tr class="supplier-data" link="{{this.image}}">
-                            <td class="infoid">1</td>
-                            <td class="infoname">Mosh Hamedani</td>
-                            <td class="infodate">2020-12-1</td>
-                            <td class="infotprice">12704</td>
-                            <td class="infostatus">Paid</td>
-                            <td class="infostaffid">NV01</td>
+                        {{#each data.instals}}
+                        <tr class="instal-data">
+                            <td class="infoid">{{this.id}}</td>
+                            <td class="infoname">{{this.customer_name}}</td>
+                            <td class="infodate">{{this.list_product}}</td>
+                            <td class="infotprice">{{this.totalprice}}</td>
+                            <td class="infostatus">{{this.pay_date}}</td>
+                            <td class="infostaffid">{{this.pay_number}}</td>
                             <td>
                                 <div class="action">
                                     <button class="action-btn btn-edit">
@@ -858,6 +861,7 @@
                                 </div>
                             </td>
                         </tr>
+                        {{/each}}
                     </table>
                 </div>
             </div>
@@ -959,12 +963,13 @@
                             <th class="note-field"></th>
                             <th class="action-field"></th>
                         </tr>
+                        {{#each data.wars}}
                         <tr class="supplier-data" link="{{this.image}}">
-                            <td class="infoid">1</td>
-                            <td class="infoname">Mosh Hamedani</td>
-                            <td class="infoproduct">HR Modern chair</td>
-                            <td class="infodate">2020-12-1</td>
-                            <td class="infotprice">12704</td>
+                            <td class="infoid">{{this.id}}</td>
+                            <td class="infoname">{{this.customer_name}}</td>
+                            <td class="infoproduct">{{this.list_product}}</td>
+                            <td class="infodate">{{this.date_expired}}</td>
+                            <td class="infotprice"></td>
                             <td>
                                 <div class="action">
                                     <button class="action-btn btn-edit">
@@ -973,6 +978,7 @@
                                 </div>
                             </td>
                         </tr>
+                        {{/each}}
                     </table>
                 </div>
             </div>
@@ -1096,6 +1102,7 @@
         </div>
     </div>
 </div>
+
 <div class="setting">
     <button id="setting-btn">
         <i class="fas fa-cog"></i>

@@ -4,6 +4,7 @@ const Convert = require('../../util/mongoose');
 
 const Ord = new Schema({
     customer_id: { type: String, required: true },
+    customer_name:{type: String, required: true},
     totalprice: { type: Number, required: true },
     order_date : {type: Date, default: Date.now()},
     delivery_date : {type: Date, default: Date.now()},
@@ -26,11 +27,12 @@ const orderdetail = mongoose.model('orderdetail', OrdDetail);
 
 class Order {
     async create(data, result){
-        let ord = new order({customer_id : data.customer_id, 
+        let ord = new order({customer_id : data.customer_id,
+                            customer_name: data.customer_name, 
                             totalprice : data.totalprice});
         await ord.save()
         .then((rod)=>{
-            console.log(rod);
+            //console.log(rod);
             let orddetail;
             for(let i = 0 ; i < data.order.length; i++){
                 orddetail = new orderdetail({order_id : rod._id, 
@@ -39,10 +41,12 @@ class Order {
                 orddetail.save();
             }
             result.status = 'success';
+            console.log(result.status);
         })
-        .catch(()=>{
-            console.log('fail');
-            result.status = 'fail';
+        .catch((error)=>{
+            result.status = 'order fail';
+            console.log(error);
+            console.log(result.status);
         })
     }
 

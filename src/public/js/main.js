@@ -233,6 +233,11 @@ function manageStaff() {
   })
 }
 
+// thanh did this
+function manageInstalment(){
+  
+}
+
 function createLoginFunction() {
   let login_btn = document.querySelector('#login-btn');
   let close_btn = document.querySelector('#close-login-btn');
@@ -356,10 +361,31 @@ function createCartFunction() {
 
   order_btn.onclick = () => {
     let data = {};
+    let listProduct = [];
+    // get name item
+    var cartItem = document.getElementById('cartItem');
+    var cartLength = $('.cart-item').children().length;
+    data.checked = false;
+    // check if instalment payment was chosen
+    if(document.getElementById('inspay').checked){
+      data.checked = true;
+    }
+    else if (document.getElementById('otpay').checked) {
+      data.checked = false;
+    }
+    
     if (localStorage.getItem('cart_info') != null) {
       let cart_info = JSON.parse(localStorage.getItem('cart_info'));
       data.order = cart_info;
       data.totalprice = document.querySelector('.cart-checkout .total-cost').textContent.slice(1, 30);
+      for(var i = 1; i <= cartLength * 2 ;i += 2){
+        var item = cartItem.childNodes[i];
+        var itemInfo = item.childNodes[3];
+        var itemNamePrice = itemInfo.childNodes[1];
+        var itemName = itemNamePrice.childNodes[1];
+        listProduct.push(itemName.textContent);
+      }
+      data.list_product = listProduct;
     }
     else {
       data.order = [];
@@ -367,11 +393,13 @@ function createCartFunction() {
     if (localStorage.getItem('account_info') != null) {
       let account_info = JSON.parse(localStorage.getItem('account_info'));
       data.customer_id = account_info.id;
+      data.customer_name = account_info.name;
     }
     else {
       data.customer_id = 'Unknown'
     }
     console.log(JSON.stringify(data));
+
     fetch('/api/order', {
       method: 'POST',
       headers: {
@@ -1002,13 +1030,14 @@ function prepareNormal() {
       JSON.parse(localStorage.getItem('account_info')).name;
   }
 }
+
 //remove localStorage when close tab
 window.onbeforeunload = function (e) {
   window.localStorage.unloadTime = JSON.stringify(new Date());
 }
 
 //admin function - normal function
-if (window.location.href === 'http://localhost:3000/admin') {
+if (window.location.href === 'http://localhost:8000/admin') {
   prepareAdmin();
   manageProduct();
   manageStaff();

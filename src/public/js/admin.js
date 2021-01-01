@@ -65,7 +65,9 @@ function manageSupplier() {
     let close_btn   = popup.querySelector('.close-edit-btn');
     for (let i = 0; i < suppliers.length; i++) {
         let supplier = suppliers[i];
+        console.log(supplier);
         supplier.querySelector('.btn-edit').addEventListener('click', () => {
+            console.log("thanh");
             popup.setAttribute('sid', suppliers[i].getAttribute('sid'));
             form.classList.add('show');
             popup.style.display = 'block';
@@ -124,3 +126,11 @@ function manageStaff() {
     })
   }
 
+function manageBill(){
+    
+}
+
+function manageInstalment(){
+    let instal = document.querySelector('.instal-data');
+    let popup = document.querySelector('.')
+}

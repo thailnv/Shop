@@ -4,6 +4,8 @@ const Convert = require('../../util/mongoose');
 const Supplier = require('../models/Supplier');
 const Employee = require('../models/Employee');
 const Order = require('../models/Order');
+const Instal = require('../models/Instalment');
+const War = require('../models/Warranty');
 const fs = require('fs');
 const fetch = require('node-fetch');
 const path = require('path');
@@ -28,6 +30,9 @@ class SiteController {
             await Product.findAll(data);
             await Supplier.findAll(data);
             await Customer.findAll(data);
+            await Instal.findAll(data);
+            await War.findAll(data);
+            await Order.findAll(data);
             res.render('admin', {data});
         }
     }
@@ -173,12 +178,31 @@ class SiteController {
 
     async order(req, res, next){
         let result = {};
+        let insChecked  = req.body.checked;
         let data = {
             customer_id : req.body.customer_id,
+            customer_name: req.body.customer_name,
             order : req.body.order,
-            totalprice : req.body.totalprice
+            totalprice : req.body.totalprice,
         }
-        await Order.create(data, result);
+        let ins = {
+            customer_id: req.body.customer_id,
+            customer_name: req.body.customer_name,
+            list_product: req.body.list_product,
+            totalprice: req.body.totalprice,
+        }
+
+        if(insChecked){
+            await Instal.create(ins, result);
+            await War.create(ins, result);
+            data.status = 'Pending';
+            await Order.create(data, result);
+        }
+        else {
+            data.status = 'Paid';
+            await War.create(ins, result);
+            await Order.create(data, result);
+        }
         res.json(result);
     }
 
