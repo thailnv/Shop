@@ -6,8 +6,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 const app = express();
-const morgan = require('morgan');
-const port = 8000;
+const port = 3000;
 //auto get index.js 
 const route =  require('./routes/index')
 

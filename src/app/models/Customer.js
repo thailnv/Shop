@@ -65,6 +65,7 @@ class Customer {
             data.customers = [];
         })
     }
+
 }
 
 module.exports = new Customer;

@@ -668,7 +668,7 @@
                                 </div>
                             </div>
                         </th>
-                        <th class="staffid-field">
+                        <th class="note-field">
                             <div class="table-header">
                                 <div>
                                     Note
@@ -712,7 +712,7 @@
                         {{#each data.orders}}
                         <tr class="supplier-data" link="{{this.image}}">
                             <td class="infoid">{{this.id}}</td>
-                            <td class="infoname">{{this.customer_name}}</td>
+                            <td class="infoname">{{this.customer.name}}</td>
                             <td class="infodate">{{this.order_date}}</td>
                             <td class="infotprice">{{this.totalprice}}</td>
                             <td class="infostatus">{{this.status}}</td>

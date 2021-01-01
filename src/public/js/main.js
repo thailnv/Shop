@@ -39,11 +39,11 @@ $('.slider-nav').slick({
     arrows: false,
 })
 
-$(document).ready(function() {
+$(document).ready(function () {
     $('.navbar-collapse').click(() => {
         $(".search-product").css('display', 'block');
     });
-    
+
 });
 
 //function & base define
@@ -97,7 +97,7 @@ function calcTotalPrice() {
   `
 }
 
-function createCartItem(name, img, price, num) {
+function createCartItem(name, img, price, num, max) {
     document.querySelector('.cart-item').innerHTML += `
   <div class="item">
     <div class="item-img">
@@ -108,7 +108,7 @@ function createCartItem(name, img, price, num) {
         <div class="item-name">${name}</div>
         <div class="item-price">$${price}</div>
       </div>
-      <input type="number" class="item-quantity" name="" min="0" value="${num}" id="">
+      <input type="number" class="item-quantity" name="" min="0" max = "${max}" value="${num}" id="">
       <button class="remove-item-btn">
         <i class="far fa-trash-alt"></i>
       </button>
@@ -122,7 +122,7 @@ function createCart() {
         document.querySelector('.cart-item').innerHTML = '';
         let cart_info = JSON.parse(localStorage.getItem('cart_info'));
         for (let i = 0; i < cart_info.length; i++) {
-            createCartItem(cart_info[i].name, cart_info[i].img, cart_info[i].price, cart_info[i].num);
+            createCartItem(cart_info[i].name, cart_info[i].img, cart_info[i].price, cart_info[i].num, cart_info[i].max);
         }
         calcTotalPrice();
     }
@@ -238,8 +238,8 @@ function manageStaff() {
 }
 
 // thanh did this
-function manageInstalment(){
-  
+function manageInstalment() {
+
 }
 
 function createLoginFunction() {
@@ -339,80 +339,6 @@ function createCartFunction() {
     let checkout_btn = cart_form.querySelector('#checkout-btn');
     let order_btn = document.getElementById('order-btn');
 
-<<<<<<< HEAD
-  checkout_btn.onclick = () => {
-    calcTotalPrice();
-    cart_action.classList.remove('cart-show-item');
-    cart_action.classList.add('cart-show-checkout');
-    document.querySelector('.checkout-form .provisional-cost').textContent =
-      cart_form.querySelector('.cart-total .total-price').textContent;
-    if (localStorage.getItem('account_info') != null) {
-      let customer_info = JSON.parse(localStorage.getItem('account_info'));
-      document.getElementById('cusname').value = customer_info.name;
-      if (customer_info.role == 4) {
-        document.getElementById('cusaddress').value = customer_info.address;
-        document.getElementById('cusphone').value = customer_info.phone;
-      }
-    }
-  }
-
-  order_btn.onclick = () => {
-    let data = {};
-    let listProduct = [];
-    // get name item
-    var cartItem = document.getElementById('cartItem');
-    var cartLength = $('.cart-item').children().length;
-    data.checked = false;
-    // check if instalment payment was chosen
-    if(document.getElementById('inspay').checked){
-      data.checked = true;
-    }
-    else if (document.getElementById('otpay').checked) {
-      data.checked = false;
-    }
-    
-    if (localStorage.getItem('cart_info') != null) {
-      let cart_info = JSON.parse(localStorage.getItem('cart_info'));
-      data.order = cart_info;
-      data.totalprice = document.querySelector('.cart-checkout .total-cost').textContent.slice(1, 30);
-      for(var i = 1; i <= cartLength * 2 ;i += 2){
-        var item = cartItem.childNodes[i];
-        var itemInfo = item.childNodes[3];
-        var itemNamePrice = itemInfo.childNodes[1];
-        var itemName = itemNamePrice.childNodes[1];
-        listProduct.push(itemName.textContent);
-      }
-      data.list_product = listProduct;
-    }
-    else {
-      data.order = [];
-    }
-    if (localStorage.getItem('account_info') != null) {
-      let account_info = JSON.parse(localStorage.getItem('account_info'));
-      data.customer_id = account_info.id;
-      data.customer_name = account_info.name;
-    }
-    else {
-      data.customer_id = 'Unknown'
-    }
-    console.log(JSON.stringify(data));
-
-    fetch('/api/order', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-=======
-    cart_btn.addEventListener('click', () => {
-        createCart();
-        createCartItemFunction();
-        cart_popup.style.display = 'block';
-        cart_action.classList.remove('cart-hide-item');
-        cart_action.classList.add('cart-show-item');
->>>>>>> 8113dc2a3e76630dd9a40887c5138369554eaf1f
-    })
-
     checkout_btn.onclick = () => {
         calcTotalPrice();
         cart_action.classList.remove('cart-show-item');
@@ -431,27 +357,52 @@ function createCartFunction() {
 
     order_btn.onclick = () => {
         let data = {};
+        let listProduct = [];
+        // get name item
+        var cartItem = document.getElementById('cartItem');
+        var cartLength = $('.cart-item').children().length;
+        data.checked = false;
+        // check if instalment payment was chosen
+        if (document.getElementById('inspay').checked) {
+            data.checked = true;
+        }
+        else if (document.getElementById('otpay').checked) {
+            data.checked = false;
+        }
+
         if (localStorage.getItem('cart_info') != null) {
             let cart_info = JSON.parse(localStorage.getItem('cart_info'));
             data.order = cart_info;
             data.totalprice = document.querySelector('.cart-checkout .total-cost').textContent.slice(1, 30);
-        } else {
+            for (var i = 1; i <= cartLength * 2; i += 2) {
+                var item = cartItem.childNodes[i];
+                var itemInfo = item.childNodes[3];
+                var itemNamePrice = itemInfo.childNodes[1];
+                var itemName = itemNamePrice.childNodes[1];
+                listProduct.push(itemName.textContent);
+            }
+            data.list_product = listProduct;
+        }
+        else {
             data.order = [];
         }
         if (localStorage.getItem('account_info') != null) {
             let account_info = JSON.parse(localStorage.getItem('account_info'));
             data.customer_id = account_info.id;
-        } else {
+            data.customer_name = account_info.name;
+        }
+        else {
             data.customer_id = 'Unknown'
         }
         console.log(JSON.stringify(data));
+
         fetch('/api/order', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
             .then(response => response.json())
             .then(data => {
                 console.log(data.status);
@@ -461,6 +412,14 @@ function createCartFunction() {
                 }
             })
     }
+
+    cart_btn.addEventListener('click', () => {
+        createCart();
+        createCartItemFunction();
+        cart_popup.style.display = 'block';
+        cart_action.classList.remove('cart-hide-item');
+        cart_action.classList.add('cart-show-item');
+    })
 
     window.onclick = (e) => {
         if (e.target == cart_popup) {
@@ -495,8 +454,8 @@ function createCartFunction() {
 }
 
 document.querySelector('.search-product-button').onclick = () => {
-    let value = document.querySelector(".search-product-text").value; 
-    location.href ='http://' + window.location.hostname + ':' + window.location.port + `/products/search/${value}`;
+    let value = document.querySelector(".search-product-text").value;
+    location.href = 'http://' + window.location.hostname + ':' + window.location.port + `/products/search/${value}`;
 }
 
 function createProductFunction() {
@@ -508,6 +467,7 @@ function createProductFunction() {
             let product_img = product.querySelector('.product-img img').src.replace('http://localhost:3000', '');
             let product_price = product.querySelector('.product-price').textContent.replace('$', '').trim();
             let product_id = product.getAttribute('pid');
+            let product_max = product.getAttribute('num');
             let cart_info = [];
             if (localStorage.getItem('cart_info') === null) {
                 let product_info = {
@@ -515,6 +475,7 @@ function createProductFunction() {
                     name: product_name,
                     price: parseInt(product_price),
                     img: product_img,
+                    max: product_max,
                     num: 1,
                 }
                 cart_info.push(product_info);
@@ -526,12 +487,14 @@ function createProductFunction() {
                     name: product_name,
                     price: parseInt(product_price),
                     img: product_img,
+                    max: product_max,
                     num: 1,
                 }
                 let j = 0;
                 for (j = 0; j < cart_info.length; j++) {
                     if (cart_info[j].name == product_name) {
-                        cart_info[j].num++;
+                        if(cart_info[i].max > cart_info[i].num)
+                            cart_info[j].num++;
                         break;
                     }
                 }
@@ -571,7 +534,7 @@ async function uploadimage(img, result) {
 
 async function createProduct() {
     let submit = document.querySelector('#product-submit');
-    submit.onclick = async function() {
+    submit.onclick = async function () {
         let product = document.querySelector('.add-product-form');
         let name = product.querySelector('#pname').value;
         let radios = product.querySelectorAll('input[name = "type"]');
@@ -626,12 +589,12 @@ async function createProduct() {
             await uploadimage(img, product2Insert);
             console.log(product2Insert);
             fetch('/api/create/product', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(product2Insert),
-                })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(product2Insert),
+            })
                 .then(response => response.json())
                 .then(data => {
                     console.log(data.status);
@@ -647,7 +610,7 @@ async function createProduct() {
 
 async function createSupplier() {
     let submit = document.querySelector('#supplier-submit');
-    submit.onclick = async function() {
+    submit.onclick = async function () {
         let supplier = document.querySelector('.add-supplier-form');
         let name = supplier.querySelector('#sname').value;
         let address = supplier.querySelector('#saddress').value;
@@ -691,12 +654,12 @@ async function createSupplier() {
             await uploadimage(img, supplier2Insert);
             console.log(supplier2Insert);
             fetch('/api/create/supplier', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(supplier2Insert),
-                })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(supplier2Insert),
+            })
                 .then(response => response.json())
                 .then(data => {
                     console.log(data.status);
@@ -712,7 +675,7 @@ async function createSupplier() {
 
 function createStaff() {
     let submit = document.querySelector('#staff-submit');
-    submit.onclick = function() {
+    submit.onclick = function () {
         let staff = document.querySelector('.add-staff-form');
         let name = staff.querySelector('#stname').value;
         let id = staff.querySelector('#stid').value;
@@ -763,12 +726,12 @@ function createStaff() {
             }
             console.log(staff2Insert);
             fetch('/api/create/staff', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(staff2Insert),
-                })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(staff2Insert),
+            })
                 .then(response => response.json())
                 .then(data => {
                     console.log(data.status);
@@ -811,12 +774,12 @@ function updateProduct() {
         }
         console.log(upProduct);
         fetch('/api/update/product', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(upProduct),
-            })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(upProduct),
+        })
             .then(response => response.json())
             .then((data) => {
                 console.log(data.status);
@@ -841,12 +804,12 @@ function updateSupplier() {
             pnumber: pnumber.value,
         }
         fetch('/api/update/supplier', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(upSupplier),
-            })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(upSupplier),
+        })
             .then(response => response.json())
             .then((data) => {
                 console.log(data.status);
@@ -875,12 +838,12 @@ function updateStaff() {
             status: status.value
         }
         fetch('/api/update/staff', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(upStaff),
-            })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(upStaff),
+        })
             .then(response => response.json())
             .then((data) => {
                 console.log(data.status);
@@ -965,12 +928,12 @@ function register() {
                 password: password.value
             }
             fetch('/api/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(customer),
-                })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(customer),
+            })
                 .then(response => response.json())
                 .then(data => {
                     console.log(data.status);
@@ -1022,12 +985,12 @@ function login() {
                 password: password.value
             }
             fetch('/api/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(user),
-                })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(user),
+            })
                 .then(response => response.json())
                 .then(data => {
                     console.log(data.status);
@@ -1076,36 +1039,11 @@ function prepareNormal() {
 }
 
 //remove localStorage when close tab
-window.onbeforeunload = function(e) {
+window.onbeforeunload = function (e) {
     window.localStorage.unloadTime = JSON.stringify(new Date());
 }
 
 //admin function - normal function
-<<<<<<< HEAD
-if (window.location.href === 'http://localhost:8000/admin') {
-  prepareAdmin();
-  manageProduct();
-  manageStaff();
-  manageSupplier();
-  createProduct();
-  createStaff();
-  createSupplier();
-  updateProduct();
-  updateSupplier();
-  updateStaff();
-}
-else {
-  prepareNormal();
-  createLoginFunction();
-  register();
-  login();
-  createCartFunction();
-  createProductFunction();
-}
-
-
-
-=======
 if (window.location.href === 'http://localhost:3000/admin') {
     prepareAdmin();
     manageProduct();
@@ -1125,4 +1063,3 @@ if (window.location.href === 'http://localhost:3000/admin') {
     createCartFunction();
     createProductFunction();
 }
->>>>>>> 8113dc2a3e76630dd9a40887c5138369554eaf1f

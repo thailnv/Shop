@@ -1122,11 +1122,11 @@ a.product-name {
       .sale-status table tr .date-field {
         width: 15%; }
       .sale-status table tr .tprice-field {
-        width: 15%; }
+        width: 10%; }
       .sale-status table tr .status-field {
-        width: 15%; }
-      .sale-status table tr .staffif-field {
-        width: 15%; }
+        width: 10%; }
+      .sale-status table tr .note-field {
+        width: 25%; }
       .sale-status table tr .action-field {
         width: 10%; }
 
