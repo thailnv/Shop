@@ -785,6 +785,7 @@ a.product-name {
   z-index: 2; }
 
 .setting-section {
+  display: none;
   width: 100%;
   top: 0; }
 
@@ -1664,10 +1665,9 @@ a.product-name {
 
 .setting-select {
   position: fixed;
-  display: none;
-  bottom: 6rem;
+  bottom: 4rem;
   right: 0.5rem;
-  height: 19rem;
+  height: auto;
   z-index: 16; }
   .setting-select .setting-option {
     display: block;

@@ -57,6 +57,7 @@
 }
 .setting-section {
   //    position: absolute;
+  display: none;
   width: 100%;
   top: 0;
 }
@@ -1083,10 +1084,9 @@
 }
 .setting-select {
   position: fixed;
-  display: none;
-  bottom: 6rem;
+  bottom: 4rem;
   right: 0.5rem;
-  height: 19rem;
+  height: auto;
   z-index: 16;
   .setting-option {
     display: block;

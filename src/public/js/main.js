@@ -49,6 +49,8 @@ $(document).ready(function () {
 //function & base define
 const lstType = ['Chair', 'Table', 'Decor', 'Bed'];
 
+var currentSection = 'product-section';
+
 function displayMessage(msg) {
     let message = document.querySelector('.message-popup');
     message.style.display = 'block';
@@ -320,6 +322,22 @@ function manageSale(){
     })
 }
 
+function switchSection(){
+    let btns = document.querySelectorAll('.setting-option');
+    document.querySelector('.product-section').style.display = 'flex';
+    for(let i = 0 ; i < btns.length ; i++){
+        console.log('adu');
+        let btn = btns[i];
+        btn.onclick = () => {
+            let section = btn.getAttribute('section');
+            console.log(section);
+            document.querySelector(`.${section}`).style.display = 'flex';
+            document.querySelector(`.${currentSection}`).style.display = 'none';
+            currentSection = section;
+            console.log(currentSection);
+        }
+    }
+}
 // thanh did this
 function manageInstalment() {
 
@@ -1174,6 +1192,7 @@ if (window.location.href === 'http://localhost:3000/admin') {
     updateSupplier();
     updateStaff();
     updateOrder();
+    switchSection();
 } else {
     prepareNormal();
     createLoginFunction();
