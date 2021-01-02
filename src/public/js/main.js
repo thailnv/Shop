@@ -237,6 +237,89 @@ function manageStaff() {
     })
 }
 
+function manageSale(){
+    let lst_order = document.querySelectorAll('.order-data');
+    let edit_popup = document.querySelector('.edit-sale-popup');
+    let edit_form = document.querySelector('.edit-sale-form');
+    let edit_form_name = edit_form.querySelector('#orcname');
+    let edit_form_pnumber = edit_form.querySelector('#orcpnumber');
+    let edit_form_address = edit_form.querySelector('#orcaddress');
+    let edit_form_note = edit_form.querySelector('#ordernote');
+    let edit_form_status = edit_form.querySelector('#orstatus');
+    let edit_form_total = edit_form.querySelector('.total-price');
+    let edit_form_odate = edit_form.querySelector('#orderdate');
+    let edit_form_ddate = edit_form.querySelector('#deliverydate');
+    let close_edit_btn = edit_popup.querySelector('.close-edit-btn');
+    for (let i = 0; i < lst_order.length; i++) {
+        let order = lst_order[i];
+        order.querySelector('.btn-edit').addEventListener('click',async () => {
+            edit_popup.style.display = 'block';
+            edit_form.classList.add('show');
+            orderid = order.getAttribute('orderid');
+            edit_popup.setAttribute('orderid', orderid);
+            await fetch(`/api/orders/${orderid}`)
+            .then((response)=>response.json())
+            .then((data) => {
+                console.log(data);
+                edit_form_odate.value = data.order_date;
+                if(data.delivery_date != null){
+                    let d = new Date(data.delivery_date);
+                    let date = d.getDate() < 10 ? ('0' + d.getDate()) : d.getDate();
+                    let month = d.getMonth() + 1 < 10 ? ('0' + ( d.getMonth() + 1 ) ) : d.getMonth();
+                    let dd = `${d.getFullYear()}-${month}-${date}`;
+                    edit_form_ddate.value = dd;
+                }else{
+                    edit_form_ddate.value = '';
+                }
+                edit_form_address.value = data.address;
+                edit_form_pnumber.value = data.phonenumber;
+                edit_form_name.value = data.customer; 
+                edit_form_note.value = data.note;
+                let options = edit_form_status.querySelectorAll('option');
+                for(let i = 0 ; i < options.length ; i++){
+                    if(options[i].value == data.status){
+                        options[i].selected = true;
+                    }
+                }
+                edit_form_total.innerHTML = '$' + data.totalprice;
+                let table = document.querySelector('.table-data');
+                table.innerHTML = '';
+                for(let i = 0 ; i < data.products.length ; i++){
+                    product = data.products[i];
+                    table.innerHTML += `
+                    <tr>
+                        <td class="product-name">
+                            ${product.product_name}
+                        </td>
+                        <td class="order-number"> 
+                            ${product.number}
+                        </td>
+                        <td class="product-price">
+                            ${product.price}
+                        </td>
+                    </tr>
+                    `
+                }
+                let d = new Date(data.order_date);
+                let date = d.getDate() < 10 ? ('0' + d.getDate()) : d.getDate();
+                let month = d.getMonth() + 1 < 10 ? ('0' + ( d.getMonth() + 1 ) ) : d.getMonth();
+                let min = `${d.getFullYear()}-${month}-${date}`;
+                edit_form_ddate.min = min;
+            })
+        })
+    }
+    close_edit_btn.addEventListener('click', () => {
+        edit_form.classList.remove('show');
+        edit_form.classList.add('hide');
+    });
+    edit_form.addEventListener('animationend', () => {
+        if (edit_form.classList.contains('hide')) {
+            edit_form.classList.remove('hide');
+            edit_popup.style.display = 'none';
+        }
+    })
+}
+
 // thanh did this
 function manageInstalment() {
 
@@ -361,6 +444,7 @@ function createCartFunction() {
         // get name item
         var cartItem = document.getElementById('cartItem');
         var cartLength = $('.cart-item').children().length;
+        data.note = document.getElementById('note').value;
         data.checked = false;
         // check if instalment payment was chosen
         if (document.getElementById('inspay').checked) {
@@ -382,19 +466,20 @@ function createCartFunction() {
                 listProduct.push(itemName.textContent);
             }
             data.list_product = listProduct;
+            data.address = document.getElementById('cusaddress').value;
+            data.phonenumber = document.getElementById('cusphone').value;
         }
         else {
             data.order = [];
         }
         if (localStorage.getItem('account_info') != null) {
             let account_info = JSON.parse(localStorage.getItem('account_info'));
-            data.customer_id = account_info.id;
-            data.customer_name = account_info.name;
+            data.customer = account_info.id;
         }
         else {
-            data.customer_id = 'Unknown'
+            data.customer = 'Unknown'
         }
-        console.log(JSON.stringify(data));
+        console.log(data);
 
         fetch('/api/order', {
             method: 'POST',
@@ -854,6 +939,38 @@ function updateStaff() {
     }
 }
 
+function updateOrder(){
+    let submitbtn = document.querySelector('.edit-order-submit');
+    let phonenumber = document.getElementById('orcpnumber');
+    let status = document.getElementById('orstatus');
+    let address = document.getElementById('orcaddress');
+    let delivery_date = document.getElementById('deliverydate');
+    submitbtn.onclick = () => {
+        let id = document.querySelector('.edit-sale-popup').getAttribute('orderid');
+        let upOrder = {
+            phonenumber: phonenumber.value,
+            status: status.value,
+            address: address.value,
+            delivery_date: delivery_date.value,
+        }
+        console.log(upOrder);
+        fetch(`/api/orders/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(upOrder),
+        })
+            .then(response => response.json())
+            .then((data) => {
+                console.log(data.status);
+                if (data.status == 'success') {
+                    location.reload();
+                }
+            })
+    }
+}
+
 function register() {
     let signupbtn = document.querySelector('.sign-up #signup-btn');
     let name = document.getElementById('uName');
@@ -1049,12 +1166,14 @@ if (window.location.href === 'http://localhost:3000/admin') {
     manageProduct();
     manageStaff();
     manageSupplier();
+    manageSale();
     createProduct();
     createStaff();
     createSupplier();
     updateProduct();
     updateSupplier();
     updateStaff();
+    updateOrder();
 } else {
     prepareNormal();
     createLoginFunction();

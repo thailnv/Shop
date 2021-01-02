@@ -22,6 +22,10 @@ router.post('/api/login', siteController.login);
 
 router.post('/api/logout', siteController.logout);
 
+router.get('/api/orders/:id', siteController.getOrder);
+
+router.put('/api/orders/:id', siteController.updateOrder);
+
 router.post('/api/order', siteController.order);
 
 router.get('/',siteController.index);

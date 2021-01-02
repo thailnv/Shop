@@ -228,8 +228,8 @@
                             </th>
                         </tr>
                         {{#each data.products}}
-                        <tr class="product-data"1 status="{{this.status}}" link="{{this.image}}" number="{{this.number}}" 
-                        discount="{{this.discount}}" pid="{{this._id}}"
+                        <tr class="product-data" 1 status="{{this.status}}" link="{{this.image}}"
+                            number="{{this.number}}" discount="{{this.discount}}" pid="{{this._id}}"
                             supplier="{{this.supplier}}" status="{{this.status}}">
                             <td class="pinfoid">{{this.id}}</td>
                             <td class="pinfoname">{{this.name}}</td>
@@ -237,17 +237,17 @@
                             <td class="pinfoprice">{{this.price}}</td>
                             <td class="pinfostatus">
                             </td>
-                                <script>
-                                    if({{this.status}} == 1){
-                                        document.querySelectorAll('.pinfostatus')[{{this.id}} - 1].innerHTML =
-                                        '<div class="instock status">In stock</div>'}
-                                    else if({{this.status}} == 2){
-                                        document.querySelectorAll('.pinfostatus')[{{this.id}} - 1].innerHTML =
-                                        '<div class="outstock status">Out of stock</div>'}
-                                    else if({{this.status}} == 3){
-                                        document.querySelectorAll('.pinfostatus')[{{this.id}} - 1].innerHTML =
-                                        '<div class="suspension status">Suspension</div>'}
-                                </script>
+                            <script>
+                                if ({{ this.status }} == 1) {
+                                    document.querySelectorAll('.pinfostatus')[{{this.id}} - 1].innerHTML =
+                                    '<div class="instock status">In stock</div>'}
+                                    else if ({{ this.status }} == 2) {
+                                    document.querySelectorAll('.pinfostatus')[{{this.id}} - 1].innerHTML =
+                                    '<div class="outstock status">Out of stock</div>'}
+                                    else if ({{ this.status }} == 3) {
+                                    document.querySelectorAll('.pinfostatus')[{{this.id}} - 1].innerHTML =
+                                    '<div class="suspension status">Suspension</div>'}
+                            </script>
                             <td>
                                 <div class="action">
                                     <button class="action-btn btn-edit">
@@ -547,7 +547,8 @@
                             </th>
                         </tr>
                         {{#each data.employees}}
-                        <tr class="staff-data" stid="{{this._id}}" pid = "{{this.personalID}}" role="{{this.role}}" status = "{{this.status}}">
+                        <tr class="staff-data" stid="{{this._id}}" pid="{{this.personalID}}" role="{{this.role}}"
+                            status="{{this.status}}">
                             <td class="infoid">{{this.id}}</td>
                             <td class="infoname">{{this.name}}</td>
                             <td class="infotype"></td>
@@ -561,33 +562,33 @@
                                 </div>
                             </td>
                             <script>
-                                switch ({{this.role}}){
-                                    case 0: 
-                                        document.querySelectorAll('.infotype')[{{this.id}} - 1].textContent = 'Admin';
-                                        break;
+                                switch ({{this.role}}) {
+                                    case 0:
+                                    document.querySelectorAll('.infotype')[{{this.id}} - 1].textContent = 'Admin';
+                                break;
                                     case 1:
-                                        document.querySelectorAll('.infotype')[{{this.id}} - 1].textContent = 'Sale';
-                                        break;
-                                    case 2: 
-                                        document.querySelectorAll('.infotype')[{{this.id}} - 1].textContent = 'Technical';
-                                        break;
+                                document.querySelectorAll('.infotype')[{{this.id}} - 1].textContent = 'Sale';
+                                break;
+                                    case 2:
+                                document.querySelectorAll('.infotype')[{{this.id}} - 1].textContent = 'Technical';
+                                break;
                                     case 3:
-                                        document.querySelectorAll('.infotype')[{{this.id}} - 1].textContent = 'Delivery';
-                                        break;
+                                document.querySelectorAll('.infotype')[{{this.id}} - 1].textContent = 'Delivery';
+                                break;
                                 }
-                                if({{this.role}}==0){
+                                if ({{ this.role }}== 0) {
                                     document.querySelectorAll('.staff-data .infostatus')[{{this.id}} - 1].innerHTML =
-                                        '<div class="working status">Working</div>'}
-                                else{
+                                    '<div class="working status">Working</div>'}
+                                else {
                                     document.querySelectorAll('.staff-data .infostatus')[{{this.id}} - 1].innerHTML =
-                                        '<div class="quit status">Quit</div>'}  
+                                    '<div class="quit status">Quit</div>'}
 
-                                if({{this.status}}==1){
+                                if ({{this.status}}== 1) {
                                     document.querySelectorAll('.staff-data .infostatus')[{{this.id}} - 1].innerHTML =
-                                        '<div class="working status">Working</div>'}
-                                else{
+                                    '<div class="working status">Working</div>'}
+                                else {
                                     document.querySelectorAll('.staff-data .infostatus')[{{this.id}} - 1].innerHTML =
-                                        '<div class="quit status">Quit</div>'}                                
+                                    '<div class="quit status">Quit</div>'}                                
                             </script>
                         </tr>
                         {{/each}}
@@ -706,11 +707,11 @@
                             <th class="date-field"></th>
                             <th class="tprice-field"></th>
                             <th class="status-field"></th>
-                            <th class="staffid-field"></th>
+                            <th class="note-field"></th>
                             <th class="action-field"></th>
                         </tr>
                         {{#each data.orders}}
-                        <tr class="supplier-data" link="{{this.image}}">
+                        <tr class="order-data" orderid = "{{this._id}}">
                             <td class="infoid">{{this.id}}</td>
                             <td class="infoname">{{this.customer.name}}</td>
                             <td class="infodate">{{this.order_date}}</td>
@@ -1048,7 +1049,7 @@
         </div>
     </div>
 </div>
-<div class="edit-supplier-popup" sid = "1">
+<div class="edit-supplier-popup" sid="1">
     <div class="edit-supplier-form">
         <div class="edit-form-image">
             <img src="/img/logo_161.png">
@@ -1099,6 +1100,75 @@
                     <input type="button" class="submit-edit-btn edit-staff-submit" value="Submit">
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="edit-sale-popup" orderid="1">
+    <div class="edit-sale-form">
+        <div class="order-info">
+            <div class="edit-sale-container">
+                <button class="close-edit-btn">X</button>
+                <form method="POST">
+                    <label for="orcname">Customer's name:</label><br>
+                    <input type="text" disabled="true" id="orcname" name="orcname"><br>
+                    <label for="orcaddress">Address:</label><br>
+                    <input type="text" id="orcaddress" name="orcaddress"><br>
+                    <label for="orcpnumber">Phonenumber:</label><br>
+                    <input type="number" id="orcpnumber" name="orcpnumber"><br>
+                    <div class="subinfo-container">
+                        <div class="order-date">
+                            <label for="orderdate">Order date:</label><br>
+                            <input disabled="true" type="text" id="orderdate" name="orderdate"><br>
+                            <label for="deliverydate">Delivery date:</label><br>
+                            <input type="date" id="deliverydate" max="1/1/2021" name="deliverydate"><br>
+                            <label for="orstatus">Status:</label><br>
+                            <select name="orstatus" id="orstatus">
+                                <option value="Pending">Pending</option>
+                                <option value="Expired">Expired</option>
+                                <option value="Complete">Complete</option>
+                            </select><br>
+                            <input type="button" class="submit-edit-btn edit-order-submit" value="Submit">
+                        </div>
+                        <div class="order-note">
+                            <label for="ordernote">Note:</label><br>
+                            <textarea disabled="true" type="text" id="ordernote" name="ordernote"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="product-list">
+            <label>List products:</label><br>
+            <table class="table-header">
+                <tr>
+                    <th class="product-name">
+                        Product's name
+                    </th>
+                    <th class="order-number"> 
+                        Number
+                    </th>
+                    <th class="product-price">
+                        Price
+                    </th>
+                </tr>
+            </table>
+            <div class="table-container-b">
+                <table class="table-data">
+                </table>
+            </div>
+            <table class="table-footer">
+                <tr>
+                    <th class="product-name">
+                        Total
+                    </th>
+                    <th class="order-number"> 
+                    </th>
+                    <th class="total-price">
+                        5000
+                    </th>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

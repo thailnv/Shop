@@ -343,8 +343,8 @@ a.product-name {
 .dropdown-content {
   position: absolute;
   display: none;
-  min-width: 8rem;
-  left: 0; }
+  min-width: 9.5rem;
+  right: 0; }
   .dropdown-content a {
     text-align: left; }
 
@@ -376,7 +376,8 @@ a.product-name {
       margin-left: 1rem; }
 
 .account-info .account-name {
-  font-weight: 600; }
+  font-weight: 600;
+  width: 9.5rem; }
 
 .account-info button {
   outline: none;
@@ -1116,7 +1117,7 @@ a.product-name {
           .sale-status table tr td .action .btn-edit {
             color: #53d8b7; }
       .sale-status table tr .id-field {
-        width: 10%; }
+        width: 5%; }
       .sale-status table tr .cname-field {
         width: 20%; }
       .sale-status table tr .date-field {
@@ -1126,7 +1127,7 @@ a.product-name {
       .sale-status table tr .status-field {
         width: 10%; }
       .sale-status table tr .note-field {
-        width: 25%; }
+        width: 30%; }
       .sale-status table tr .action-field {
         width: 10%; }
 
@@ -1506,6 +1507,145 @@ a.product-name {
   .edit-staff-container form .submit-edit-btn {
     border-radius: 0.25rem;
     width: 45%;
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    background: #74d8ba;
+    border: none;
+    outline: none;
+    color: white;
+    height: 2.25rem; }
+
+.edit-sale-popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: none;
+  z-index: 16;
+  /* Sit on top */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); }
+
+.edit-sale-form {
+  width: 70vw;
+  height: 80vh;
+  position: relative;
+  margin: auto;
+  background-color: #cacaca;
+  border-radius: 0.5rem;
+  margin-top: calc((100vh - 80vh) / 2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex; }
+  .edit-sale-form .order-info {
+    width: 50%;
+    height: 100%;
+    display: block;
+    white-space: nowrap;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    background-color: white; }
+  .edit-sale-form .product-list {
+    width: 50%;
+    display: block;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    background-color: white; }
+    .edit-sale-form .product-list label {
+      margin-top: 0.5rem; }
+    .edit-sale-form .product-list .product-name {
+      width: 50%;
+      padding-left: 0.5rem; }
+    .edit-sale-form .product-list .order-number {
+      width: 25%; }
+    .edit-sale-form .product-list .product-price, .edit-sale-form .product-list .total-price {
+      width: 25%; }
+    .edit-sale-form .product-list .table-header {
+      width: 95%;
+      border: solid 2px #f0f0f0;
+      border-bottom: 0px; }
+    .edit-sale-form .product-list .table-footer {
+      width: 95%;
+      height: 2rem;
+      border: solid 2px #f0f0f0;
+      border-top: 0px; }
+    .edit-sale-form .product-list .table-container-b {
+      width: 95%;
+      height: calc(83% - 2rem);
+      border: solid 2px #f0f0f0;
+      border-top: 0px; }
+      .edit-sale-form .product-list .table-container-b .table-data {
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 0.5rem; }
+        .edit-sale-form .product-list .table-container-b .table-data td {
+          height: 2rem;
+          border-top: solid 2px #f7f7f7;
+          border-bottom: solid 2px #f7f7f7; }
+
+.edit-sale-container {
+  width: 90%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0%;
+  background: white; }
+  .edit-sale-container button {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-family: "Audiowide", cursive;
+    border: none;
+    outline: none;
+    background: whitesmoke;
+    border-radius: 10rem;
+    color: #aaaaaa; }
+  .edit-sale-container button:hover {
+    background-color: #e79c9c;
+    color: white; }
+  .edit-sale-container form input[type="radio"] {
+    pointer-events: none; }
+  .edit-sale-container form label {
+    margin-top: 0.5rem; }
+  .edit-sale-container form .subinfo-container {
+    display: flex;
+    width: 100%; }
+  .edit-sale-container form .order-date {
+    width: 40%; }
+  .edit-sale-container form .order-note {
+    width: 59%;
+    margin-left: 1%; }
+    .edit-sale-container form .order-note #ordernote {
+      width: 100%;
+      height: 85%;
+      display: block;
+      border-radius: 0.25rem;
+      border: solid 1px #616161; }
+  .edit-sale-container form #orcname,
+  .edit-sale-container form #orcaddress,
+  .edit-sale-container form #orcpnumber,
+  .edit-sale-container form #sterole,
+  .edit-sale-container form #stestatus {
+    width: 100%;
+    height: 1.8rem;
+    outline: none;
+    border: solid 1px #616161;
+    border-radius: 0.125rem;
+    color: #616161; }
+  .edit-sale-container form #deliverydate,
+  .edit-sale-container form #orderdate,
+  .edit-sale-container form #orstatus {
+    width: 100%;
+    height: 1.8rem;
+    outline: none;
+    border: solid 1px #616161;
+    border-radius: 0.125rem;
+    color: #616161; }
+  .edit-sale-container form .submit-edit-btn {
+    border-radius: 0.25rem;
+    width: 100%;
     display: block;
     text-align: center;
     margin-top: 1.5rem;
@@ -1899,7 +2039,18 @@ a.product-name {
     margin-left: auto;
     margin-right: auto; }
     .cart-checkout .checkout-form label {
-      margin-top: 0.5rem; }
+      margin-top: 0.25rem; }
+    .cart-checkout .checkout-form .message-container {
+      display: flex;
+      justify-content: space-between; }
+    .cart-checkout .checkout-form .wrong-cart-message {
+      font-size: 0.75rem;
+      line-height: 1rem;
+      text-align: center;
+      margin-top: 0.5rem;
+      margin-left: 1rem;
+      color: #e78080;
+      display: none; }
     .cart-checkout .checkout-form input[type=text] {
       width: 100%;
       height: 2rem;

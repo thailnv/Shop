@@ -3,7 +3,7 @@
     <img src="/img/brand.png" class="brand-img" />
     <a class="navbar-brand" href="/">alorant</a>
   </div>
-  <div class="col-sm-9">
+  <div class="col-sm-8">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -38,7 +38,7 @@
     </div>
   </div>
   
-  <div>
+  <div style="margin-right: 1rem">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown account-info">
         <div class="category-dropdown">
@@ -161,15 +161,26 @@
         <div class="shopping-title">
           Order information
         </div>
-        <label for="cusname">Name:</label><br>
+        <div class="message-container">
+          <label for="cusname">Name:</label><br>
+          <p class="wrong-cart-message">Please enter product name!</p>
+        </div>
         <input type="text" name="cusname" id="cusname">
-        <label for="cusaddress">Address:</label><br>
+        <div class="message-container">
+          <label for="cusaddress">Address:</label><br>
+          <p class="wrong-cart-message">Please enter product name!</p>
+        </div>
         <input type="text" name="cusaddress" id="cusaddress">
-        <label for="cusphone">Phonenumber:</label><br>
+        <div class="message-container">
+          <label for="cusphone">Phonenumber:</label><br>
+          <p class="wrong-cart-message">Please enter product name!</p>
+        </div>
         <input type="text" name="cusphone" id="cusphone">
+        <label for="note">Note:</label><br>
+        <input type="text" name="note" id="note">
         <label for="paymenttype">Type of payment:</label><br>
         <div>
-          <input type="radio" name="type" id="otpay" value="2">
+          <input type="radio" name="type" id="otpay" value="2" checked="true">
           <label for="otpay">One-time payments</label><br>
           <input type="radio" name="type" id="inspay" value="1">
           <label for="inspay">Installment payment</label>

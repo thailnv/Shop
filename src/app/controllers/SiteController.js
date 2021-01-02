@@ -181,10 +181,14 @@ class SiteController {
         let insChecked  = req.body.checked;
         let data = {
             customer_id : req.body.customer_id,
-            customer_name: req.body.customer_name,
+            customer: req.body.customer,
             order : req.body.order,
+            address : req.body.address,
+            phonenumber : req.body.phonenumber,
             totalprice : req.body.totalprice,
+            note : req.body.note
         }
+        console.log(data);
         let ins = {
             customer_id: req.body.customer_id,
             customer_name: req.body.customer_name,
@@ -204,6 +208,26 @@ class SiteController {
             await Order.create(data, result);
         }
         res.json(result);
+    }
+
+    async getOrder(req, res, next){
+        let data = {};
+        await Order.findByID(req.params.id, data);
+        res.json(data.order);
+    }
+
+    async updateOrder(req, res, next){
+        let data = {};
+        data.address = req.body.address;
+        data.phonenumber = req.body.phonenumber;
+        data.status = req.body.status;
+        data.delivery_date = req.body.delivery_date;
+        data.id = req.params.id;
+        console.log(data.id);
+        await Order.update(data);
+        res.json({
+            status : 'success'
+        });
     }
 
     denied(req, res, next) {
