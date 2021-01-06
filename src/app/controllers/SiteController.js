@@ -27,14 +27,20 @@ class SiteController {
         {
             let data= {};
             await Employee.findAll(data);
-            await Product.findAll(data);
+            await Order.findAll(data);
+            await Product.findAll(data, true);
             await Supplier.findAll(data);
             await Customer.findAll(data);
             await Instal.findAll(data);
             await War.findAll(data);
-            await Order.findAll(data);
             res.render('admin', {data});
         }
+    }
+
+    async cusOrder(req, res, next){
+        let data = {};
+        await Order.findByCustomerID(req.session.customer_id, data);
+        res.render('customerOrder', {data});
     }
 
     async createProduct(req, res, next) {
@@ -150,6 +156,8 @@ class SiteController {
         let result = {};
         await Customer.create(customer, result);
         console.log(result);
+        req.session.role = result.role;
+        req.session.customer_id = result.id;
         res.json(result);
     }
 
@@ -163,8 +171,9 @@ class SiteController {
         if(result.status == 'fail'){
             await Customer.login(data, result);
         }
-        console.log(result);
         req.session.role = result.role;
+        req.session.customer_id = result.id;
+        console.log(req.session);
         res.json(result);
     }
 
@@ -180,7 +189,7 @@ class SiteController {
         let result = {};
         let insChecked  = req.body.checked;
         let data = {
-            customer_id : req.body.customer_id,
+            customer_name : req.body.customer_name,
             customer: req.body.customer,
             order : req.body.order,
             address : req.body.address,
@@ -218,13 +227,17 @@ class SiteController {
 
     async updateOrder(req, res, next){
         let data = {};
-        data.address = req.body.address;
-        data.phonenumber = req.body.phonenumber;
         data.status = req.body.status;
-        data.delivery_date = req.body.delivery_date;
-        data.id = req.params.id;
-        console.log(data.id);
-        await Order.update(data);
+        if(data.status == 'Cancel'){
+            await Order.setCancel(req.params.id);
+        }else{
+            data.address = req.body.address;
+            data.phonenumber = req.body.phonenumber;
+            data.delivery_date = req.body.delivery_date;
+            data.id = req.params.id;
+            console.log(data.id);
+            await Order.update(data);
+        }
         res.json({
             status : 'success'
         });

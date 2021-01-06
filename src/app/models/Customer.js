@@ -20,10 +20,11 @@ class Customer {
     async create(data, result){
         let cus = new customer(data);
         await cus.save()
-        .then(()=>{
+        .then((cus)=>{
             result.status = 'success';
             console.log('success');
             result.name = cus.name;
+            result.id = cus._id;
             result.role = 4;
             result.address = cus.address;
             result.phone = cus.phonenumber;

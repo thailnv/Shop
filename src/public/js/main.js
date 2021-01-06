@@ -66,6 +66,22 @@ function prepareAdmin() {
     document.querySelector('.footer').style.display = 'none';
     document.querySelector('.pre-footer').style.display = 'none';
     document.querySelector('.setting').style.display = 'block';
+    let setting = document.querySelector('.setting-select');
+    document.getElementById('setting-btn').onclick = () => {
+        if(setting.classList.contains('showsetting')){
+            setting.classList.add('hidesetting');
+            setting.classList.remove('showsetting');
+        }else{
+            setting.classList.add('showsetting');
+            setting.style.display = 'block';
+        }
+    }
+    setting.addEventListener('animationend', () => {
+        if(setting.classList.contains('hidesetting')){
+            setting.classList.remove('hidesetting');
+            setting.style.display = 'none';
+        }
+    })
 }
 
 function calcCartItem() {
@@ -252,17 +268,19 @@ function manageSale(){
     let edit_form_odate = edit_form.querySelector('#orderdate');
     let edit_form_ddate = edit_form.querySelector('#deliverydate');
     let close_edit_btn = edit_popup.querySelector('.close-edit-btn');
+    let submit_btn = edit_popup.querySelector('.edit-order-submit');
     for (let i = 0; i < lst_order.length; i++) {
         let order = lst_order[i];
         order.querySelector('.btn-edit').addEventListener('click',async () => {
-            edit_popup.style.display = 'block';
-            edit_form.classList.add('show');
+            
             orderid = order.getAttribute('orderid');
             edit_popup.setAttribute('orderid', orderid);
             await fetch(`/api/orders/${orderid}`)
             .then((response)=>response.json())
             .then((data) => {
                 console.log(data);
+                edit_popup.style.display = 'block';
+                edit_form.classList.add('show');
                 edit_form_odate.value = data.order_date;
                 if(data.delivery_date != null){
                     let d = new Date(data.delivery_date);
@@ -275,13 +293,27 @@ function manageSale(){
                 }
                 edit_form_address.value = data.address;
                 edit_form_pnumber.value = data.phonenumber;
-                edit_form_name.value = data.customer; 
+                edit_form_name.value = data.customer_name; 
                 edit_form_note.value = data.note;
                 let options = edit_form_status.querySelectorAll('option');
                 for(let i = 0 ; i < options.length ; i++){
                     if(options[i].value == data.status){
                         options[i].selected = true;
                     }
+                }
+                if(data.status == 'Pending'){
+                    edit_form_ddate.disabled = false;
+                    edit_form_pnumber.disabled = false;
+                    edit_form_address.disabled = false;
+                    edit_form_status.disabled = false;
+                    submit_btn.disabled = false;
+                }
+                else{
+                    edit_form_ddate.disabled = true;
+                    edit_form_pnumber.disabled = true;
+                    edit_form_address.disabled = true;
+                    edit_form_status.disabled = true;
+                    submit_btn.disabled = true;
                 }
                 edit_form_total.innerHTML = '$' + data.totalprice;
                 let table = document.querySelector('.table-data');
@@ -304,7 +336,7 @@ function manageSale(){
                 }
                 let d = new Date(data.order_date);
                 let date = d.getDate() < 10 ? ('0' + d.getDate()) : d.getDate();
-                let month = d.getMonth() + 1 < 10 ? ('0' + ( d.getMonth() + 1 ) ) : d.getMonth();
+                let month = d.getMonth() + 1 < 10 ? ('0' + ( d.getMonth() + 1 ) ) : d.getMonth() + 1;
                 let min = `${d.getFullYear()}-${month}-${date}`;
                 edit_form_ddate.min = min;
             })
@@ -322,17 +354,119 @@ function manageSale(){
     })
 }
 
+function manageCusOrder(){
+    let lst_order = document.querySelectorAll('.order-data');
+    let edit_popup = document.querySelector('.edit-sale-popup');
+    let edit_form = document.querySelector('.edit-sale-form');
+    let edit_form_name = edit_form.querySelector('#orcname');
+    let edit_form_pnumber = edit_form.querySelector('#orcpnumber');
+    let edit_form_address = edit_form.querySelector('#orcaddress');
+    let edit_form_note = edit_form.querySelector('#ordernote');
+    let edit_form_status = edit_form.querySelector('#orstatus');
+    let edit_form_total = edit_form.querySelector('.total-price');
+    let edit_form_odate = edit_form.querySelector('#orderdate');
+    let close_edit_btn = edit_popup.querySelector('.close-edit-btn');
+    let submit_btn = edit_popup.querySelector('.edit-order-submit');
+    let cancel_btn = edit_popup.querySelector('.edit-order-cancel');
+    for (let i = 0; i < lst_order.length; i++) {
+        let order = lst_order[i];
+        order.querySelector('.btn-edit').addEventListener('click',async () => {
+            edit_popup.style.display = 'block';
+            edit_form.classList.add('show');
+            orderid = order.getAttribute('orderid');
+            edit_popup.setAttribute('orderid', orderid);
+            await fetch(`/api/orders/${orderid}`)
+            .then((response)=>response.json())
+            .then((data) => {
+                console.log(data);
+                edit_form_odate.value = data.order_date;
+                edit_form_address.value = data.address;
+                edit_form_pnumber.value = data.phonenumber;
+                edit_form_name.value = data.customer_name; 
+                edit_form_note.value = data.note;
+                let options = edit_form_status.querySelectorAll('option');
+                for(let i = 0 ; i < options.length ; i++){
+                    if(options[i].value == data.status){
+                        options[i].selected = true;
+                    }
+                }
+                if(data.status == 'Expired' || data.status == 'Cancel'){
+                    cancel_btn.disabled = true;
+                    submit_btn.disabled = true;
+                }
+                else{
+                    cancel_btn.disabled = false;
+                    submit_btn.disabled = false;
+                }
+                edit_form_total.innerHTML = '$' + data.totalprice;
+                let table = document.querySelector('.table-data');
+                table.innerHTML = '';
+                for(let i = 0 ; i < data.products.length ; i++){
+                    product = data.products[i];
+                    table.innerHTML += `
+                    <tr>
+                        <td class="product-name">
+                            ${product.product_name}
+                        </td>
+                        <td class="order-number"> 
+                            ${product.number}
+                        </td>
+                        <td class="product-price">
+                            ${product.price}
+                        </td>
+                    </tr>
+                    `
+                }
+            })
+        })
+    }
+    close_edit_btn.addEventListener('click', () => {
+        edit_form.classList.remove('show');
+        edit_form.classList.add('hide');
+    });
+
+    cancel_btn.onclick = ()=>{
+        let id = document.querySelector('.edit-sale-popup').getAttribute('orderid');
+        upOrder = {
+            status : 'Cancel'
+        }
+        fetch(`/api/orders/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(upOrder),
+        })
+            .then(response => response.json())
+            .then((data) => {
+                console.log(data.status);
+                if (data.status == 'success') {
+                    location.reload();
+                }
+            })
+    }
+
+    edit_form.addEventListener('animationend', () => {
+        if (edit_form.classList.contains('hide')) {
+            edit_form.classList.remove('hide');
+            edit_popup.style.display = 'none';
+        }
+    })
+}
+
 function switchSection(){
     let btns = document.querySelectorAll('.setting-option');
-    document.querySelector('.product-section').style.display = 'flex';
+    if(localStorage.getItem('section') != null){
+        currentSection =JSON.parse(localStorage.getItem('section'));
+    }
+    document.querySelector(`.${currentSection}`).style.display = 'flex';
     for(let i = 0 ; i < btns.length ; i++){
-        console.log('adu');
         let btn = btns[i];
         btn.onclick = () => {
             let section = btn.getAttribute('section');
             console.log(section);
-            document.querySelector(`.${section}`).style.display = 'flex';
             document.querySelector(`.${currentSection}`).style.display = 'none';
+            document.querySelector(`.${section}`).style.display = 'flex';
             currentSection = section;
             console.log(currentSection);
         }
@@ -401,7 +535,7 @@ function createLoginFunction() {
         }).then(
             () => {
                 localStorage.removeItem('account_info');
-                location.reload();
+                location.href = '/';
             }
         )
     }
@@ -459,11 +593,13 @@ function createCartFunction() {
     order_btn.onclick = () => {
         let data = {};
         let listProduct = [];
+
         // get name item
         var cartItem = document.getElementById('cartItem');
         var cartLength = $('.cart-item').children().length;
         data.note = document.getElementById('note').value;
         data.checked = false;
+
         // check if instalment payment was chosen
         if (document.getElementById('inspay').checked) {
             data.checked = true;
@@ -484,36 +620,67 @@ function createCartFunction() {
                 listProduct.push(itemName.textContent);
             }
             data.list_product = listProduct;
-            data.address = document.getElementById('cusaddress').value;
-            data.phonenumber = document.getElementById('cusphone').value;
         }
         else {
             data.order = [];
         }
+
         if (localStorage.getItem('account_info') != null) {
             let account_info = JSON.parse(localStorage.getItem('account_info'));
             data.customer = account_info.id;
         }
         else {
-            data.customer = 'Unknown'
+            data.customer = '5ff1d80c793a7ad089cb70fd'
         }
-        console.log(data);
 
-        fetch('/api/order', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.status);
-                if (data.status == 'success') {
-                    displayMessage('Order successfully!');
-                    localStorage.removeItem('cart_info');
-                }
+        let wrongCount = 0;
+
+        let messages = document.querySelectorAll('.message-container .wrong-cart-message');
+        let cusname = document.getElementById('cusname').value;
+        let cusaddress = document.getElementById('cusaddress').value;
+        let cusphone = document.getElementById('cusphone').value;
+
+        if(cusname == ''){
+            wrongCount++;
+            messages[0].style.display = 'block';
+        }else{
+            messages[0].style.display = 'none';
+            data.customer_name  = cusname;
+        }
+        if(cusaddress == ''){
+            wrongCount++;
+            messages[1].style.display = 'block';
+        }else{
+            messages[1].style.display = 'none';
+            data.address = cusaddress;
+        }
+        if(cusphone == ''){
+            wrongCount++;
+            messages[2].style.display = 'block';
+        }else{
+            messages[2].style.display = 'none';
+            data.phonenumber = cusphone;
+        }
+
+        if(wrongCount == 0){
+            console.log(data);
+    
+            fetch('/api/order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
             })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.status);
+                    if (data.status == 'success') {
+                        displayMessage('Order successfully!');
+                        localStorage.removeItem('cart_info');
+                    }
+                })
+        }
     }
 
     cart_btn.addEventListener('click', () => {
@@ -969,7 +1136,12 @@ function updateOrder(){
             phonenumber: phonenumber.value,
             status: status.value,
             address: address.value,
-            delivery_date: delivery_date.value,
+        }
+        if(delivery_date != null){
+            upOrder.delivery_date = delivery_date.value;
+            console.log(upOrder.delivery_date);
+            if(status.value == 'Complete' && upOrder.delivery_date == '')
+                upOrder.delivery_date = Date.now();
         }
         console.log(upOrder);
         fetch(`/api/orders/${id}`, {
@@ -1156,6 +1328,7 @@ function prepareNormal() {
             console.log('remove localStg');
             window.localStorage.removeItem('cart_info');
             localStorage.removeItem('account_info');
+            sessionStorage.clear();
         }
         calcCartItem();
     }
@@ -1176,8 +1349,8 @@ function prepareNormal() {
 //remove localStorage when close tab
 window.onbeforeunload = function (e) {
     window.localStorage.unloadTime = JSON.stringify(new Date());
+    localStorage.setItem('section', JSON.stringify(currentSection));
 }
-
 //admin function - normal function
 if (window.location.href === 'http://localhost:3000/admin') {
     prepareAdmin();
@@ -1200,4 +1373,6 @@ if (window.location.href === 'http://localhost:3000/admin') {
     login();
     createCartFunction();
     createProductFunction();
+    manageCusOrder();
+    updateOrder();
 }

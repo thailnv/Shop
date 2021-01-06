@@ -7,7 +7,7 @@ class ProductsController {
     // [GET] /products
     async index(req, res, next) {
         let data = {};
-        await Product.findAll(data);
+        await Product.findAll(data, false);
         res.render('products', { data });
     }
 

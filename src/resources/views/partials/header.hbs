@@ -13,7 +13,7 @@
         <li class="nav-item">
           <div class="category-dropdown">
             <a class="nav-link" href="/products">PRODUCTS</a>
-            <div class="dropdown-content bg-light">
+            <div class="product-dropdown-content bg-light" >
               <a href="/products/chair" class="nav-link">Chair &amp Sofa</a>
               <a href="/products/decor" class="nav-link">Decoration</a>
               <a href="/products/table" class="nav-link">Table</a>
@@ -44,8 +44,8 @@
         <div class="category-dropdown">
           <button class="nav-link account-name">ACCOUNT</button>
           <div class="dropdown-content bg-light">
-            <button class="nav-link">Profile</button>
-            <button class="nav-link">Your order</button>
+            <a href="#" class="nav-link">Profile</a>
+            <a href="/customer/orders" class="nav-link">Your order</a>
             <button class="nav-link logout-btn">Logout</button>
           </div>
         </div>
@@ -163,19 +163,19 @@
         </div>
         <div class="message-container">
           <label for="cusname">Name:</label><br>
-          <p class="wrong-cart-message">Please enter product name!</p>
+          <p class="wrong-cart-message">Please enter name!</p>
         </div>
         <input type="text" name="cusname" id="cusname">
         <div class="message-container">
           <label for="cusaddress">Address:</label><br>
-          <p class="wrong-cart-message">Please enter product name!</p>
+          <p class="wrong-cart-message">Please enter address!</p>
         </div>
         <input type="text" name="cusaddress" id="cusaddress">
         <div class="message-container">
           <label for="cusphone">Phonenumber:</label><br>
-          <p class="wrong-cart-message">Please enter product name!</p>
+          <p class="wrong-cart-message">Please enter phonenumber!</p>
         </div>
-        <input type="text" name="cusphone" id="cusphone">
+        <input type="number" name="cusphone" id="cusphone">
         <label for="note">Note:</label><br>
         <input type="text" name="note" id="note">
         <label for="paymenttype">Type of payment:</label><br>

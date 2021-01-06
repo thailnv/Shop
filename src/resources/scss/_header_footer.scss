@@ -47,6 +47,7 @@
 
 .category-dropdown {
     position: relative;
+    text-align: left;
 }
 
 .dropdown-content {
@@ -59,7 +60,16 @@
     }
 }
 
-.category-dropdown:hover .dropdown-content {
+.product-dropdown-content {
+    position: absolute;
+    display: none;
+    right: 0;
+    min-width: 8rem;
+    a {
+        text-align: left;
+    }
+}
+.category-dropdown:hover .dropdown-content, .category-dropdown:hover .product-dropdown-content  {
     display: block;
 }
 

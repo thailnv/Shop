@@ -713,11 +713,11 @@
                         {{#each data.orders}}
                         <tr class="order-data" orderid = "{{this._id}}">
                             <td class="infoid">{{this.id}}</td>
-                            <td class="infoname">{{this.customer.name}}</td>
+                            <td class="infoname">{{this.customer_name}}</td>
                             <td class="infodate">{{this.order_date}}</td>
                             <td class="infotprice">{{this.totalprice}}</td>
                             <td class="infostatus">{{this.status}}</td>
-                            <td class="infostaffid"></td>
+                            <td class="infostaffid">{{this.note}}</td>
                             <td>
                                 <div class="action">
                                     <button class="action-btn btn-edit">
@@ -1126,6 +1126,7 @@
                                 <option value="Pending">Pending</option>
                                 <option value="Expired">Expired</option>
                                 <option value="Complete">Complete</option>
+                                <option value="Cancel">Cancel</option>
                             </select><br>
                             <input type="button" class="submit-edit-btn edit-order-submit" value="Submit">
                         </div>
@@ -1171,6 +1172,92 @@
         </div>
     </div>
 </div>
+<div class="edit-instal-popup" orderid="1">
+    <div class="edit-instal-form">
+        <div class="instal-info">
+            <div class="edit-instal-container">
+                <button class="close-edit-btn">X</button>
+                <form method="POST">
+                    <label for="instalcname">Customer's name:</label><br>
+                    <input type="text" disabled="true" id="instalcname" name="instalcname"><br>
+                    <label for="instalPID">Personal ID:</label><br>
+                    <input type="text" id="instalPID" name="instalPID"><br>
+                    <label for="instalcpnumber">Process:</label><br>
+                    <div class="process-list" style="display: flex; justify-content:space-between;">
+                        <input type="checkbox">
+                        <input type="checkbox">
+                        <input type="checkbox">
+                        <input type="checkbox">
+                        <input type="checkbox">
+                        <input type="checkbox">
+                        <input type="checkbox">
+                        <input type="checkbox">
+                        <input type="checkbox">
+                        <input type="checkbox">
+                        <input type="checkbox">
+                        <input type="checkbox">
+                    </div>
+                    <div class="subinfo-container">
+                        <div class="order-date">
+                            <label for="instalodate">Order date:</label><br>
+                            <input disabled="true" type="text" id="instalodate" name="instalodate"><br>
+                            <label for="instalddate">Delivery date:</label><br>
+                            <input type="date" id="instalddate" max="1/1/2021" name="instalddate"><br>
+                            <label for="instalstatus">Status:</label><br>
+                            <select name="instalstatus" id="instalstatus">
+                                <option value="Pending">Pending</option>
+                                <option value="Expired">Expired</option>
+                                <option value="Complete">Complete</option>
+                            </select><br>
+                            <input type="button" class="submit-edit-btn edit-instal-submit" value="Submit">
+                        </div>
+                        <div class="instal-note">
+                            <label for="instalnote">Note:</label><br>
+                            <textarea disabled="true" type="text" id="instalnote" name="instalnote"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="product-list">
+            <label for="instalcaddress">Address:</label><br>
+            <input type="text" id="instalcaddress" name="instalcaddress"><br>
+            <label for="instalcpnumber">Phonenumber:</label><br>
+            <input type="number" id="instalcpnumber" name="instalcpnumber"><br>
+            <label>List products:</label><br>
+            <table class="table-header">
+                <tr>
+                    <th class="product-name">
+                        Product's name
+                    </th>
+                    <th class="order-number"> 
+                        Number
+                    </th>
+                    <th class="product-price">
+                        Price
+                    </th>
+                </tr>
+            </table>
+            <div class="table-container-b">
+                <table class="table-data">
+                </table>
+            </div>
+            <table class="table-footer">
+                <tr>
+                    <th class="product-name">
+                        Total
+                    </th>
+                    <th class="order-number"> 
+                    </th>
+                    <th class="total-price">
+                        5000
+                    </th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
 
 <div class="setting">
     <button id="setting-btn">

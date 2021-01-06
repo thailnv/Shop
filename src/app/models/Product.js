@@ -19,8 +19,12 @@ const Pro = new Schema({
 const product = mongoose.model('product', Pro);
 
 class Product {
-    async findAll(data) {
-        await product.find({})
+    async findAll(data, isAdmin) {
+        let minNum = 0;
+        if(isAdmin){
+            minNum = -1;
+        }
+        await product.find({ number : {$gt : minNum}})
             .then((products) => {
                 products = Convert.cvDataToObjects(products);
                 data.products = products;
@@ -45,7 +49,7 @@ class Product {
     }
 
     async findByType(ptype, data) {
-        await product.find({ type: ptype })
+        await product.find({ type: ptype,  number : {$gt : 0} })
             .then((products) => {
                 products = Convert.cvDataToObjects(products);
                 data.products = products;
@@ -58,7 +62,7 @@ class Product {
     }
 
     async findBestSeller(data) {
-        await product.find({}).sort({ orderTime: 'desc' }).limit(10)
+        await product.find({number : {$gt : 0}}).sort({ orderTime: 'desc' }).limit(10)
             .then((products) => {
                 products = Convert.cvDataToObjects(products);
                 data.lstBestSeller = products;
@@ -70,7 +74,7 @@ class Product {
     }
 
     async findNewArrival(data) {
-        await product.find({}).sort({ createdAt: 'desc' }).limit(10)
+        await product.find({number : {$gt : 0}}).sort({ createdAt: 'desc' }).limit(10)
             .then((products) => {
                 products = Convert.cvDataToObjects(products);
                 data.lstNewArrivals = products;
@@ -119,7 +123,21 @@ class Product {
         await product.findOne({ _id: id })
             .then(async(doc) => {
                 doc.number = doc.number - number;
-                doc.order = doc.orderTime + 1;
+                doc.orderTime = doc.orderTime + 1;
+                if(doc.number == 0){
+                    doc.status = 2;
+                }
+                await doc.save();
+                console.log(`order product ${doc._id}`);
+            })
+    }
+
+    async unorder(id, number) {
+        await product.findOne({ _id: id })
+            .then(async(doc) => {
+                doc.number = doc.number + number;
+                doc.orderTime = doc.orderTime - 1;
+                doc.status = 1;
                 await doc.save();
                 console.log(`order product ${doc._id}`);
             })

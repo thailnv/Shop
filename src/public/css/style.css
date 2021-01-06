@@ -338,7 +338,8 @@ a.product-name {
   color: #636e72; }
 
 .category-dropdown {
-  position: relative; }
+  position: relative;
+  text-align: left; }
 
 .dropdown-content {
   position: absolute;
@@ -348,7 +349,15 @@ a.product-name {
   .dropdown-content a {
     text-align: left; }
 
-.category-dropdown:hover .dropdown-content {
+.product-dropdown-content {
+  position: absolute;
+  display: none;
+  right: 0;
+  min-width: 8rem; }
+  .product-dropdown-content a {
+    text-align: left; }
+
+.category-dropdown:hover .dropdown-content, .category-dropdown:hover .product-dropdown-content {
   display: block; }
 
 .white-text {
@@ -1559,7 +1568,8 @@ a.product-name {
       padding-left: 0.5rem; }
     .edit-sale-form .product-list .order-number {
       width: 25%; }
-    .edit-sale-form .product-list .product-price, .edit-sale-form .product-list .total-price {
+    .edit-sale-form .product-list .product-price,
+    .edit-sale-form .product-list .total-price {
       width: 25%; }
     .edit-sale-form .product-list .table-header {
       width: 95%;
@@ -1656,6 +1666,146 @@ a.product-name {
     color: white;
     height: 2.25rem; }
 
+.edit-instal-popup {
+  position: fixed;
+  display: none;
+  left: 0;
+  top: 0;
+  z-index: 16;
+  /* Sit on top */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); }
+
+.edit-instal-form {
+  width: 70vw;
+  height: 80vh;
+  position: relative;
+  margin: auto;
+  background-color: white;
+  border-radius: 0.5rem;
+  margin-top: calc((100vh - 80vh) / 2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex; }
+  .edit-instal-form #instalcname,
+  .edit-instal-form #instalcaddress,
+  .edit-instal-form #instalcpnumber,
+  .edit-instal-form #instalPID {
+    width: 100%;
+    height: 1.8rem;
+    outline: none;
+    border: solid 1px #616161;
+    border-radius: 0.125rem;
+    color: #616161; }
+  .edit-instal-form #instalddate,
+  .edit-instal-form #instalodate,
+  .edit-instal-form #instalstatus {
+    width: 100%;
+    height: 1.8rem;
+    outline: none;
+    border: solid 1px #616161;
+    border-radius: 0.125rem;
+    color: #616161; }
+  .edit-instal-form .instal-info {
+    width: 50%;
+    height: 100%;
+    display: block;
+    white-space: nowrap;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    background-color: white; }
+  .edit-instal-form .product-list {
+    width: 48%;
+    display: block;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    background-color: white; }
+    .edit-instal-form .product-list label {
+      margin-top: 0.5rem; }
+    .edit-instal-form .product-list .product-name {
+      width: 50%;
+      padding-left: 0.5rem; }
+    .edit-instal-form .product-list .order-number {
+      width: 25%; }
+    .edit-instal-form .product-list .product-price,
+    .edit-instal-form .product-list .total-price {
+      width: 25%; }
+    .edit-instal-form .product-list .table-header {
+      width: 100%;
+      border: solid 2px #f0f0f0;
+      border-bottom: 0px; }
+    .edit-instal-form .product-list .table-footer {
+      width: 100%;
+      height: 2rem;
+      border: solid 2px #f0f0f0;
+      border-top: 0px; }
+    .edit-instal-form .product-list .table-container-b {
+      width: 100%;
+      height: calc(55% - 2rem);
+      border: solid 2px #f0f0f0;
+      border-top: 0px; }
+      .edit-instal-form .product-list .table-container-b .table-data {
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 0.5rem; }
+        .edit-instal-form .product-list .table-container-b .table-data td {
+          height: 2rem;
+          border-top: solid 2px #f7f7f7;
+          border-bottom: solid 2px #f7f7f7; }
+
+.edit-instal-container {
+  width: 90%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0%;
+  background: white; }
+  .edit-instal-container button {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-family: "Audiowide", cursive;
+    border: none;
+    outline: none;
+    background: whitesmoke;
+    border-radius: 10rem;
+    color: #aaaaaa; }
+  .edit-instal-container button:hover {
+    background-color: #e79c9c;
+    color: white; }
+  .edit-instal-container form input[type="radio"] {
+    pointer-events: none; }
+  .edit-instal-container form label {
+    margin-top: 0.5rem; }
+  .edit-instal-container form input[type=checkbox] {
+    width: 1.5rem;
+    height: 1.5rem; }
+  .edit-instal-container form .subinfo-container {
+    display: flex;
+    width: 100%; }
+  .edit-instal-container form .instal-note {
+    width: 59%;
+    margin-left: 1%; }
+    .edit-instal-container form .instal-note #instalnote {
+      width: 100%;
+      height: 85%;
+      display: block;
+      border-radius: 0.25rem;
+      border: solid 1px #616161; }
+  .edit-instal-container form .submit-edit-btn {
+    border-radius: 0.25rem;
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    background: #74d8ba;
+    border: none;
+    outline: none;
+    color: white;
+    height: 2.25rem; }
+
 .setting {
   position: fixed;
   bottom: 1rem;
@@ -1665,6 +1815,7 @@ a.product-name {
 
 .setting-select {
   position: fixed;
+  display: none;
   bottom: 4rem;
   right: 0.5rem;
   height: auto;
@@ -1682,6 +1833,34 @@ a.product-name {
     color: white; }
   .setting-select .setting-option:hover {
     opacity: 0.8; }
+
+@keyframes show-setting {
+  from {
+    right: -6rem;
+    bottom: 4rem;
+    opacity: 0; }
+  to {
+    right: 0.5rem;
+    bottom: 4rem;
+    opacity: 1; } }
+
+@keyframes hide-setting {
+  from {
+    right: 0.5rem;
+    bottom: 4rem;
+    opacity: 1; }
+  to {
+    right: -6rem;
+    bottom: 4rem;
+    opacity: 0; } }
+
+.showsetting {
+  animation-name: show-setting;
+  animation-duration: 0.5s; }
+
+.hidesetting {
+  animation-name: hide-setting;
+  animation-duration: 0.5s; }
 
 .message-popup {
   z-index: 17;
@@ -2051,7 +2230,7 @@ a.product-name {
       margin-left: 1rem;
       color: #e78080;
       display: none; }
-    .cart-checkout .checkout-form input[type=text] {
+    .cart-checkout .checkout-form input[type=text], .cart-checkout .checkout-form input[type=number] {
       width: 100%;
       height: 2rem;
       outline: none;
